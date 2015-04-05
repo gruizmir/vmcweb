@@ -27,9 +27,9 @@ class Person(models.Model):
                     verbose_name="Pagado")
     reg_code = models.CharField(max_length=20,
                     verbose_name="Código de registro")
-    photo = models.ImageFile(upload_to="profile_pics",
+    photo = models.ImageField(upload_to="profile_pics",
                     verbose_name="Foto")
-    photo_thumb = models.ImageFile(upload_to="profile_pics",
+    photo_thumb = models.ImageField(upload_to="profile_pics",
                     verbose_name="Thumbnail")
 
     class Meta:
@@ -45,7 +45,7 @@ class Paper(models.Model):
     title = models.CharField(max_length=30, null=True, blank=False,
                             verbose_name='Título')
     abstract = models.TextField(verbose_name='Resumen')
-    accepted = models.BooleanField(verbose_name='Aceptado')
+    accepted = models.BooleanField(verbose_name='Aceptado', default=False)
     creation_date = models.DateTimeField(auto_now_add=True,
                     verbose_name="Fecha de creación")
 
@@ -55,9 +55,11 @@ class Paper(models.Model):
 
 
 class PaperFile(models.Model):
-    paper = models.ForeigKey(Paper)
+    paper = models.ForeignKey(Paper)
     doc = models.FileField(null=False, verbose_name="Archivo", blank=False,
                             upload_to="papers")
+    extras = models.FileField(null=True, verbose_name="Anexos", blank=True,
+                            upload_to="extras")
     description = models.TextField(verbose_name='Descripción', null=True,
                                     blank=True)
     upload_date = models.DateTimeField(auto_now_add=True,
@@ -66,6 +68,9 @@ class PaperFile(models.Model):
     class Meta:
         verbose_name = "Archivo adjunto"
         verbose_name_plural = "Archivos adjuntos"
+
+    def __unicode__(self):
+        return self.paper.title
 
 
 class HackTeam(models.Model):
@@ -89,9 +94,9 @@ class Hacker(Person):
 class Workshop(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre")
     description = models.TextField(verbose_name="Descripción")
-    assistant = models.ManyToManyField(Person)
-    timespan = models.CharField(verbose_name="Duración")
-    expositor = models.ForeignKey(Person, relation_name="Expositor")
+    assistant = models.ManyToManyField(Person, related_name="assistant")
+    timespan = models.CharField(verbose_name="Duración", max_length=10)
+    expositor = models.ForeignKey(Person, related_name="Expositor")
 
     class Meta:
         verbose_name = "Taller"

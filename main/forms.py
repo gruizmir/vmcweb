@@ -17,14 +17,14 @@ class PaperForm(forms.ModelForm):
         exclude = ('accepted', 'authors', 'creation_date')
 
 
-class PaperFileForm(forms.ModelForm):
+class PaperFilesForm(forms.ModelForm):
 
     class Meta:
         model = PaperFile
         exclude = ('paper', 'upload_date')
 
 
-class Hacker(forms.ModelForm):
+class HackerForm(forms.ModelForm):
 
     class Meta:
         model = Hacker
@@ -37,4 +37,3 @@ class ContactForm(forms.Form):
     subject = forms.CharField(max_length=100)
     #TODO: Cambiar el widget
     message = forms.CharField(widget=forms.Textarea)
-
