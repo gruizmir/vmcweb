@@ -383,7 +383,7 @@ hr.white {
 
 .overlay.color {
     background: #fe4918;
-    opacity: .95;
+    opacity: .75;
 }
 
 .container {
@@ -1561,9 +1561,8 @@ label.error {
 }
 #schedule .panel .panel-title a .fa {
     font-size: 18px;
-     position: relative;
-     top: 20px;
-
+    position: relative;
+    top: 20px;
 }
 
 #schedule .panel .panel-title a.collapsed .fa.fa-angle-down {
@@ -2342,7 +2341,6 @@ label.error {
     padding-left: 5px;
     padding-right: 5px;
     font-size: 16px;
-
 }
 }
 
@@ -2355,6 +2353,15 @@ label.error {
 @media (min-width: 1200px) {
     .container {
         width: 970px;
-
     }
+}
+
+.indicator {
+    color: #ffffff;
+}
+
+.indicator:hover {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bolder;
 }

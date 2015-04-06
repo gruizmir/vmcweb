@@ -56,7 +56,6 @@
         var hero        = jQuery('#hero'),
             winHeight   = jQuery(window).height(),
             heroHeight  = winHeight;
-
             hero.css({height: heroHeight+"px"});
       };
 
