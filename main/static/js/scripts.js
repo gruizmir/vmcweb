@@ -56,8 +56,10 @@
         var hero        = jQuery('#hero'),
             winHeight   = jQuery(window).height(),
             heroHeight  = winHeight;
-
-            hero.css({height: heroHeight+"px"});
+            items = ['01', '02', '03'];
+            item = items[Math.floor(Math.random()*items.length)];
+            bg = "/static/bg/bg" + item + ".jpg";
+            hero.css({height: heroHeight+"px", background-image: url(bg)});
       };
 
     jQuery(window).on("resize", heroInit);
