@@ -1,2 +1,6 @@
 *.pyc
 media/*
+*~
+secrets.py
+*/secrets.py
+

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import random
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from main.models import Paper
@@ -10,7 +11,9 @@ from rest_framework import status
 
 
 def home(request):
+    bgs = ['bg01.jpg', 'bg02.jpg', 'bg03.jpg']
     data = {}
+    data['bg'] = random.choice(bgs)
     data['register_form'] = RegisterForm(prefix='register')
     data['contact_form'] = ContactForm(prefix='contact')
     papers = Paper.objects.filter(accepted=True)
