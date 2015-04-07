@@ -45,8 +45,8 @@
         <div class="home-bg">
           <nav class="navigation navigation-social">
             <ul class="navigation-bar">
-              <li><a href="https://twitter.com/ValpoMobileConf"><span class="fa fa-twitter"></span></a>
-              <li><a href="https://facebook.com/ValpoMobileConf"><span class="fa fa-facebook"></span></a>
+              <li><a href="https://twitter.com/ValpoMobileConf" target="_blank"><span class="fa fa-twitter"></span></a>
+              <li><a href="https://facebook.com/ValpoMobileConf" target="_blank"><span class="fa fa-facebook"></span></a>
 <!--
               <li><a href="#"><span class="fa fa-github"></span></a>
               <li><a href="#"><span class="fa fa-vimeo-square"></span></a>
@@ -151,9 +151,6 @@
                 <ul class="sub-list">
                   <li><i class="icon icon-documents-bookmarks-16"></i> Introducción a desarrollo para Android. <strong>Nivel principiante</strong></li>
                   <li><i class="icon icon-documents-bookmarks-11"></i> Diseño para Android Wear. <strong>Nivel: Medio</strong></li>
-<!--
-                  <li><i class="icon icon-documents-bookmarks-10"></i> </li>
--->
                 </ul>
               </div>
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInRight" data-delay="500">
@@ -722,6 +719,7 @@
     </div>
   </section>
   <!-- End Elements Section -->
+
   <!-- Register Section -->
   <section id="register" class="section light">
     <div class="overlay"></div>
@@ -735,34 +733,31 @@
     </div>
   </section>
   <!-- End Register Section -->
+
   <!-- Sponsors Section -->
   <section id="sponsors" class="section dark">
     <div class="container">
-    <div class="icon-wrap"><span class="icon icon-active icon-documents-bookmarks-12"></span></div>
-    <h3>Sponsors</h3>
-    <div class="sub-title">Lorem ipsum dolor sit amet</div>
-		<br/>
-     <div class="row">
-      <ul class="list-inline">
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-1.jpg" alt="sponsor-1" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-2.jpg" alt="sponsor-2" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-3.jpg" alt="sponsor-3" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-4.jpg" alt="sponsor-4" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-5.jpg" alt="sponsor-5" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-0.jpg" alt="sponsor-6" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-7.jpg" alt="sponsor-7" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-8.jpg" alt="sponsor-8" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-9.jpg" alt="sponsor-9" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-0.jpg" alt="sponsor-10" /></a></li>
-      </ul>
-		
-		 <div class="btn-wrapper">
-			<a href="#" class="btn btn-sm btn-primary">Become a sponsor</a>
-		 </div>
-		</div>
+      <div class="icon-wrap">
+        <span class="icon icon-active icon-documents-bookmarks-12"></span>
+      </div>
+      <h3>Auspiciadores</h3>
+      <div class="sub-title">Contamos con el apoyo de:</div>
+      <br/>
+      <div class="row">
+        <ul class="list-inline">
+          {% for sponsor in sponsors %}
+            <li><a href="{{sponsor.url}}" target="_blank"><img class="sponsor-logo" src="media/{{sponsor.logo}}" alt="sponsor-1" /></a></li>
+          {% endfor %}
+        </ul>
+        <div class="btn-wrapper">
+          <a href="{% reverse 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
+        </div>
+      </div>
     </div>
   </section>
-  <!-- End Price Section -->
+  <!-- End Sponsor Section -->
+
+
   <!-- Map Section -->
   <section id="map" class="dark">
     <div id="canvas-map"></div>

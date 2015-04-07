@@ -73,3 +73,6 @@ def register_hack_team(request):
     if form.is_valid():
         form.save()
         return Response(status=status.HTTP_200_OK)
+
+#TODO: url con name 'become_sponsor'
+#TODO: nuevo formulario BecomeSponsor
