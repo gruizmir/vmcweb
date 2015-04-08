@@ -43,6 +43,9 @@ class Person(models.Model):
         verbose_name = "Persona"
         verbose_name_plural = "Personas"
 
+    def get_full_name(self):
+        return ('%s %s') % (self.name, self.last_name)
+
     def __unicode__(self):
         return ('%s %s') % (self.name, self.last_name)
 
@@ -53,6 +56,12 @@ class Paper(models.Model):
                             verbose_name='Título')
     abstract = models.TextField(verbose_name='Resumen')
     accepted = models.BooleanField(verbose_name='Aceptado', default=False)
+    day_one = models.BooleanField(verbose_name='¿Día 1?',
+      help_text="Participa en el día 1. Si está desmarcado, participa en día 2",
+      default=False)
+    start_time = models.TimeField(verbose_name='Hora de inicio',
+            help_text='Rellenar sólo si es aceptada', null=True, blank=True)
+
     creation_date = models.DateTimeField(auto_now_add=True,
                     verbose_name="Fecha de creación")
 
@@ -159,7 +168,6 @@ class Sponsor(models.Model):
                                  content_type='image/%s' % (PIL_TYPE))
         self.logo_thumb.save('%s.%s' % (os.path.splitext(suf.name)[0],
                                  FILE_EXTENSION), suf, save=False)
-
 
 
 @receiver(post_delete, sender=Sponsor)
