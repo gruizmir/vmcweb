@@ -14,7 +14,8 @@ class PaperForm(forms.ModelForm):
 
     class Meta:
         model = Paper
-        exclude = ('accepted', 'authors', 'creation_date')
+        exclude = ('accepted', 'authors', 'creation_date', 'start_time',
+            'day_one')
 
 
 class PaperFilesForm(forms.ModelForm):

@@ -111,6 +111,8 @@ class Workshop(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre")
     description = models.TextField(verbose_name="Descripción")
     assistant = models.ManyToManyField(Person, related_name="assistant")
+    start_time = models.TimeField(verbose_name='Hora de inicio',
+            help_text='Rellenar sólo si es aceptada', null=True, blank=True)
     timespan = models.CharField(verbose_name="Duración", max_length=10)
     expositor = models.ForeignKey(Person, related_name="Expositor")
 
