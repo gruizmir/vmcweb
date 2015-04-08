@@ -47,13 +47,6 @@
             <ul class="navigation-bar">
               <li><a href="https://twitter.com/ValpoMobileConf" target="_blank"><span class="fa fa-twitter"></span></a>
               <li><a href="https://facebook.com/ValpoMobileConf" target="_blank"><span class="fa fa-facebook"></span></a>
-<!--
-              <li><a href="#"><span class="fa fa-github"></span></a>
-              <li><a href="#"><span class="fa fa-vimeo-square"></span></a>
-              <li><a href="#"><span class="fa fa-google-plus"></span></a>
-              <li><a href="#"><span class="fa fa-instagram"></span></a>
-            </ul>
--->
           </nav>
         <div class="hero-content text-center ">
           <div class="hero-small">
@@ -93,7 +86,6 @@
           <!--<li><a href="#stat">Number Facts</a></li>-->
           <li><a href="#schedule">Programa</a></li>
           <li><a href="#speakers">Expositores</a></li>
-          <li><a href="#price">Precios</a></li>
           <li><a href="#elements">Hackathon</a></li>
           <li><a href="#sponsors">Auspiciadores</a></li>
           <li><a href="#map">Contacto</a></li>
@@ -115,17 +107,19 @@
       <section class="nav-tabs-simple">
       <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified">
-          <li class="active"><a href="#htmlcss" data-toggle="tab"><i class="icon icon-chat-messages-01"></i> Área</a></li>
-          <li><a href="#jquery" data-toggle="tab"><i class="icon icon-education-science-11"></i> Talleres</a></li>
-          <li><a href="#php" data-toggle="tab"><i class="icon icon-documents-bookmarks-12"></i> Hackathon</a></li>
+          <li class="active"><a href="#charlas" data-toggle="tab"><i class="icon icon-chat-messages-01"></i> Área</a></li>
+          <li><a href="#talleres" data-toggle="tab"><i class="icon icon-education-science-11"></i> Talleres</a></li>
+          <li><a href="#hackathon" data-toggle="tab"><i class="icon icon-documents-bookmarks-12"></i> Hackathon</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="htmlcss">
+
+          <!-- CHARLAS -->
+          <div class="tab-pane fade in active" id="charlas">
             <article class="row">
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInLeft" data-delay="500">
-                <img class="img-responsive" src="static/img/about-placeholder-starbucks.jpg" alt="starbuck" />
+                    <img class="img-responsive" src="static/img/speaker.jpg" alt="expositor" />
               </div>
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
                 <h6>¿Qué haremos?</h6>
@@ -140,8 +134,10 @@
               </div>
             </article>
           </div>
+          <!-- END CHARLAS -->
 
-          <div class="tab-pane fade" id="jquery">
+          <!-- TALLERES -->
+          <div class="tab-pane fade" id="talleres">
             <article class="row">
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInLeft" data-delay="500">
                 <h6>¿Qué aprenderás?</h6>
@@ -158,10 +154,13 @@
               </div>
             </article>
           </div>
-          <div class="tab-pane fade" id="php">
+          <!-- END TALLERES -->
+
+          <!-- HACKATHON -->
+          <div class="tab-pane fade" id="hackathon">
             <article class="row">
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInLeft" data-delay="500">
-                <img class="img-responsive" src="static/img/about-placeholder-iphone.jpg" alt="iphone" />
+                <img class="img-responsive" src="static/img/hackathon01.jpg" alt="Hackathon" />
               </div>
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
                 <h6>Demuestra tus habilidades creativas</h6>
@@ -177,6 +176,8 @@
               </div>
             </article>
           </div>
+          <!-- END HACKATHON -->
+
         </div>
       </section>
     </div>
@@ -184,7 +185,7 @@
   <!-- End About Section -->
 
 
-  <!-- Stat Section -->
+  <!-- ESTADISTICAS-->
   <section id="stat" class="section light">
     <div class="overlay"></div>
     <div class="container">
@@ -226,9 +227,10 @@
       </div>
     </div>
   </section>
-  <!-- End Stat Section -->
+  <!-- FIN ESTADISTICAS -->
 
-  <!-- Schedule Section -->
+  {% if schedule %}
+  <!-- Sección Programa -->
   <section id="schedule" class="section dark">
     <div class="container">
       <div class="icon-wrap"><span class="icon icon-active icon-text-hierarchy-07"></span></div>
@@ -264,10 +266,8 @@
 
            <!-- Child 1 Nav Tabs -->
            <ul class="nav nav-tabs">
-             <li class="active"><a href="#DayOne-1" data-toggle="tab">Auditorium 1</a></li>
-             <li><a href="#DayOne-2" data-toggle="tab">Auditorium 2</a></li>
-             <li><a href="#DayOne-3" data-toggle="tab">Auditorium 3</a></li>
-            <li><a href="#DayOne-4" data-toggle="tab">Class 2</a></li>
+             <li class="active"><a href="#DayOne-1" data-toggle="tab">Charlas - Salón de Honor</a></li>
+             <li><a href="#DayOne-2" data-toggle="tab">Talleres - F-106</a></li>
           </ul>
 
         <!-- Child 1 Tab panes -->
@@ -387,8 +387,9 @@
         <div class="clearfix"></div>
 
       </div>
-      <div class="tab-pane fade" id="DayTwo">
 
+
+      <div class="tab-pane fade" id="DayTwo">
         <!-- Child 2 Nav Tabs -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#DayTwo-1" data-toggle="tab">Auditorium 1</a></li>
@@ -422,41 +423,6 @@
         </div>
 
       </div>
-      <div class="tab-pane fade" id="DayThree">
-
-        <!-- Child 3 Nav Tabs -->
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#DayThree-1" data-toggle="tab">Auditorium 1</a></li>
-          <li><a href="#DayThree-2" data-toggle="tab">Auditorium 2</a></li>
-          <li><a href="#DayThree-3" data-toggle="tab">Auditorium 3</a></li>
-          <li><a href="#DayThree-4" data-toggle="tab">Class 2</a></li>
-        </ul>
-
-        <!-- Child 3 Tab panes -->
-        <div class="tab-content">
-          <div class="tab-pane fade in active" id="DayThree-1">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-          <div class="tab-pane fade" id="DayThree-2">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-          <div class="tab-pane fade" id="DayThree-3">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-          <div class="tab-pane fade" id="DayThree-4">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-        </div>
-
-      </div>
       </div>
     </section>
 
@@ -465,7 +431,10 @@
     </div>
     </div>
   </section>
-  <!-- End Schedule Section -->
+  <!-- FIN PROGRAMA-->
+  {% endif %}
+
+  {% if speakers %}
   <!-- Speakers Section -->
   <section id="speakers" class="section light">
     <div class="overlay"></div>
@@ -547,84 +516,10 @@
     </div>
   </section>
   <!-- End Speakers Section -->
-  <!-- Price Section -->
-  <section id="price" class="section dark">
-    <div class="container">
-    <div class="icon-wrap"><span class="icon icon-active icon-shopping-02"></span></div>
-    <h3>Pricetable</h3>
-    <div class="sub-title">Shortest way to explore what will happen on Ventcamp</div>
-    <br/>
-    <br/>
-    <div class="pricing-cols pricing-3-cols">
-      <div class="pricing-col animated hiding" data-animation="fadeInLeft" data-delay="0">
-        <div class="pricing-col-header">
-          <h3 class="pricing-col-header-title">1 day</h3>
-          <h4 class="pricing-col-header-amount">
-          <span class="pricing-col-amount">$100</span></h4>
-        </div>
-        <div class="pricing-col-content">
-          <ul>
-            <li>Lorem ipsum is simply</li>
-            <li>Dummy text of the printing</li>
-            <li>Typesetting industry</li>
-          </ul>
-          <a class="pricing-col-button" href="register.html">Buy Now</a>
-        </div>
-      </div>
-      <div class="pricing-col pricing-col-featured">
-        <div class="pricing-ribbon">-20%</div>
-        <div class="pricing-col-header">
-          <h3 class="pricing-col-header-title">3 days</h3>
-          <h4 class="pricing-col-header-amount"><span class="pricing-col-amount">$150</span></h4>
-        </div>
-        <div class="pricing-col-content">
-          <ul>
-            <li>Lorem ipsum is simply</li>
-            <li>Dummy text of the printing</li>
-            <li>Typesetting industry</li>
-          </ul>
-          <a class="pricing-col-button" href="register.html">Buy Now</a>
-        </div>
-      </div>
-      <div class="pricing-col animated hiding" data-animation="fadeInRight" data-delay="0">
-        <div class="pricing-col-header">
-          <h3 class="pricing-col-header-title">2 days</h3>
-          <h4 class="pricing-col-header-amount"><span class="pricing-col-amount">$200</span></h4>
-        </div>
-        <div class="pricing-col-content">
-          <ul>
-            <li>Lorem ipsum is simply</li>
-            <li>Dummy text of the printing</li>
-            <li>Typesetting industry</li>
-          </ul>
-          <a class="pricing-col-button" href="register.html">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    </div>
-  </section>
-  <!-- End Price Section -->
-	<!-- Newsletter Section -->
-  <section id="newsletter" class="section light">
-    <div class="overlay"></div>
-    <div class="container">
-    <article class="article-big animated hiding" data-animation="fadeInDown" data-delay="0">
-      <h5>Newsletter <span class="highlight">Signup</span></h5>
-      <p>No Spam - only <span class="highlight">latest news</span>, price and activity updates!</p>
-      <form id="subscribe" class="form" action="/demo/ventcamp/index-overlay.html" method="post">
-      <div class="form-group form-inline">
-        <input type="email" class="form-control required" id="NewsletterEmail" name="NewsletterEmail" placeholder="your@email.com" />
-			  <input type="submit" class="btn btn-xs btn-default" value="Submit" />
-			  <span id="response">
-							  </span>
-      </div>
+  {% endif %}
 
-      </form>
-    </article>
-    </div>
-  </section>
-  <!-- End Newsletter Section -->
-	<!-- Elements Section -->
+
+  <!-- Elements Section -->
   <section id="elements" class="section dark">
     <div class="container">
 		<!--
