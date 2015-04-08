@@ -45,15 +45,8 @@
         <div class="home-bg">
           <nav class="navigation navigation-social">
             <ul class="navigation-bar">
-              <li><a href="https://twitter.com/ValpoMobileConf"><span class="fa fa-twitter"></span></a>
-              <li><a href="https://facebook.com/ValpoMobileConf"><span class="fa fa-facebook"></span></a>
-<!--
-              <li><a href="#"><span class="fa fa-github"></span></a>
-              <li><a href="#"><span class="fa fa-vimeo-square"></span></a>
-              <li><a href="#"><span class="fa fa-google-plus"></span></a>
-              <li><a href="#"><span class="fa fa-instagram"></span></a>
-            </ul>
--->
+              <li><a href="https://twitter.com/ValpoMobileConf" target="_blank"><span class="fa fa-twitter"></span></a>
+              <li><a href="https://facebook.com/ValpoMobileConf" target="_blank"><span class="fa fa-facebook"></span></a>
           </nav>
         <div class="hero-content text-center ">
           <div class="hero-small">
@@ -93,7 +86,6 @@
           <!--<li><a href="#stat">Number Facts</a></li>-->
           <li><a href="#schedule">Programa</a></li>
           <li><a href="#speakers">Expositores</a></li>
-          <li><a href="#price">Precios</a></li>
           <li><a href="#elements">Hackathon</a></li>
           <li><a href="#sponsors">Auspiciadores</a></li>
           <li><a href="#map">Contacto</a></li>
@@ -115,17 +107,19 @@
       <section class="nav-tabs-simple">
       <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified">
-          <li class="active"><a href="#htmlcss" data-toggle="tab"><i class="icon icon-chat-messages-01"></i> Área</a></li>
-          <li><a href="#jquery" data-toggle="tab"><i class="icon icon-education-science-11"></i> Talleres</a></li>
-          <li><a href="#php" data-toggle="tab"><i class="icon icon-documents-bookmarks-12"></i> Hackathon</a></li>
+          <li class="active"><a href="#charlas" data-toggle="tab"><i class="icon icon-chat-messages-01"></i> Área</a></li>
+          <li><a href="#talleres" data-toggle="tab"><i class="icon icon-education-science-11"></i> Talleres</a></li>
+          <li><a href="#hackathon" data-toggle="tab"><i class="icon icon-documents-bookmarks-12"></i> Hackathon</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="htmlcss">
+
+          <!-- CHARLAS -->
+          <div class="tab-pane fade in active" id="charlas">
             <article class="row">
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInLeft" data-delay="500">
-                <img class="img-responsive" src="static/img/about-placeholder-starbucks.jpg" alt="starbuck" />
+                    <img class="img-responsive" src="static/img/speaker.jpg" alt="expositor" />
               </div>
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
                 <h6>¿Qué haremos?</h6>
@@ -140,8 +134,10 @@
               </div>
             </article>
           </div>
+          <!-- END CHARLAS -->
 
-          <div class="tab-pane fade" id="jquery">
+          <!-- TALLERES -->
+          <div class="tab-pane fade" id="talleres">
             <article class="row">
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInLeft" data-delay="500">
                 <h6>¿Qué aprenderás?</h6>
@@ -151,9 +147,6 @@
                 <ul class="sub-list">
                   <li><i class="icon icon-documents-bookmarks-16"></i> Introducción a desarrollo para Android. <strong>Nivel principiante</strong></li>
                   <li><i class="icon icon-documents-bookmarks-11"></i> Diseño para Android Wear. <strong>Nivel: Medio</strong></li>
-<!--
-                  <li><i class="icon icon-documents-bookmarks-10"></i> </li>
--->
                 </ul>
               </div>
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInRight" data-delay="500">
@@ -161,10 +154,13 @@
               </div>
             </article>
           </div>
-          <div class="tab-pane fade" id="php">
+          <!-- END TALLERES -->
+
+          <!-- HACKATHON -->
+          <div class="tab-pane fade" id="hackathon">
             <article class="row">
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInLeft" data-delay="500">
-                <img class="img-responsive" src="static/img/about-placeholder-iphone.jpg" alt="iphone" />
+                <img class="img-responsive" src="static/img/hackathon01.jpg" alt="Hackathon" />
               </div>
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
                 <h6>Demuestra tus habilidades creativas</h6>
@@ -180,6 +176,8 @@
               </div>
             </article>
           </div>
+          <!-- END HACKATHON -->
+
         </div>
       </section>
     </div>
@@ -187,7 +185,7 @@
   <!-- End About Section -->
 
 
-  <!-- Stat Section -->
+  <!-- ESTADISTICAS-->
   <section id="stat" class="section light">
     <div class="overlay"></div>
     <div class="container">
@@ -229,9 +227,10 @@
       </div>
     </div>
   </section>
-  <!-- End Stat Section -->
+  <!-- FIN ESTADISTICAS -->
 
-  <!-- Schedule Section -->
+  {% if schedule %}
+  <!-- Sección Programa -->
   <section id="schedule" class="section dark">
     <div class="container">
       <div class="icon-wrap"><span class="icon icon-active icon-text-hierarchy-07"></span></div>
@@ -265,44 +264,39 @@
         <div class="tab-content">
           <div class="tab-pane fade in active" id="DayOne">
 
-           <!-- Día 1-->
+           <!-- Child 1 Nav Tabs -->
            <ul class="nav nav-tabs">
-             <li class="active"><a href="#DayOne-1" data-toggle="tab">Salón de Honor </a></li>
-             <li><a href="#DayOne-2" data-toggle="tab">F-106</a></li>
+             <li class="active"><a href="#DayOne-1" data-toggle="tab">Charlas - Salón de Honor</a></li>
+             <li><a href="#DayOne-2" data-toggle="tab">Talleres - F-106</a></li>
           </ul>
 
-        <!-- Día 1 - Salón de Honor -->
+        <!-- Child 1 Tab panes -->
         <div class="tab-content">
           <div class="tab-pane fade in active" id="DayOne-1">
-            <div class="panel-group timeline-schedule" id="panelTimelineOne">
-
-              <!-- Charlista -->
-              <div class="panel panel-default">
-                <div class="speaker-wrapper">
-                  <img src="static/img/speaker/speaker-1.jpg" class="img-responsive img-circle" alt="speaker-1" />
-                </div>
-                <div class="panel-heading">
-                  <div class="panel-title">
-                    <div class="time"><i class="fa fa-clock-o"></i> 9:00 AM</div>
-                    <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#itemOne">
-                      Acreditación
-                      <div class="pull-right fa fa-angle-up"></div>
-                      <div class="pull-right fa fa-angle-down"></div>
-                    </a>
-                  </div>
-                </div>
-                <div id="itemOne" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                    <article>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                      <p class="author"><a href="#"><strong><i class="fa fa-user"></i> Michael Lambert</strong></a></p>
-                    </article>
-                  </div>
-               </div>
+          <div class="panel-group timeline-schedule" id="panelTimelineOne">
+            <div class="panel panel-default">
+            <div class="speaker-wrapper">
+              <img src="static/img/speaker/speaker-1.jpg" class="img-responsive img-circle" alt="speaker-1" />
             </div>
-            <!-- END Charlista -->
-
-
+            <div class="panel-heading">
+              <div class="panel-title">
+              <div class="time"><i class="fa fa-clock-o"></i> 2:20 PM</div>
+              <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#itemOne">
+                Starting your own business
+                <div class="pull-right fa fa-angle-up"></div>
+                <div class="pull-right fa fa-angle-down"></div>
+              </a>
+              </div>
+            </div>
+            <div id="itemOne" class="panel-collapse collapse in">
+              <div class="panel-body">
+              <article>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                <p class="author"><a href="#"><strong><i class="fa fa-user"></i> Michael Lambert</strong></a></p>
+              </article>
+              </div>
+            </div>
+            </div>
             <div class="panel panel-default">
             <div class="speaker-wrapper">
               <img src="static/img/speaker/speaker-2.jpg" class="img-responsive img-circle" alt="speaker-2" />
@@ -393,8 +387,9 @@
         <div class="clearfix"></div>
 
       </div>
-      <div class="tab-pane fade" id="DayTwo">
 
+
+      <div class="tab-pane fade" id="DayTwo">
         <!-- Child 2 Nav Tabs -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#DayTwo-1" data-toggle="tab">Auditorium 1</a></li>
@@ -428,41 +423,6 @@
         </div>
 
       </div>
-      <div class="tab-pane fade" id="DayThree">
-
-        <!-- Child 3 Nav Tabs -->
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#DayThree-1" data-toggle="tab">Auditorium 1</a></li>
-          <li><a href="#DayThree-2" data-toggle="tab">Auditorium 2</a></li>
-          <li><a href="#DayThree-3" data-toggle="tab">Auditorium 3</a></li>
-          <li><a href="#DayThree-4" data-toggle="tab">Class 2</a></li>
-        </ul>
-
-        <!-- Child 3 Tab panes -->
-        <div class="tab-content">
-          <div class="tab-pane fade in active" id="DayThree-1">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-          <div class="tab-pane fade" id="DayThree-2">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-          <div class="tab-pane fade" id="DayThree-3">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-          <div class="tab-pane fade" id="DayThree-4">
-          <article>
-            <p>No schedule yet.</p>
-          </article>
-          </div>
-        </div>
-
-      </div>
       </div>
     </section>
 
@@ -471,7 +431,10 @@
     </div>
     </div>
   </section>
-  <!-- End Schedule Section -->
+  <!-- FIN PROGRAMA-->
+  {% endif %}
+
+  {% if speakers %}
   <!-- Speakers Section -->
   <section id="speakers" class="section light">
     <div class="overlay"></div>
@@ -553,84 +516,10 @@
     </div>
   </section>
   <!-- End Speakers Section -->
-  <!-- Price Section -->
-  <section id="price" class="section dark">
-    <div class="container">
-    <div class="icon-wrap"><span class="icon icon-active icon-shopping-02"></span></div>
-    <h3>Pricetable</h3>
-    <div class="sub-title">Shortest way to explore what will happen on Ventcamp</div>
-    <br/>
-    <br/>
-    <div class="pricing-cols pricing-3-cols">
-      <div class="pricing-col animated hiding" data-animation="fadeInLeft" data-delay="0">
-        <div class="pricing-col-header">
-          <h3 class="pricing-col-header-title">1 day</h3>
-          <h4 class="pricing-col-header-amount">
-          <span class="pricing-col-amount">$100</span></h4>
-        </div>
-        <div class="pricing-col-content">
-          <ul>
-            <li>Lorem ipsum is simply</li>
-            <li>Dummy text of the printing</li>
-            <li>Typesetting industry</li>
-          </ul>
-          <a class="pricing-col-button" href="register.html">Buy Now</a>
-        </div>
-      </div>
-      <div class="pricing-col pricing-col-featured">
-        <div class="pricing-ribbon">-20%</div>
-        <div class="pricing-col-header">
-          <h3 class="pricing-col-header-title">3 days</h3>
-          <h4 class="pricing-col-header-amount"><span class="pricing-col-amount">$150</span></h4>
-        </div>
-        <div class="pricing-col-content">
-          <ul>
-            <li>Lorem ipsum is simply</li>
-            <li>Dummy text of the printing</li>
-            <li>Typesetting industry</li>
-          </ul>
-          <a class="pricing-col-button" href="register.html">Buy Now</a>
-        </div>
-      </div>
-      <div class="pricing-col animated hiding" data-animation="fadeInRight" data-delay="0">
-        <div class="pricing-col-header">
-          <h3 class="pricing-col-header-title">2 days</h3>
-          <h4 class="pricing-col-header-amount"><span class="pricing-col-amount">$200</span></h4>
-        </div>
-        <div class="pricing-col-content">
-          <ul>
-            <li>Lorem ipsum is simply</li>
-            <li>Dummy text of the printing</li>
-            <li>Typesetting industry</li>
-          </ul>
-          <a class="pricing-col-button" href="register.html">Buy Now</a>
-        </div>
-      </div>
-    </div>
-    </div>
-  </section>
-  <!-- End Price Section -->
-	<!-- Newsletter Section -->
-  <section id="newsletter" class="section light">
-    <div class="overlay"></div>
-    <div class="container">
-    <article class="article-big animated hiding" data-animation="fadeInDown" data-delay="0">
-      <h5>Newsletter <span class="highlight">Signup</span></h5>
-      <p>No Spam - only <span class="highlight">latest news</span>, price and activity updates!</p>
-      <form id="subscribe" class="form" action="/demo/ventcamp/index-overlay.html" method="post">
-      <div class="form-group form-inline">
-        <input type="email" class="form-control required" id="NewsletterEmail" name="NewsletterEmail" placeholder="your@email.com" />
-			  <input type="submit" class="btn btn-xs btn-default" value="Submit" />
-			  <span id="response">
-							  </span>
-      </div>
+  {% endif %}
 
-      </form>
-    </article>
-    </div>
-  </section>
-  <!-- End Newsletter Section -->
-	<!-- Elements Section -->
+
+  <!-- Elements Section -->
   <section id="elements" class="section dark">
     <div class="container">
 		<!--
@@ -725,6 +614,7 @@
     </div>
   </section>
   <!-- End Elements Section -->
+
   <!-- Register Section -->
   <section id="register" class="section light">
     <div class="overlay"></div>
@@ -738,34 +628,44 @@
     </div>
   </section>
   <!-- End Register Section -->
+
   <!-- Sponsors Section -->
   <section id="sponsors" class="section dark">
     <div class="container">
-    <div class="icon-wrap"><span class="icon icon-active icon-documents-bookmarks-12"></span></div>
-    <h3>Sponsors</h3>
-    <div class="sub-title">Lorem ipsum dolor sit amet</div>
-		<br/>
-     <div class="row">
-      <ul class="list-inline">
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-1.jpg" alt="sponsor-1" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-2.jpg" alt="sponsor-2" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-3.jpg" alt="sponsor-3" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-4.jpg" alt="sponsor-4" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-5.jpg" alt="sponsor-5" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-0.jpg" alt="sponsor-6" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-7.jpg" alt="sponsor-7" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-8.jpg" alt="sponsor-8" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-9.jpg" alt="sponsor-9" /></a></li>
-      <li><a href="#" target="_blank"><img src="static/img/sponsor/sponsor-logo-0.jpg" alt="sponsor-10" /></a></li>
-      </ul>
-		
-		 <div class="btn-wrapper">
-			<a href="#" class="btn btn-sm btn-primary">Become a sponsor</a>
-		 </div>
-		</div>
+      <div class="icon-wrap">
+        <span class="icon icon-active icon-documents-bookmarks-12"></span>
+      </div>
+      <h3>Auspiciadores</h3>
+      {% if sponsor_list %}
+        <div class="sub-title">Contamos con el apoyo de:</div>
+        <br/>
+        <div class="row">
+          <ul class="list-inline">
+            {% for sponsor in sponsor_list %}
+              <li><a href="{{sponsor.url}}" target="_blank"><img class="sponsor-logo" src="media/{{sponsor.logo}}" alt="sponsor-1" /></a></li>
+            {% endfor %}
+          </ul>
+          <div class="btn-wrapper">
+            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
+          </div>
+        </div>
+      {% else %}
+        <div class="sub-title">
+          <p>
+            Aún no contamos con auspiciadores :(
+          </p>
+        </div>
+        <div class="row">
+          <div class="btn-wrapper">
+            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </section>
-  <!-- End Price Section -->
+  <!-- End Sponsor Section -->
+
+
   <!-- Map Section -->
   <section id="map" class="dark">
     <div id="canvas-map"></div>

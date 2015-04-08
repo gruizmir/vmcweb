@@ -31,9 +31,17 @@ class HackerForm(forms.ModelForm):
         exclude = ('team',)
 
 
+class SponsorForm(forms.ModelForm):
+
+    class Meta:
+        model = Sponsor
+        exclude = ('creation_date', 'logo_thumb', 'logo')
+
+
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=30)
     email = forms.EmailField(max_length=30)
     subject = forms.CharField(max_length=100)
-    #TODO: Cambiar el widget
     message = forms.CharField(widget=forms.Textarea)
+
+

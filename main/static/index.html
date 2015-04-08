@@ -636,18 +636,31 @@
         <span class="icon icon-active icon-documents-bookmarks-12"></span>
       </div>
       <h3>Auspiciadores</h3>
-      <div class="sub-title">Contamos con el apoyo de:</div>
-      <br/>
-      <div class="row">
-        <ul class="list-inline">
-          {% for sponsor in sponsors %}
-            <li><a href="{{sponsor.url}}" target="_blank"><img class="sponsor-logo" src="media/{{sponsor.logo}}" alt="sponsor-1" /></a></li>
-          {% endfor %}
-        </ul>
-        <div class="btn-wrapper">
-          <a href="{% reverse 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
+      {% if sponsor_list %}
+        <div class="sub-title">Contamos con el apoyo de:</div>
+        <br/>
+        <div class="row">
+          <ul class="list-inline">
+            {% for sponsor in sponsor_list %}
+              <li><a href="{{sponsor.url}}" target="_blank"><img class="sponsor-logo" src="media/{{sponsor.logo}}" alt="sponsor-1" /></a></li>
+            {% endfor %}
+          </ul>
+          <div class="btn-wrapper">
+            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
+          </div>
         </div>
-      </div>
+      {% else %}
+        <div class="sub-title">
+          <p>
+            Aún no contamos con auspiciadores :(
+          </p>
+        </div>
+        <div class="row">
+          <div class="btn-wrapper">
+            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </section>
   <!-- End Sponsor Section -->

@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
 from django.db import models
+from cStringIO import StringIO
+from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+from PIL import Image
 
 
 class Person(models.Model):
@@ -101,3 +108,93 @@ class Workshop(models.Model):
     class Meta:
         verbose_name = "Taller"
         verbose_name_plural = "Talleres"
+
+
+class Sponsor(models.Model):
+    name = models.CharField(max_length=50, verbose_name="Nombre")
+    description = models.TextField(verbose_name="Descripción")
+    url = models.URLField(null=True, blank=True)
+    contact_name = models.CharField(max_length=50, verbose_name="Contacto")
+    email = models.EmailField(max_length=40, null=False, blank=False,
+                    verbose_name='Email', unique=True)
+    phone = models.CharField(max_length=15, null=True, blank=True,
+                    verbose_name='Fono')
+    logo = models.ImageField(upload_to="logos",
+                    verbose_name="Logo")
+    logo_thumb = models.ImageField(upload_to="logos",
+                    verbose_name="Thumbnail")
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    def createThumbnails(self):
+        """
+        Crea un thumbnail del avatar del usuario, con el menor tamaño (entre
+        ancho y alto), definido por MAX_THUMBNAIL_SIZE en settings. Luego,
+        guarda este thumbnail en el objeto Profile, campo profile_thumbnail.
+        """
+        if not self.logo:
+            return
+        img = Image.open(StringIO(self.logo.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE == 'jpeg':
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the thumbnail
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+        suf = SimpleUploadedFile(os.path.split(self.logo.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        self.logo_thumb.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+
+
+
+@receiver(post_delete, sender=Sponsor)
+def sponsor_post_delete_handler(sender, **kwargs):
+    """
+    Recibe una señal de eliminación de una instancia de Sponsor. Elimina
+    del sistema de archivos la foto real y el thumbnail asociados al avatar de
+    esta instancia.
+    """
+    try:
+        sponsor = kwargs['instance']
+        storage, path = sponsor.logo.storage, sponsor.logo.path
+        storageThumb, pathThumb = sponsor.logo_thumb.storage,\
+                                    sponsor.logo_thumb.path
+        if not path.endswith("no_disponible.jpg"):
+            storage.delete(path)
+            storageThumb.delete(pathThumb)
+    except:
+        pass
+
+
+@receiver(post_delete, sender=Person)
+def person_post_delete_handler(sender, **kwargs):
+    """
+    Recibe una señal de eliminación de una instancia de Person. Elimina
+    del sistema de archivos la foto real y el thumbnail asociados al avatar de
+    esta instancia.
+    """
+    try:
+        person = kwargs['instance']
+        storage, path = person.photo.storage, person.photo.path
+        storageThumb, pathThumb = person.photo_thumb.storage,\
+                                    person.photo_thumb.path
+        if not path.endswith("no_disponible.jpg"):
+            storage.delete(path)
+            storageThumb.delete(pathThumb)
+    except:
+        pass
