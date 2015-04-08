@@ -88,3 +88,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'cargas')
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+MANDRILL_API_KEY = 'pzpL8fvqRESbTamvYuK7XQ'
+DEFAULT_FROM_EMAIL = 'valpo.mobile.conf@gmail.com'
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
