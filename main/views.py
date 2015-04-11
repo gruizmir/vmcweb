@@ -21,8 +21,10 @@ def home(request):
     data['sponsor_list'] = Sponsor.objects.all()
     papers = Paper.objects.filter(accepted=True)
     data['papers'] = papers
+    data['schedule'] = True
     return render_to_response("index.html", data,
                                   context_instance=RequestContext(request))
+
 
 #TODO: Enviar email a usuario
 def register(request):
@@ -33,6 +35,7 @@ def register(request):
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
 
+
 #TODO: Enviar email a usuario y a valpo.mobile.conf@gmail.com
 @api_view(["POST"])
 def contact(request):
@@ -42,6 +45,7 @@ def contact(request):
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
+
 
 #TODO: Debe enviar email de confirmación al posible expositor.
 @api_view(["POST"])
