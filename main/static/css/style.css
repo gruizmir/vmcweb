@@ -386,6 +386,11 @@ hr.white {
     opacity: .75;
 }
 
+.register-page .overlay {
+    position: fixed;
+    background: black;
+}
+
 .container {
     z-index: 1;
     position: relative;
@@ -427,7 +432,7 @@ hr.white {
     top: 50%;
     left: 0;
     right: 0;
-    margin-top: -195px;
+    margin-top: -150px;
 }
 
 #hero hr {
@@ -705,6 +710,8 @@ hr.white {
     padding-top: 60px;
 
 }
+
+
 
 #hackathon {
     text-align: left;
@@ -1191,20 +1198,20 @@ hr.white {
 
 }
 .form-register ::-webkit-input-placeholder {
-    /* WebKit browsers */ color:#EBEBEB !important;
+    /* WebKit browsers */ color:#BFBFBF !important;
      font-family: 'Source Sans Pro', sans-serif;
     }
 .form-register :-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */ color:#EBEBEB !important;
+    /* Mozilla Firefox 4 to 18 */ color:#BFBFBF !important;
      font-family: 'Source Sans Pro', sans-serif;
     }
 .form-register  ::-moz-placeholder {
-    /* Mozilla Firefox 19+ */ color:#EBEBEB !important;
+    /* Mozilla Firefox 19+ */ color:#BFBFBF !important;
      font-family: 'Source Sans Pro', sans-serif;
 
 }
 .form-register  :-ms-input-placeholder {
-    /* Internet Explorer 10+ */ color:#EBEBEB !important;
+    /* Internet Explorer 10+ */ color:#BFBFBF !important;
      font-family: 'Source Sans Pro', sans-serif;
     }
 .form-register:after {
@@ -2380,4 +2387,11 @@ label.error {
   height:100px;
   width:100px;
   overflow:hidden;
+}
+
+
+.top-alert {
+  position: relative;
+  top: 10px;
+  text-align: center;
 }

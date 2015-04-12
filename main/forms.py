@@ -25,11 +25,11 @@ class PaperFilesForm(forms.ModelForm):
         exclude = ('paper', 'upload_date')
 
 
-class HackerForm(forms.ModelForm):
+class HackTeamForm(forms.ModelForm):
 
     class Meta:
-        model = Hacker
-        exclude = ('team',)
+        model = HackTeam
+        exclude = ('creation_date',)
 
 
 class SponsorForm(forms.ModelForm):

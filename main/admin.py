@@ -8,9 +8,9 @@ class PersonAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'email', 'payed', 'creation_date')
 
 
-@admin.register(Hacker)
-class HackerAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'has_team', 'creation_date')
+@admin.register(HackTeam)
+class Admin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'creation_date')
 
 
 @admin.register(Paper)

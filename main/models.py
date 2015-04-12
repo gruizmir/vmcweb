@@ -15,7 +15,7 @@ class Person(models.Model):
     lastname = models.CharField(max_length=30, null=True, blank=False,
                     verbose_name='Apellido')
     rut = models.CharField(max_length=30, null=True, blank=True,
-                    verbose_name='RUT/Pasaporte')
+                    verbose_name='RUT/Pasaporte', unique=True)
     email = models.EmailField(max_length=40, null=False, blank=False,
                     verbose_name='Email', unique=True)
     phone = models.CharField(max_length=15, null=True, blank=True,
@@ -53,7 +53,7 @@ class Person(models.Model):
 class Paper(models.Model):
     authors = models.ManyToManyField(Person)
     title = models.CharField(max_length=30, null=True, blank=False,
-                            verbose_name='Título')
+                            verbose_name='Título', unique=True)
     abstract = models.TextField(verbose_name='Resumen')
     accepted = models.BooleanField(verbose_name='Aceptado', default=False)
     day_one = models.BooleanField(verbose_name='¿Día 1?',
@@ -90,21 +90,48 @@ class PaperFile(models.Model):
 
 
 class HackTeam(models.Model):
-    name = models.CharField(max_length=40, verbose_name="Equipos")
+    name = models.CharField(max_length=40, verbose_name="Team Name",
+                                unique=True)
+    email = models.EmailField(max_length=30, verbose_name="Email de contacto",
+                default="", unique=True,
+                help_text="Usaremos este email para comunicarnos con ustedes ")
+    phone = models.CharField(max_length=30, verbose_name="Teléfono de contacto",
+                default="",
+                help_text="Usaremos este teléfono para comunicarnos con ustedes ")
+    leader = models.CharField(verbose_name="Team leader", max_length=40,
+                                null=False, default="")
+    lider_code = models.CharField(verbose_name="Código registro", max_length=40,
+                null=True, blank=True,
+                help_text="¿Registrado a las charlas? Ingresa tu código.")
+    person2 = models.CharField(verbose_name="Hacker", max_length=40, null=False,
+                default="")
+    person2_code = models.CharField(verbose_name="Código registro", null=True,
+                max_length=40, blank=True,
+                help_text="¿Registrado a las charlas? Ingresa tu código.")
+    person3 = models.CharField(verbose_name="Hacker", max_length=40,
+                default="",
+                null=False)
+    person3_code = models.CharField(verbose_name="Código registro", null=True,
+                max_length=40, blank=True,
+                help_text="¿Registrado a las charlas? Ingresa tu código.")
+    person4 = models.CharField(verbose_name="Hacker", max_length=40, null=True,
+                                blank=True)
+    person4_code = models.CharField(verbose_name="Código registro", null=True,
+                max_length=40, blank=True,
+                help_text="¿Registrado a las charlas? Ingresa tu código.")
+    person5 = models.CharField(verbose_name="Hacker", max_length=40, null=True,
+                                blank=True)
+    person5_code = models.CharField(verbose_name="Código registro", null=True,
+                max_length=40, blank=True,
+                help_text="¿Registrado a las charlas? Ingresa tu código.")
     creation_date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
 
     class Meta:
         verbose_name = "Equipo"
         verbose_name_plural = "Equipos"
-
-
-class Hacker(Person):
-    has_team = models.BooleanField(default=True)
-    team = models.ForeignKey(HackTeam, blank=True, null=True)
-
-    class Meta:
-        verbose_name = "Hacker"
-        verbose_name_plural = "Hackers"
 
 
 class Workshop(models.Model):
@@ -115,6 +142,9 @@ class Workshop(models.Model):
             help_text='Rellenar sólo si es aceptada', null=True, blank=True)
     timespan = models.CharField(verbose_name="Duración", max_length=10)
     expositor = models.ForeignKey(Person, related_name="Expositor")
+
+    def __unicode__(self):
+        return self.name
 
     class Meta:
         verbose_name = "Taller"
@@ -135,6 +165,9 @@ class Sponsor(models.Model):
     logo_thumb = models.ImageField(upload_to="logos",
                     verbose_name="Thumbnail")
     creation_date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
 
     def createThumbnails(self):
         """

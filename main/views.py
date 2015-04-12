@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 import random
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.views.generic import FormView
 from main.models import Paper, Sponsor
 from main.forms import RegisterForm, ContactForm, PaperForm, PaperFilesForm, \
-                       HackerForm, SponsorForm
+                       HackTeamForm, SponsorForm
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg']
 
 def home(request):
-    bgs = ['bg01.jpg', 'bg02.jpg', 'bg03.jpg']
     data = {}
+    if 'team' in request.GET and request.GET['team'] == '1':
+        data['success_message'] = "Tu equipo ha sido registrado"
     data['bg'] = random.choice(bgs)
     data['register_form'] = RegisterForm(prefix='register')
     data['contact_form'] = ContactForm(prefix='contact')
@@ -75,46 +78,51 @@ class RegisterTeamView(FormView):
     """
     Recibe el formulario de registro de un equipo para la hackathon.
     """
-    success_url = '/'
+    success_url = '/?team=1'
     template_name = 'register_team.html'
-    form_class = HackerForm
+    form_class = HackTeamForm
+    success_message = "¡El equipo <strong>%(name)s</strong> fue registrado!"
 
-    def dispatch(self, request, device=None):
+    def dispatch(self, request):
         """
         Primera función llamada cuando se accede normalmente por navegador.
         """
-        return super(SponsorView, self).dispatch(request=request,
-                                                   device=device)
+        return super(RegisterTeamView, self).dispatch(request=request)
 
     def get(self, request):
         data = {}
+        data['bg'] = random.choice(bgs)
         return render(request, self.template_name, data)
 
     def post(self, request):
-        form = HackerForm(request.POST)
+        form = HackTeamForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
-            return render(request, self.template_name, {'form': form})
+            data = {}
+            data['bg'] = random.choice(bgs)
+            data['form'] = form
+            return render(request, self.template_name, data)
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, name=self.object.name)
 
 
 #TODO: Email de confirmación y notificación a organización
-class SponsorView(FormView):
+class SponsorView(SuccessMessageMixin, FormView):
     """
-    Vista del panel principal. Los cuadros se cargan con JS después de la carga
-    de la página principal.
+    Vista de registro de auspiciadores para el evento.
     """
     success_url = '/'
     template_name = 'new_sponsor.html'
     form_class = SponsorForm
 
-    def dispatch(self, request, device=None):
+    def dispatch(self, request):
         """
         Primera función llamada cuando se accede normalmente por navegador.
         """
-        return super(SponsorView, self).dispatch(request=request,
-                                                   device=device)
+        return super(SponsorView, self).dispatch(request=request)
 
     def get(self, request):
         data = {}
