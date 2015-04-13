@@ -18,13 +18,6 @@ class PaperForm(forms.ModelForm):
             'day_one')
 
 
-class PaperFilesForm(forms.ModelForm):
-
-    class Meta:
-        model = PaperFile
-        exclude = ('paper', 'upload_date')
-
-
 class HackTeamForm(forms.ModelForm):
 
     class Meta:
@@ -44,5 +37,3 @@ class ContactForm(forms.Form):
     email = forms.EmailField(max_length=30)
     subject = forms.CharField(max_length=100)
     message = forms.CharField(widget=forms.Textarea)
-
-

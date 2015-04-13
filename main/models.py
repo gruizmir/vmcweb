@@ -51,6 +51,10 @@ class Person(models.Model):
 
 
 class Paper(models.Model):
+    """
+    Modelo para subir las charlas. Permite subir un archivo (.pdf) y un
+    archivo con con información adicional.
+    """
     authors = models.ManyToManyField(Person)
     title = models.CharField(max_length=30, null=True, blank=False,
                             verbose_name='Título', unique=True)
@@ -61,32 +65,16 @@ class Paper(models.Model):
       default=False)
     start_time = models.TimeField(verbose_name='Hora de inicio',
             help_text='Rellenar sólo si es aceptada', null=True, blank=True)
-
+    doc = models.FileField(null=False, verbose_name="Archivo", blank=False,
+                            upload_to="papers")
+    extras = models.FileField(null=True, verbose_name="Anexos", blank=True,
+                            upload_to="extras")
     creation_date = models.DateTimeField(auto_now_add=True,
                     verbose_name="Fecha de creación")
 
     class Meta:
         verbose_name = "Paper"
         verbose_name_plural = "Papers"
-
-
-class PaperFile(models.Model):
-    paper = models.ForeignKey(Paper)
-    doc = models.FileField(null=False, verbose_name="Archivo", blank=False,
-                            upload_to="papers")
-    extras = models.FileField(null=True, verbose_name="Anexos", blank=True,
-                            upload_to="extras")
-    description = models.TextField(verbose_name='Descripción', null=True,
-                                    blank=True)
-    upload_date = models.DateTimeField(auto_now_add=True,
-                    verbose_name="Fecha de registro")
-
-    class Meta:
-        verbose_name = "Archivo adjunto"
-        verbose_name_plural = "Archivos adjuntos"
-
-    def __unicode__(self):
-        return self.paper.title
 
 
 class HackTeam(models.Model):
@@ -96,8 +84,8 @@ class HackTeam(models.Model):
                 default="", unique=True,
                 help_text="Usaremos este email para comunicarnos con ustedes ")
     phone = models.CharField(max_length=30, verbose_name="Teléfono de contacto",
-                default="",
-                help_text="Usaremos este teléfono para comunicarnos con ustedes ")
+            default="",
+            help_text="Usaremos este teléfono para comunicarnos con ustedes ")
     leader = models.CharField(verbose_name="Team leader", max_length=40,
                                 null=False, default="")
     lider_code = models.CharField(verbose_name="Código registro", max_length=40,

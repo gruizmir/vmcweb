@@ -6,8 +6,8 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.views.generic import FormView
 from main.models import Paper, Sponsor
-from main.forms import RegisterForm, ContactForm, PaperForm, PaperFilesForm, \
-                       HackTeamForm, SponsorForm
+from main.forms import RegisterForm, ContactForm, PaperForm, HackTeamForm, \
+                       SponsorForm
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -50,29 +50,6 @@ def contact(request):
         return Response(status=status.HTTP_403_FORBIDDEN)
 
 
-#TODO: Debe enviar email de confirmación al posible expositor.
-@api_view(["POST"])
-def upload_paper(request):
-    """
-    Recibe los formularios para postulación de papers. Tiene dos formularios
-    Django incrustados para recibir: uno es del paper propiamente tal, y el
-    otro es de los archivos que se subirán con este.
-    """
-    paper_form = PaperForm(request.POST, prefix='paper')
-    files_form = PaperFilesForm(request.POST, prefix='files')
-    if paper_form.is_valid():
-        if files_form.is_valid():
-            paper = paper_form.save()
-            files = files_form.save(commit=False)
-            files.paper = paper
-            files.save()
-            return Response(status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-    else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
-
-
 #TODO: Enviar email a cada uno de los miembros del equipo.
 class RegisterTeamView(FormView):
     """
@@ -81,7 +58,6 @@ class RegisterTeamView(FormView):
     success_url = '/?team=1'
     template_name = 'register_team.html'
     form_class = HackTeamForm
-    success_message = "¡El equipo <strong>%(name)s</strong> fue registrado!"
 
     def dispatch(self, request):
         """
@@ -97,7 +73,23 @@ class RegisterTeamView(FormView):
     def post(self, request):
         form = HackTeamForm(request.POST)
         if form.is_valid():
-            form.save()
+            team = form.save()
+            subject = "Registro de Equipo a Valparaíso Mobile Conf"
+            msg = "%(name)s, bienvenido a Valparaíso Mobile Conf. Tu equipo " +\
+                  "ha sido correctamente registrado a la Hackathon. Como " +\
+                  "respaldo, te enviamos una lista con tu equipo:" +
+                  "%(leader)s \n" +\
+                  "%(person2)s\n%(person3)\n%(person4)s\n%(person5)"
+
+            try:
+                connection = mail.get_connection()
+                connection.open()
+                email = mail.EmailMessage(subject, msg, settings.EMAIL_HOST_USER,
+                                          [user.email], connection=connection)
+                connection.send_messages([email])
+                connection.close()
+            except:
+                print traceback.format_exc()
             return HttpResponseRedirect(self.get_success_url())
         else:
             data = {}
@@ -105,8 +97,44 @@ class RegisterTeamView(FormView):
             data['form'] = form
             return render(request, self.template_name, data)
 
-    def get_success_message(self, cleaned_data):
-        return self.success_message % dict(cleaned_data, name=self.object.name)
+
+#TODO: Enviar email a cada uno de los miembros del equipo.
+class RegisterPaperView(FormView):
+    """
+    Recibe el formulario de registro de un equipo para la hackathon.
+    """
+    success_url = '/?paper=1'
+    template_name = 'register_paper.html'
+    form_class = PaperForm
+
+    def dispatch(self, request):
+        """
+        Primera función llamada cuando se accede normalmente por navegador.
+        """
+        return super(RegisterPaperView, self).dispatch(request=request)
+
+    def get(self, request):
+        data = {}
+        data['bg'] = random.choice(bgs)
+        return render(request, self.template_name, data)
+
+    #TODO: Debe enviar email de confirmación al posible expositor.
+    def post(self, request):
+
+        """
+        Recibe los formularios para postulación de papers. Tiene dos formularios
+        Django incrustados para recibir: uno es del paper propiamente tal, y el
+        otro es de los archivos que se subirán con este.
+        """
+        form = PaperForm(request.POST, prefix='paper')
+        if form.is_valid():
+            paper = form.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            data = {}
+            data['bg'] = random.choice(bgs)
+            data['form'] = form
+            return render(request, self.template_name, data)
 
 
 #TODO: Email de confirmación y notificación a organización

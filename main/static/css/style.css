@@ -382,8 +382,8 @@ hr.white {
 }
 
 .overlay.color {
-    background: #fe4918;
-    opacity: .75;
+    background: black;
+    opacity: .5;
 }
 
 .register-page .overlay {

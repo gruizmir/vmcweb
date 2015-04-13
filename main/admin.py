@@ -16,8 +16,3 @@ class Admin(admin.ModelAdmin):
 @admin.register(Paper)
 class PaperAdmin(admin.ModelAdmin):
     list_display = ('title', 'accepted', 'creation_date')
-
-
-@admin.register(PaperFile)
-class PaperFileAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'doc', 'extras', 'upload_date')
