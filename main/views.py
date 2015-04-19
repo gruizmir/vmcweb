@@ -205,15 +205,19 @@ class SponsorView(SuccessMessageMixin, FormView):
 
     def get(self, request):
         data = {}
+        data['bg'] = random.choice(bgs)
         return render(request, self.template_name, data)
 
     def post(self, request):
+        data = {}
+        data['bg'] = random.choice(bgs)
         form = SponsorForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
-            return render(request, self.template_name, {'form': form})
+            data['form'] = form
+            return render(request, self.template_name, data)
 
     def sendEmail(self, sponsor):
         """

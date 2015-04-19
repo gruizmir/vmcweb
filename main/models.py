@@ -149,9 +149,9 @@ class Sponsor(models.Model):
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
     logo = models.ImageField(upload_to="logos",
-                    verbose_name="Logo")
+                    verbose_name="Logo", null=True, blank=True)
     logo_thumb = models.ImageField(upload_to="logos",
-                    verbose_name="Thumbnail")
+                    verbose_name="Thumbnail", null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):

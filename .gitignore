@@ -3,4 +3,4 @@ media/*
 *~
 secrets.py
 */secrets.py
-
+*.db
