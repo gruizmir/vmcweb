@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import random
+import traceback
+from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core import mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
@@ -13,6 +16,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg']
+
 
 def home(request):
     data = {}
@@ -50,7 +54,6 @@ def contact(request):
         return Response(status=status.HTTP_403_FORBIDDEN)
 
 
-#TODO: Enviar email a cada uno de los miembros del equipo.
 class RegisterTeamView(FormView):
     """
     Recibe el formulario de registro de un equipo para la hackathon.
@@ -77,15 +80,16 @@ class RegisterTeamView(FormView):
             subject = "Registro de Equipo a Valparaíso Mobile Conf"
             msg = "%(name)s, bienvenido a Valparaíso Mobile Conf. Tu equipo " +\
                   "ha sido correctamente registrado a la Hackathon. Como " +\
-                  "respaldo, te enviamos una lista con tu equipo:" +
+                  "respaldo, te enviamos una lista con tu equipo:" +\
                   "%(leader)s \n" +\
                   "%(person2)s\n%(person3)\n%(person4)s\n%(person5)"
 
             try:
                 connection = mail.get_connection()
                 connection.open()
-                email = mail.EmailMessage(subject, msg, settings.EMAIL_HOST_USER,
-                                          [user.email], connection=connection)
+                email = mail.EmailMessage(subject, msg,
+                                          settings.DEFAULT_FROM_EMAIL,
+                                          [team.email], connection=connection)
                 connection.send_messages([email])
                 connection.close()
             except:
@@ -98,7 +102,6 @@ class RegisterTeamView(FormView):
             return render(request, self.template_name, data)
 
 
-#TODO: Enviar email a cada uno de los miembros del equipo.
 class RegisterPaperView(FormView):
     """
     Recibe el formulario de registro de un equipo para la hackathon.
@@ -118,7 +121,6 @@ class RegisterPaperView(FormView):
         data['bg'] = random.choice(bgs)
         return render(request, self.template_name, data)
 
-    #TODO: Debe enviar email de confirmación al posible expositor.
     def post(self, request):
 
         """
@@ -129,6 +131,7 @@ class RegisterPaperView(FormView):
         form = PaperForm(request.POST, prefix='paper')
         if form.is_valid():
             paper = form.save()
+            self.sendEmail(paper)
             return HttpResponseRedirect(self.get_success_url())
         else:
             data = {}
@@ -136,8 +139,31 @@ class RegisterPaperView(FormView):
             data['form'] = form
             return render(request, self.template_name, data)
 
+    def sendEmail(self, paper):
+        """
+        Función encargada de enviar un email de confirmación de recepción de
+        email al expositor.
+        """
+        subject = "[Valparaíso Mobile Conf] Recepción de paper"
+        msg = u'Estimado %(name)s, su paper fue recibido exitosamente, y ' +\
+              u'será evaluado por el jurado dentro del período de ' +\
+              u'deliberación. Desde el %(fecha)s te avisaremos de los' +\
+              u'resultados.\n\nMuchas gracias por participar de ' +\
+              u'Valparaíso Mobile Conf. \n\n Abdel Rojas Silva\nOrganizador'
+        msg = msg % {'name': list(paper.authors)[0].name,
+                     'fecha': '08 de Junio de 2015'}
+        try:
+            connection = mail.get_connection()
+            connection.open()
+            email = mail.EmailMessage(subject, msg, settings.DEFAULT_FROM_EMAIL,
+                                      [list(paper.authors)[0].email],
+                                      connection=connection)
+            connection.send_messages([email])
+            connection.close()
+        except:
+            print traceback.format_exc()
 
-#TODO: Email de confirmación y notificación a organización
+
 class SponsorView(SuccessMessageMixin, FormView):
     """
     Vista de registro de auspiciadores para el evento.
@@ -164,8 +190,31 @@ class SponsorView(SuccessMessageMixin, FormView):
         else:
             return render(request, self.template_name, {'form': form})
 
+    def sendEmail(self, sponsor):
+        """
+        Función encargada de enviar un email de confirmación de recepción de
+        email a la empresa interesada y un email a los organizadores.
+        """
+        subject = "[Valparaíso Mobile Conf] Solicitud de auspicio"
+        msg = u'Estimado %(name)s, hemos recibido su solicitud de auspiciar ' +\
+              u'el evento Valparaíso Mobile Conf. En breve, la organización ' +\
+              u'del evento le contactará personalmente. \nMuchas gracias ' +\
+              u'por apoyar esta gran iniciativa, Valparaíso Mobile Conf.' +\
+              u'\n\n Abdel Rojas Silva\nOrganizador'
+        msg = msg % {'name': sponsor.contact_name}
+        try:
+            connection = mail.get_connection()
+            connection.open()
+            email = mail.EmailMessage(subject, msg, settings.DEFAULT_FROM_EMAIL,
+                                      [sponsor.email,
+                                      'abdel.rojas@alumnos.usm.cl',
+                                      'gabriel.ruiz.miranda@gmail.com',
+                                      'pablo.inzunza@alumnos.usm.cl'],
+                                      connection=connection)
+            connection.send_messages([email])
+            connection.close()
+        except:
+            print traceback.format_exc()
 
 become_sponsor = SponsorView.as_view()
 register_hack_team = RegisterTeamView.as_view()
-
-#TODO: Crear modelo y formulario para Sponsor.
