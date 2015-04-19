@@ -3,6 +3,13 @@ from django import forms
 from main.models import *
 
 
+class AuthorForm(forms.ModelForm):
+
+    class Meta:
+        model = Person
+        fields = ('name', 'lastname', 'phone', 'email')
+
+
 class RegisterForm(forms.ModelForm):
 
     class Meta:

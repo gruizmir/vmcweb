@@ -5,12 +5,11 @@ from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import mail
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
-from django.views.generic import FormView
+from django.shortcuts import render
+from django.views.generic import FormView, View
 from main.models import Paper, Sponsor
 from main.forms import RegisterForm, ContactForm, PaperForm, HackTeamForm, \
-                       SponsorForm
+                       SponsorForm, AuthorForm
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -18,19 +17,31 @@ from rest_framework import status
 bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg']
 
 
-def home(request):
-    data = {}
-    if 'team' in request.GET and request.GET['team'] == '1':
-        data['success_message'] = "Tu equipo ha sido registrado"
-    data['bg'] = random.choice(bgs)
-    data['register_form'] = RegisterForm(prefix='register')
-    data['contact_form'] = ContactForm(prefix='contact')
-    data['sponsor_list'] = Sponsor.objects.all()
-    papers = Paper.objects.filter(accepted=True)
-    data['papers'] = papers
-    data['schedule'] = True
-    return render_to_response("index.html", data,
-                                  context_instance=RequestContext(request))
+class HomeView(View):
+    """
+    Recibe el formulario de registro de un equipo para la hackathon.
+    """
+    success_url = '/'
+    template_name = 'index.html'
+
+    def dispatch(self, request):
+        """
+        Primera función llamada cuando se accede normalmente por navegador.
+        """
+        return super(HomeView, self).dispatch(request=request)
+
+    def get(self, request):
+        data = {}
+        if 'team' in request.GET and request.GET['team'] == '1':
+            data['success_message'] = "Tu equipo ha sido registrado"
+        data['bg'] = random.choice(bgs)
+        data['register_form'] = RegisterForm(prefix='register')
+        data['contact_form'] = ContactForm(prefix='contact')
+        data['sponsor_list'] = Sponsor.objects.all()
+        papers = Paper.objects.filter(accepted=True)
+        data['papers'] = papers
+        data['schedule'] = True
+        return render(request, self.template_name, data)
 
 
 #TODO: Enviar email a usuario
@@ -119,6 +130,8 @@ class RegisterPaperView(FormView):
     def get(self, request):
         data = {}
         data['bg'] = random.choice(bgs)
+        data['paper_form'] = PaperForm(prefix='paper')
+        data['author_form'] = AuthorForm(prefix='author')
         return render(request, self.template_name, data)
 
     def post(self, request):
@@ -128,15 +141,25 @@ class RegisterPaperView(FormView):
         Django incrustados para recibir: uno es del paper propiamente tal, y el
         otro es de los archivos que se subirán con este.
         """
-        form = PaperForm(request.POST, prefix='paper')
+        form = PaperForm(request, request.POST, prefix='paper')
+        author_form = AuthorForm(request, request.POST, prefix='author')
+        data = {}
+        data['bg'] = random.choice(bgs)
         if form.is_valid():
-            paper = form.save()
-            self.sendEmail(paper)
-            return HttpResponseRedirect(self.get_success_url())
+            if author_form.is_valid():
+                author = author_form.save()
+                paper = form.save(commit=False)
+                paper.authors.add(author)
+                paper.save()
+                self.sendEmail(paper)
+                return HttpResponseRedirect(self.get_success_url())
+            else:
+                data['paper_form'] = form
+                data['author_form'] = author_form
+                return render(request, self.template_name, data)
         else:
-            data = {}
-            data['bg'] = random.choice(bgs)
-            data['form'] = form
+            data['paper_form'] = form
+            data['author_form'] = author_form
             return render(request, self.template_name, data)
 
     def sendEmail(self, paper):
@@ -218,3 +241,5 @@ class SponsorView(SuccessMessageMixin, FormView):
 
 become_sponsor = SponsorView.as_view()
 register_hack_team = RegisterTeamView.as_view()
+home_view = HomeView.as_view()
+paper_view = RegisterPaperView.as_view()

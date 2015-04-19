@@ -83,8 +83,10 @@
           {% if schedule %}
           <li><a href="#schedule">Programa</a></li>
           {% endif %}
-          {% if speaker %}
+          {% if speakers %}
           <li><a href="#speakers">Expositores</a></li>
+          {% else %}
+          <li><a href="#cfp">Call for Papers</a></li>
           {% endif %}
           <li><a href="#hackathon">Hackathon</a></li>
           <li><a href="#sponsors">Auspiciadores</a></li>
@@ -756,6 +758,23 @@
     </div>
   </section>
   <!-- End Speakers Section -->
+
+  {% else %}
+  <!-- Call for Papers Section -->
+  <section id="cfp" class="section light">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="icon-wrap"><span class="icon icon-active icon-multimedia-12"></span></div>
+      <h3>Call for Papers</h3>
+      <div class="sub-title">¿Quieres presentar una charla en el Valparaíso Mobile Conf? ¡Postula tu paper aquí!</div>
+      <br />
+      <div class="btn-wrapper">
+        <a href="{% url 'new_paper' %} "class="btn btn-sm btn-default" >Enviar </a>
+      </div>
+    </div>
+  </section>
+  <!-- End Call for Papers Section -->
+
   {% endif %}
 
 
