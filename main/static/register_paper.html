@@ -40,12 +40,13 @@
                   <br/>
                 </div>
                 <div class="col-md-10 col-md-offset-1 col-xs-12">
-                  <form class="form form-register" method="post" action="">
+                  <form class="form form-register" method="post" action="" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                       <label for="id_paper-title" class="col-sm-3 col-xs-12 control-label">Título</label>
                       <div class="col-sm-9 col-xs-12">
     		    <input type="text" class="form-control required" name="paper-title" id="id_paper-title" placeholder="Título" value="{{paper_form.title.value|default:''}}">
+    		    {{paper_form.title.help_text}}
     		    {{paper_form.title.errors}}
     		  </div>
                     </div>
@@ -53,7 +54,8 @@
                     <div class="form-group">
                       <label for="id_paper-abstract" class="col-sm-3 col-xs-12 control-label">Resumen</label>
                       <div class="col-sm-9 col-xs-12">
-                        <input type="text" class="form-control required" name="paper-abstract" id="id_paper-abstract" placeholder="Resumen" value="{{paper_form.abstract.value|default:''}}">
+                        <textarea class="form-control required" name="paper-abstract" id="id_paper-abstract" placeholder="Resumen" >{{paper_form.abstract.value|default:''}}</textarea>
+                        {{paper_form.abstract.help_text}}
                         {{paper_form.abstract.errors}}
                       </div>
                     </div>
@@ -62,11 +64,13 @@
                       <label for="id_author-name" class="col-sm-3 col-xs-12 control-label">Autor</label>
                       <div class="col-sm-4 col-xs-12">
     		    <input type="text" class="form-control required" name="author-name" id="id_author-name" placeholder="Nombre" value="{{author_form.name.value|default:''}}">
+    		    {{author_form.name.help_text}}
     		    {{author_form.name.errors}}
     		  </div>
 
     		  <div class="col-sm-5 col-xs-12">
     		    <input type="text" class="form-control required" name="author-lastname" id="id_author-lastname" placeholder="Apellido" value="{{author_form.lastname.value|default:''}}">
+    		    {{author_form.lastname.help_text}}
     		    {{author_form.lastname.errors}}
     		  </div>
                     </div>
@@ -75,6 +79,7 @@
                       <label for="id_author-email" class="col-sm-3 col-xs-12 control-label">Email de contacto</label>
                       <div class="col-sm-9 col-xs-12">
                         <input type="email" class="form-control required email" name="author-email" id="id_author-email" placeholder="Email" value="{{author_form.email.value|default:''}}">
+                        {{author_form.email.help_text}}
                         {{author_form.email.errors}}
                       </div>
                     </div>
@@ -83,6 +88,7 @@
                       <label for="id_author-phone" class="col-sm-3 col-xs-12 control-label">Fono de contacto</label>
                       <div class="col-sm-9 col-xs-12">
                         <input type="text" class="form-control required" name="author-phone" id="id_author-phone" placeholder="Teléfono" value="{{author_form.phone.value|default:''}}">
+                        {{author_form.phone.help_text}}
                         {{author_form.phone.errors}}
                       </div>
                     </div>
@@ -91,7 +97,8 @@
                       <label for="id_paper-doc" class="col-sm-3 col-xs-12 control-label">Archivo</label>
                       <div class="col-sm-9 col-xs-12">
                         {{paper_form.doc}}
-                        {{author_form.doc.errors}}
+                        {{paper_form.doc.help_text}}
+                        {{paper_form.doc.errors}}
                       </div>
                     </div>
 
@@ -99,7 +106,8 @@
                       <label for="id_paper-doc" class="col-sm-3 col-xs-12 control-label">Anexos</label>
                       <div class="col-sm-9 col-xs-12">
                         {{paper_form.extras}}
-                        {{author_form.extras.errors}}
+                        {{paper_form.extras.help_text}}
+                        {{paper_form.extras.errors}}
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-sm btn-block">Postular</button>

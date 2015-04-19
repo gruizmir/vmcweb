@@ -141,23 +141,25 @@ class RegisterPaperView(FormView):
         Django incrustados para recibir: uno es del paper propiamente tal, y el
         otro es de los archivos que se subirán con este.
         """
-        form = PaperForm(request, request.POST, prefix='paper')
-        author_form = AuthorForm(request, request.POST, prefix='author')
+        form = PaperForm(request.POST, request.FILES, prefix='paper')
+        author_form = AuthorForm(request.POST, prefix='author')
         data = {}
         data['bg'] = random.choice(bgs)
         if form.is_valid():
             if author_form.is_valid():
                 author = author_form.save()
-                paper = form.save(commit=False)
+                paper = form.save()
                 paper.authors.add(author)
                 paper.save()
                 self.sendEmail(paper)
                 return HttpResponseRedirect(self.get_success_url())
             else:
+                print author_form
                 data['paper_form'] = form
                 data['author_form'] = author_form
                 return render(request, self.template_name, data)
         else:
+            print form
             data['paper_form'] = form
             data['author_form'] = author_form
             return render(request, self.template_name, data)
@@ -173,13 +175,13 @@ class RegisterPaperView(FormView):
               u'deliberación. Desde el %(fecha)s te avisaremos de los' +\
               u'resultados.\n\nMuchas gracias por participar de ' +\
               u'Valparaíso Mobile Conf. \n\n Abdel Rojas Silva\nOrganizador'
-        msg = msg % {'name': list(paper.authors)[0].name,
+        msg = msg % {'name': paper.authors.all()[0].name,
                      'fecha': '08 de Junio de 2015'}
         try:
             connection = mail.get_connection()
             connection.open()
             email = mail.EmailMessage(subject, msg, settings.DEFAULT_FROM_EMAIL,
-                                      [list(paper.authors)[0].email],
+                                      [paper.authors.all()[0].email],
                                       connection=connection)
             connection.send_messages([email])
             connection.close()

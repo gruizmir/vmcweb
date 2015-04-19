@@ -44,10 +44,10 @@ class Person(models.Model):
         verbose_name_plural = "Personas"
 
     def get_full_name(self):
-        return ('%s %s') % (self.name, self.last_name)
+        return ('%s %s') % (self.name, self.lastname)
 
     def __unicode__(self):
-        return ('%s %s') % (self.name, self.last_name)
+        return ('%s %s') % (self.name, self.lastname)
 
 
 class Paper(models.Model):

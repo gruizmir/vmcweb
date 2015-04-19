@@ -125,6 +125,10 @@ a:hover, a:active, a:focus {
     color: #fff;
 }
 
+textarea {
+    height:150px !important;
+}
+
 hr {
     width: 20px;
     border-top:1px solid #fe4918;

@@ -18,6 +18,10 @@ class RegisterForm(forms.ModelForm):
 
 
 class PaperForm(forms.ModelForm):
+    doc = forms.FileField(widget=forms.FileInput(
+                                attrs={'class': 'form-control required'}))
+    extras = forms.FileField(widget=forms.FileInput(
+                                attrs={'class': 'form-control'}))
 
     class Meta:
         model = Paper
