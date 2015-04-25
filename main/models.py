@@ -58,7 +58,6 @@ class Person(models.Model):
         reg_code = str(uuid.uuid1()).split('-')[-1]
         while Person.objects.filter(reg_code=reg_code).exists():
             reg_code = str(uuid.uuid1()).split('-')[-1]
-        print reg_code
         self.reg_code = reg_code
         super(Person, self).save(force_insert, force_update, *args, **kwargs)
 

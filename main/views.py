@@ -32,11 +32,21 @@ class HomeView(View):
 
     def get(self, request):
         data = {}
-        if 'team' in request.GET and request.GET['team'] == '1':
+        if request.session.pop('team_registered', False):
             data['success_message'] = "Tu equipo ha sido registrado"
-        elif 'u' in request.GET and request.GET['u'] == '1':
+        elif request.session.pop('registered', False):
             data['success_message'] = "¡Gracias por inscribirte en " + \
                                       "Valparaíso Mobile Conf!"
+        elif request.session.pop('paper_registered', False):
+            data['success_message'] = "¡Gracias por postular!" + \
+                                      "Avisaremos de los resultados a partir" +\
+                                      "del 19 de junio"
+        elif request.session.pop('sponsor_registered', False):
+            data['success_message'] = "¡Gracias por apoyar a Valparaíso " + \
+                                      "Mobile Conf. La organización ha sido " +\
+                                      "notificada y se pondrá en contacto " +\
+                                      "usted a la brevedad."
+
         data['bg'] = random.choice(bgs)
         data['register_form'] = RegisterForm(prefix='register')
         data['contact_form'] = ContactForm(prefix='contact')
@@ -51,7 +61,7 @@ class RegisterUserView(FormView):
     """
     Recibe el formulario de registro de un asistente al evento.
     """
-    success_url = '/?u=1'
+    success_url = '/'
     template_name = 'register.html'
     form_class = RegisterForm
 
@@ -93,6 +103,7 @@ class RegisterUserView(FormView):
                 connection.close()
             except:
                 print traceback.format_exc()
+            self.request.session['registered'] = True
             return HttpResponseRedirect(self.get_success_url())
         else:
             data = {}
@@ -102,7 +113,6 @@ class RegisterUserView(FormView):
 
 
 
-#TODO: Enviar email a usuario y a valpo.mobile.conf@gmail.com
 @api_view(["POST"])
 def contact(request):
     contact_form = ContactForm(prefix='contact')
@@ -117,7 +127,7 @@ class RegisterTeamView(FormView):
     """
     Recibe el formulario de registro de un equipo para la hackathon.
     """
-    success_url = '/?team=1'
+    success_url = '/'
     template_name = 'register_team.html'
     form_class = HackTeamForm
 
@@ -153,6 +163,7 @@ class RegisterTeamView(FormView):
                 connection.close()
             except:
                 print traceback.format_exc()
+            self.request.session['team_registered'] = True
             return HttpResponseRedirect(self.get_success_url())
         else:
             data = {}
@@ -200,6 +211,7 @@ class RegisterPaperView(FormView):
                 paper.authors.add(author)
                 paper.save()
                 self.sendEmail(paper)
+                self.request.session['paper_registered'] = True
                 return HttpResponseRedirect(self.get_success_url())
             else:
                 print author_form
@@ -207,7 +219,6 @@ class RegisterPaperView(FormView):
                 data['author_form'] = author_form
                 return render(request, self.template_name, data)
         else:
-            print form
             data['paper_form'] = form
             data['author_form'] = author_form
             return render(request, self.template_name, data)
@@ -262,6 +273,7 @@ class SponsorView(SuccessMessageMixin, FormView):
         form = SponsorForm(request.POST)
         if form.is_valid():
             form.save()
+            self.request.session['sponsor_registered'] = True
             return HttpResponseRedirect(self.get_success_url())
         else:
             data['form'] = form

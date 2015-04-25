@@ -40,11 +40,6 @@
           {{success_message}}</div>
         {% endif %}
         <div class="home-bg">
-          <nav class="navigation navigation-social">
-            <ul class="navigation-bar">
-              <li><a href="https://twitter.com/ValpoMobileConf" target="_blank"><span class="fa fa-twitter"></span></a>
-              <li><a href="https://facebook.com/ValpoMobileConf" target="_blank"><span class="fa fa-facebook"></span></a>
-          </nav>
         <div class="hero-content text-center ">
           <div class="hero-small">
             <hr />
@@ -52,13 +47,30 @@
               <span class="fa fa-calendar"></span>
               <a class="indicator" href="#schedule">9-10 Octubre, 9:00 </a>
               <div class="sep"></div>
+              <a href="https://twitter.com/ValpoMobileConf" target="_blank"><span class="fa fa-twitter"></span></a>
+              <div class="sep"></div>
+              <a href="https://facebook.com/ValpoMobileConf" target="_blank"><span class="fa fa-facebook"></span></a>
+              <div class="sep"></div>
               <span class="fa fa-map-marker"></span>
               <a class="indicator" href="#map">UTFSM, Valparaíso, Chile</a>
             </span>
             <hr />
           </div>
+<!--
           <div class="hero-big">Valparaíso Mobile Conf</div>
+-->
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="hero-big"><img class="logo" src="{% static 'img/logo.png' %}"/></div>
+            </div>
+            <div class="col-sm-6">
+              <div class="hero-big">Conferencia sobre <span class="highlight"><strong>tecnologías móviles</strong></span></div>
+            </div>
+          </div>
+<!--
+          <div class="hero-big"><img class="logo" src="{% static 'img/logo.png' %}"/></div>
           <div class="hero-normal">Conferencia sobre <strong>tecnologías móviles</strong></div>
+-->
           <a href="{% url 'register' %}" class="btn btn-lg">
             <span>Obtén tu entrada</span></a>
         </div>
@@ -667,10 +679,12 @@
 
         </div>
       </section>
-
+      {% if paper_list_first %}
       <div class="btn-wrapper">
         <a href="/media/Valparaiso_Mobile_Conf.pdf" class="btn btn-xs"><span class="icon icon-filetypes-11 icon-active"></span> <span class="btn-txt">Descargar programa</span></a>
       </div>
+      {% endif %}
+
     </div>
   </section>
   <!-- FIN PROGRAMA-->

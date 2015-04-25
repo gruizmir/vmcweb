@@ -433,7 +433,7 @@ hr.white {
 
 #hero .hero-content {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 0;
     right: 0;
     margin-top: -150px;
@@ -467,9 +467,9 @@ hr.white {
 }
 
 #hero .hero-big  {
-    font-size: 100pt;
+    font-size: 70px;
     text-transform: uppercase;
-    line-height: 100px;
+    line-height: 75px;
     margin-bottom: 25px;
 }
 
@@ -1887,7 +1887,7 @@ label.error {
 }
 #map {
     position: relative;
-    padding:100px 0px;
+    padding:120px 0px;
 }
 
 .location {background:#fff;
@@ -1929,6 +1929,13 @@ label.error {
      text-decoration: none;
 
 }
+
+.logo {
+    max-width: 40%;
+    max-height: 200px;
+    margin-top: 5px;
+    margin-left:10px;
+  }
 
 @-moz-document url-prefix() {
   .nav-tabs-simple .nav-tabs li.active:after,
@@ -2094,9 +2101,9 @@ label.error {
 
 }
   #hero .hero-big {
-    font-size: 50px !important;
-     line-height: 70px;
-     margin-top: 10px;
+    font-size: 30px !important;
+    line-height: 50px;
+    margin-top: 10px;
 
 }
   #hero .hero-normal {font-size: 18pt;
@@ -2182,18 +2189,13 @@ label.error {
     margin: 0px 0px 15px 0px;
 
 }
+
   #hero .hero-big {
-  font-size: 80px;
-
-  text-transform: uppercase;
-
-  line-height: 70px;
-
-  margin-top: 10px;
-
-  margin-bottom: 0px;
-
-
+    font-size: 30px;
+    text-transform: uppercase;
+    line-height: 35px;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
   .nav-tabs-simple {
@@ -2363,13 +2365,20 @@ label.error {
   }
 
   #hero .hero-big {
-    font-size: 130px;
+    font-size: 50px;
   }
 
   .navigation-bar-header .navigation-bar > li a {
     padding-left: 5px;
     padding-right: 5px;
     font-size: 16px;
+  }
+
+  .logo {
+    max-width: 50%;
+    max-height: 250px;
+    margin-top: 10px;
+    margin-left:10px;
   }
 }
 
@@ -2383,6 +2392,13 @@ label.error {
   .container {
     width: 970px;
   }
+
+  .logo {
+      max-width: 50%;
+      max-height: 360px;
+      margin-top: 20px;
+      margin-left:20px;
+    }
 }
 
 .indicator {
@@ -2407,3 +2423,4 @@ label.error {
   top: 10px;
   text-align: center;
 }
+
