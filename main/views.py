@@ -80,7 +80,7 @@ class RegisterUserView(FormView):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            subject = u'¡Gracias por inscribirte a Valparaíso Mobile Conf'
+            subject = u'¡Gracias por inscribirte a Valparaíso Mobile Conf!'
             msg = u'%(name)s, bienvenido a Valparaíso Mobile Conf. Estás ' + \
                   u'registrado para participar de las charlas del evento. ' + \
                   u'Si quieres participar de algún taller y aún no te ' +\

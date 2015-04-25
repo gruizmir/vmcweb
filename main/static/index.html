@@ -56,21 +56,14 @@
             </span>
             <hr />
           </div>
-<!--
-          <div class="hero-big">Valparaíso Mobile Conf</div>
--->
           <div class="row">
             <div class="col-sm-6">
-              <div class="hero-big"><img class="logo" src="{% static 'img/logo.png' %}"/></div>
+              <div class="hero-big"><img class="logo" src="{% static 'img/logo.png' %}" alt="Logo Valparaíso Mobile Conf"/></div>
             </div>
             <div class="col-sm-6">
               <div class="hero-big">Conferencia sobre <span class="highlight"><strong>tecnologías móviles</strong></span></div>
             </div>
           </div>
-<!--
-          <div class="hero-big"><img class="logo" src="{% static 'img/logo.png' %}"/></div>
-          <div class="hero-normal">Conferencia sobre <strong>tecnologías móviles</strong></div>
--->
           <a href="{% url 'register' %}" class="btn btn-lg">
             <span>Obtén tu entrada</span></a>
         </div>
@@ -133,7 +126,7 @@
           <div class="tab-pane fade in active" id="charlas">
             <article class="row">
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInLeft" data-delay="500">
-                    <img class="img-responsive" src="{% static 'img/speaker.jpg' %}" alt="expositor" />
+                    <img class="img-responsive" src="{% static 'img/speaker.jpg' %}" alt="Charlas" />
               </div>
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
                 <h6>¿Qué haremos?</h6>
@@ -164,7 +157,7 @@
                 </ul>
               </div>
               <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInRight" data-delay="500">
-                <img class="img-responsive" src="{% static 'img/about-placeholder-mbp.jpg' %}" alt="placeholder" />
+                <img class="img-responsive" src="{% static 'img/about-placeholder-mbp.jpg' %}" alt="Imagen Talleres" />
               </div>
             </article>
           </div>
@@ -508,7 +501,7 @@
                   <!-- Intro HACK NIGHT-->
                   <div class="panel panel-default">
                     <div class="speaker-wrapper">
-                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Organizador" />
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
                     </div>
                     <div class="panel-heading">
                       <div class="panel-title">
@@ -543,7 +536,7 @@
                   <!-- Hack time HACK NIGHT-->
                   <div class="panel panel-default">
                     <div class="speaker-wrapper">
-                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Organizador" />
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
                     </div>
                     <div class="panel-heading">
                       <div class="panel-title">
@@ -575,7 +568,7 @@
                   <!-- Descanso HACK NIGHT-->
                   <div class="panel panel-default">
                     <div class="speaker-wrapper">
-                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Organizador" />
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
                     </div>
                     <div class="panel-heading">
                       <div class="panel-title">
@@ -609,7 +602,7 @@
                   <!-- Presentaciones HACK NIGHT-->
                   <div class="panel panel-default">
                     <div class="speaker-wrapper">
-                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Organizador" />
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
                     </div>
                     <div class="panel-heading">
                       <div class="panel-title">
@@ -642,7 +635,7 @@
                   <!-- Presentaciones HACK NIGHT-->
                   <div class="panel panel-default">
                     <div class="speaker-wrapper">
-                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Organizador" />
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
                     </div>
                     <div class="panel-heading">
                       <div class="panel-title">
@@ -705,7 +698,7 @@
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="speaker-item animated hiding" data-animation="fadeInUp" data-delay="0">
           <div class="img-wrapper">
-            <img src="{% static 'img/speaker/speaker-1.jpg' %}" class="img-responsive img-circle" alt="speaker-1" />
+            <img src="{% static 'img/speaker/speaker-1.jpg' %}" class="img-responsive img-circle" alt="Foto {{speaker.get_full_name }}" />
           </div>
           <div class="name">John Doeson</div>
           <div class="sub">CEO Upbox</div>
@@ -863,7 +856,7 @@
         <div class="row">
           <ul class="list-inline">
             {% for sponsor in sponsor_list %}
-              <li><a href="{{sponsor.url}}" target="_blank"><img class="sponsor-logo" src="media/{{sponsor.logo}}" alt="sponsor-1" /></a></li>
+              <li><a href="{{sponsor.url}}" target="_blank"><img class="sponsor-logo" src="media/{{sponsor.logo}}" alt="Logo {{sponsor.name}}" /></a></li>
             {% endfor %}
           </ul>
           <div class="btn-wrapper">
