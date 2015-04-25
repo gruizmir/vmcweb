@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import uuid
 from django.db import models
 from cStringIO import StringIO
 from django.conf import settings
@@ -30,7 +31,7 @@ class Person(models.Model):
                     verbose_name="Asiste a taller")
     creation_date = models.DateTimeField(auto_now_add=True,
                     verbose_name="Fecha de registro")
-    payed = models.BooleanField(default=False,
+    paid = models.BooleanField(default=False,
                     verbose_name="Pagado")
     reg_code = models.CharField(max_length=20,
                     verbose_name="Código de registro")
@@ -49,6 +50,17 @@ class Person(models.Model):
     def __unicode__(self):
         return ('%s %s') % (self.name, self.lastname)
 
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        """
+        Este método save() crea el código de registro del usuario antes de
+        guardarlo.
+        """
+        reg_code = str(uuid.uuid1()).split('-')[-1]
+        while Person.objects.filter(reg_code=reg_code).exists():
+            reg_code = str(uuid.uuid1()).split('-')[-1]
+        print reg_code
+        self.reg_code = reg_code
+        super(Person, self).save(force_insert, force_update, *args, **kwargs)
 
 class Paper(models.Model):
     """

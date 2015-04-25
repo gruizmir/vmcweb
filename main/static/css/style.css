@@ -12,7 +12,7 @@
 *    Berry - #ff8208
 *
 */
-
+label
 /* FIX FONTS */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,300italic,300,100italic&subset=latin,cyrillic-ext);
 
@@ -387,7 +387,7 @@ hr.white {
 
 .overlay.color {
     background: black;
-    opacity: .5;
+    opacity: .7;
 }
 
 .register-page .overlay {
@@ -1176,6 +1176,7 @@ hr.white {
     margin-top: -10px;
 
 }
+
 .form-register .form-control {
     height: 50px;
      border: 1px solid #d1d8dd;
@@ -1186,21 +1187,28 @@ hr.white {
      font-weight: 300;
 
 }
+
 .form .form-group label {
     text-align: right;
      line-height: 50px;
      margin-bottom: 0;
      font-family:'Roboto', sans-serif;
      font-weight:300;
-    }
+}
+
+.form .form-group label.multiline {
+    line-height: 20px;
+}
+
 .form-register {
     background: #fff;
      padding: 20px 15px;
-    }
+}
+
 .form-register .form-control {
     color:#000 !important;
-
 }
+
 .form-register ::-webkit-input-placeholder {
     /* WebKit browsers */ color:#BFBFBF !important;
      font-family: 'Source Sans Pro', sans-serif;

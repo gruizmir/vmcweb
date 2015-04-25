@@ -34,6 +34,9 @@ class HomeView(View):
         data = {}
         if 'team' in request.GET and request.GET['team'] == '1':
             data['success_message'] = "Tu equipo ha sido registrado"
+        elif 'u' in request.GET and request.GET['u'] == '1':
+            data['success_message'] = "¡Gracias por inscribirte en " + \
+                                      "Valparaíso Mobile Conf!"
         data['bg'] = random.choice(bgs)
         data['register_form'] = RegisterForm(prefix='register')
         data['contact_form'] = ContactForm(prefix='contact')
@@ -44,14 +47,59 @@ class HomeView(View):
         return render(request, self.template_name, data)
 
 
-#TODO: Enviar email a usuario
-def register(request):
-    register_form = RegisterForm(prefix='register')
-    if register_form.is_valid():
-        register_form.save()
-        return Response(status=status.HTTP_200_OK)
-    else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
+class RegisterUserView(FormView):
+    """
+    Recibe el formulario de registro de un asistente al evento.
+    """
+    success_url = '/?u=1'
+    template_name = 'register.html'
+    form_class = RegisterForm
+
+    def dispatch(self, request):
+        """
+        Primera función llamada cuando se accede normalmente por navegador.
+        """
+        return super(RegisterUserView, self).dispatch(request=request)
+
+    def get(self, request):
+        data = {}
+        data['bg'] = random.choice(bgs)
+        return render(request, self.template_name, data)
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            subject = u'¡Gracias por inscribirte a Valparaíso Mobile Conf'
+            msg = u'%(name)s, bienvenido a Valparaíso Mobile Conf. Estás ' + \
+                  u'registrado para participar de las charlas del evento. ' + \
+                  u'Si quieres participar de algún taller y aún no te ' +\
+                  u'has registrado, revisa la sección talleres de nuestra web.'
+            msg += u'\n\nTu código de registro es el %(code)s. '
+            msg += u'\n\nEste código será solicitado si decides registrarte ' +\
+                   u'para la hackathon o para otro taller. \n' +\
+                   u'Unos días antes del evento, te enviaremos un ' +\
+                   u'recordatorio y las instrucciones para identificarte en ' +\
+                   u'la entrada del evento.'
+            msg += u'\n\nAbdel Rojas Silva.\nOrganizador Valparaíso Mobile Conf.'
+            msg = msg % {'name': user.name, 'code':user.reg_code}
+            try:
+                connection = mail.get_connection()
+                connection.open()
+                email = mail.EmailMessage(subject, msg,
+                                          settings.DEFAULT_FROM_EMAIL,
+                                          [user.email], connection=connection)
+                connection.send_messages([email])
+                connection.close()
+            except:
+                print traceback.format_exc()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            data = {}
+            data['bg'] = random.choice(bgs)
+            data['form'] = form
+            return render(request, self.template_name, data)
+
 
 
 #TODO: Enviar email a usuario y a valpo.mobile.conf@gmail.com
@@ -249,3 +297,4 @@ become_sponsor = SponsorView.as_view()
 register_hack_team = RegisterTeamView.as_view()
 home_view = HomeView.as_view()
 paper_view = RegisterPaperView.as_view()
+register = RegisterUserView.as_view()

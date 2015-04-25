@@ -35,7 +35,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djrill',
     'main',
 )
 
@@ -89,8 +88,13 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-MANDRILL_API_KEY = 'pzpL8fvqRESbTamvYuK7XQ'
 DEFAULT_FROM_EMAIL = 'valpo.mobile.conf@gmail.com'
-EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 MAX_THUMBNAIL_SIZE = 150
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'valpomobileconf'
+EMAIL_HOST_PASSWORD = 'kenolamasca2veces'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'contacto@vmc.cl'
