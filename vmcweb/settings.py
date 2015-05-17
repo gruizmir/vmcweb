@@ -23,7 +23,7 @@ SECRET_KEY = 'tvxp6xkk_)uc4egydwvr&ny_(j+d9^g!b3t4jf&7z0(e-&#r%v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['valpomobileconf.com', 'valpomobileconf.cl']
+ALLOWED_HOSTS = ['valpomobileconf.com', 'valpomobileconf.cl', 'www.valpomobileconf.com']
 
 
 # Application definition
