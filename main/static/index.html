@@ -781,7 +781,11 @@
       <div class="sub-title">¿Quieres presentar una charla en el Valparaíso Mobile Conf? ¡Postula tu paper aquí!</div>
       <br />
       <div class="btn-wrapper">
-        <a href="{% url 'new_paper' %} "class="btn btn-sm btn-default" >Enviar </a>
+        <a href="{% static 'CALL_FOR_PAPERS.pdf' %}" class="btn btn-sm btn-default" target="_blank">Descargar bases</a>
+      </div>
+      <br>
+      <div class="btn-wrapper">
+        <a href="{% url 'new_paper' %} "class="btn btn-sm btn-default" >Postular</a>
       </div>
     </div>
   </section>
@@ -865,13 +869,13 @@
             {% endfor %}
           </ul>
           <div class="btn-wrapper">
-            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
+            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar/patrocinar este evento</a>
           </div>
         </div>
       {% else %}
         <div class="sub-title">
           <p>
-            Aún no contamos con auspiciadores :(
+            Aún no contamos con patrocinadores oficiales :(
           </p>
         </div>
         <div class="row">
