@@ -92,6 +92,5 @@ class Migration(migrations.Migration):
             model_name='hackteam',
             name='name',
             field=models.CharField(max_length=40, verbose_name=b'Team Name'),
-            preserve_default=True,
         ),
     ]

@@ -39,12 +39,10 @@ class Migration(migrations.Migration):
             model_name='sponsor',
             name='logo',
             field=models.ImageField(upload_to=b'logos', null=True, verbose_name=b'Logo', blank=True),
-            preserve_default=True,
         ),
         migrations.AlterField(
             model_name='sponsor',
             name='logo_thumb',
             field=models.ImageField(upload_to=b'logos', null=True, verbose_name=b'Thumbnail', blank=True),
-            preserve_default=True,
         ),
     ]

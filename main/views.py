@@ -74,6 +74,7 @@ class RegisterUserView(FormView):
     def get(self, request):
         data = {}
         data['bg'] = random.choice(bgs)
+        data['title'] = u'Inscripción'
         return render(request, self.template_name, data)
 
     def post(self, request):
@@ -91,8 +92,9 @@ class RegisterUserView(FormView):
                    u'Unos días antes del evento, te enviaremos un ' +\
                    u'recordatorio y las instrucciones para identificarte en ' +\
                    u'la entrada del evento.'
-            msg += u'\n\nAbdel Rojas Silva.\nOrganizador Valparaíso Mobile Conf.'
-            msg = msg % {'name': user.name, 'code':user.reg_code}
+            msg += u'\n\nAbdel Rojas Silva.\nOrganizador Valparaíso ' +\
+                    u'Mobile Conf.'
+            msg = msg % {'name': user.name, 'code': user.reg_code}
             try:
                 connection = mail.get_connection()
                 connection.open()
@@ -109,8 +111,8 @@ class RegisterUserView(FormView):
             data = {}
             data['bg'] = random.choice(bgs)
             data['form'] = form
+            data['title'] = u'Inscripción'
             return render(request, self.template_name, data)
-
 
 
 @api_view(["POST"])
@@ -140,6 +142,7 @@ class RegisterTeamView(FormView):
     def get(self, request):
         data = {}
         data['bg'] = random.choice(bgs)
+        data['title'] = u'Registro de equipos'
         return render(request, self.template_name, data)
 
     def post(self, request):
@@ -169,6 +172,7 @@ class RegisterTeamView(FormView):
             data = {}
             data['bg'] = random.choice(bgs)
             data['form'] = form
+            data['title'] = u'Registro de equipos'
             return render(request, self.template_name, data)
 
 
@@ -191,6 +195,7 @@ class RegisterPaperView(FormView):
         data['bg'] = random.choice(bgs)
         data['paper_form'] = PaperForm(prefix='paper')
         data['author_form'] = AuthorForm(prefix='author')
+        data['title'] = u'Postulación'
         return render(request, self.template_name, data)
 
     def post(self, request):
@@ -217,10 +222,12 @@ class RegisterPaperView(FormView):
                 print author_form
                 data['paper_form'] = form
                 data['author_form'] = author_form
+                data['title'] = u'Postulación'
                 return render(request, self.template_name, data)
         else:
             data['paper_form'] = form
             data['author_form'] = author_form
+            data['title'] = u'Postulación'
             return render(request, self.template_name, data)
 
     def sendEmail(self, paper):
@@ -265,11 +272,13 @@ class SponsorView(SuccessMessageMixin, FormView):
     def get(self, request):
         data = {}
         data['bg'] = random.choice(bgs)
+        data['title'] = u'Auspicio'
         return render(request, self.template_name, data)
 
     def post(self, request):
         data = {}
         data['bg'] = random.choice(bgs)
+        data['title'] = u'Auspicio'
         form = SponsorForm(request.POST)
         if form.is_valid():
             form.save()
@@ -288,7 +297,7 @@ class SponsorView(SuccessMessageMixin, FormView):
         msg = u'Estimado %(name)s, hemos recibido su solicitud de auspiciar ' +\
               u'el evento Valparaíso Mobile Conf. En breve, la organización ' +\
               u'del evento le contactará personalmente. \nMuchas gracias ' +\
-              u'por apoyar esta gran iniciativa, Valparaíso Mobile Conf.' +\
+              u'por apoyar esta gran inciativa, Valparaíso Mobile Conf.' +\
               u'\n\n Abdel Rojas Silva\nOrganizador'
         msg = msg % {'name': sponsor.contact_name}
         try:
