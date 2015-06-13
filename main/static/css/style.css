@@ -1858,18 +1858,27 @@ label.error {
 
 }
 
-#sponsors .list-inline li {
+#sponsors .list-inline li{
     width: 19%;
-     padding-left: 0;
-     padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 
 }
-#sponsors .list-inline {
+
+#organization .list-inline li {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left:15px;
+    margin-right:15px;
+}
+
+#sponsors .list-inline, #organization .list-inline {
     margin-bottom:30px;
-    }
-#sponsors img{
+}
+
+#sponsors img {
     width: 100%;
-    }
+}
 
 #location-gmap {
     width:100%;
@@ -2424,3 +2433,7 @@ label.error {
   text-align: center;
 }
 
+.org-logo {
+    max-width:450px;
+    max-height:120px;
+}

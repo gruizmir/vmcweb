@@ -95,7 +95,7 @@
           <li><a href="#cfp">Call for Papers</a></li>
           {% endif %}
           <li><a href="#hackathon">Hackathon</a></li>
-          <li><a href="#sponsors">Auspiciadores</a></li>
+          <li><a href="#organization">Organizadores</a></li>
           <li><a href="#map">Contacto</a></li>
 <!--          <li class="featured"><a href="{% url 'register' %}"><i class="fa fa-ticket fa-1x"></i>Obtener entrada</a></li> -->
         </ul>
@@ -848,6 +848,27 @@
   -->
   <!-- End Register Section -->
 
+  <!-- Organization Section -->
+  <section id="organization" class="section dark">
+    <div class="container">
+      <div class="icon-wrap">
+        <i class="fa fa-briefcase"></i>
+      </div>
+      <h3>Organización</h3>
+
+        <div class="sub-title">Valparaíso Mobile Conf es traído a ustedes por:</div>
+        <br/>
+        <div class="row">
+          <ul class="list-inline">
+            <li><a href="http://www.inf.utfsm.cl" target="_blank"><img class="org-logo" src="static/img/di.jpeg" alt="Logo DI" /></a></li>
+            <li><a href="http://www.industrias.usm.cl" target="_blank"><img class="org-logo" src="static/img/industrias.png" alt="Logo Industrias" /></a></li>
+          </ul>
+        </div>
+    </div>
+  </section>
+  <!-- End Organization Section -->
+
+  {% if sponsor_list %}
   <!-- Sponsors Section -->
   <section id="sponsors" class="section dark">
     <div class="container">
@@ -855,7 +876,7 @@
         <i class="fa fa-briefcase"></i>
       </div>
       <h3>Patrocinadores</h3>
-      {% if sponsor_list %}
+
         <div class="sub-title">Contamos con el apoyo de:</div>
         <br/>
         <div class="row">
@@ -868,22 +889,10 @@
             <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar/patrocinar este evento</a>
           </div>
         </div>
-      {% else %}
-        <div class="sub-title">
-          <p>
-            Aún no contamos con patrocinadores oficiales :(
-          </p>
-        </div>
-        <div class="row">
-          <div class="btn-wrapper">
-            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar este evento</a>
-          </div>
-        </div>
-      {% endif %}
     </div>
   </section>
   <!-- End Sponsor Section -->
-
+  {% endif %}
 
   <!-- Map Section -->
   <section id="map" class="dark">
