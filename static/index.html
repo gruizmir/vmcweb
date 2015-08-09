@@ -62,7 +62,8 @@
               <div class="hero-big"><img class="logo" src="{% static 'img/logo_white.png' %}" alt="Logo Valparaíso Mobile Conf"/></div>
             </div>
             <div class="col-sm-6">
-              <div class="hero-big">Conferencia sobre <span class="highlight"><strong>tecnologías móviles</strong></span></div>
+              <div class="hero-big">La primera conferencia sobre <span class="highlight"><strong>tecnologías móviles</strong></span></div>
+              <div class="hero-normal">desde Valparaíso para todo Chile</div>
             </div>
           </div>
           <a class="btn btn-lg">
@@ -170,7 +171,7 @@
               </div>
               <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
                 <h6>Demuestra tus habilidades creativas</h6>
-                <p>Si te gusta el desarrollo de aplicaciones, estás invitado a participar de esta hackathon de forma <span class="highlight">gratuita</span>. No te pediremos modelo de negocios ni grandes proyecciones: queremos que programen una aplicación buena en poco tiempo. Las reglas son simples:
+                <p>Si te gusta el desarrollo de aplicaciones, estás invitado a participar de esta hackathon. No te pediremos modelo de negocios ni proyecciones financieras: queremos que programen una aplicación buena en poco tiempo. Las reglas son simples:
                 </p>
                 <ul class="sub-list">
                   <li><i class="fa fa-angle-right"></i> Debes conformar equipos de 3 a 4 personas (se recomienda tener al menos un programador y un diseñador) e inscribirte en el <a>formulario de registro de equipos</a> que pronto pondremos a disposición.</li>
@@ -825,7 +826,7 @@
   <!-- End Register Section -->
 
   <!-- Organization Section -->
-  <section id="organization" class="section dark">
+  <section id="organization" class="logos section dark">
     <div class="container">
       <div class="icon-wrap">
         <i class="fa fa-briefcase"></i>
@@ -836,39 +837,37 @@
         <br/>
         <div class="row">
           <ul class="list-inline">
-            <li><a href="http://www.inf.utfsm.cl" target="_blank"><img class="org-logo" src="static/img/di.jpeg" alt="Logo DI" /></a></li>
-            <li><a href="http://www.industrias.usm.cl" target="_blank"><img class="org-logo" src="static/img/industrias.png" alt="Logo Industrias" /></a></li>
+            <li><a href="http://www.inf.utfsm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/di.jpg" alt="Logo D I" /></a></li>
+            <li><a href="http://www.usm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/utfsm.png" alt="Logo U T F S M" /></a></li>
           </ul>
         </div>
     </div>
   </section>
   <!-- End Organization Section -->
 
-  {% if sponsor_list %}
   <!-- Sponsors Section -->
-  <section id="sponsors" class="section dark">
+  <section id="sponsors" class="logos section dark">
     <div class="container">
       <div class="icon-wrap">
         <i class="fa fa-briefcase"></i>
       </div>
-      <h3>Patrocinadores</h3>
+      <h3>Patrocinadores y colaboradores</h3>
 
         <div class="sub-title">Contamos con el apoyo de:</div>
         <br/>
         <div class="row">
           <ul class="list-inline">
-            {% for sponsor in sponsor_list %}
-              <li><a href="{{sponsor.url}}" target="_blank"><img class="sponsor-logo" src="media/{{sponsor.logo}}" alt="Logo {{sponsor.name}}" /></a></li>
-            {% endfor %}
+            <li><a href="http://paisdigital.org" target="_blank"><img class="org-logo" src="static/img/patrocinio/paisdigital.png" alt="Logo Fundación País Digital" /></a></li>
+            <li><a href="http://www.rree.utfsm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/rree.png" alt="Logo Relaciones Estudiantiles U T F S M" /></a></li>
+            <li><a href="http://www.exalumnos.usm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/aexa.png" alt="Logo Red de Ex Alumnos U T F S M" /></a></li>
+            <li><a href="http://www.industrias.usm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/industrias.png" alt="Logo" /></a></li>
           </ul>
           <div class="btn-wrapper">
             <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar/patrocinar este evento</a>
           </div>
         </div>
     </div>
-  </section>
   <!-- End Sponsor Section -->
-  {% endif %}
 
   <!-- Map Section -->
   <section id="map" class="dark">

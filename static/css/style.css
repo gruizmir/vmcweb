@@ -387,7 +387,6 @@ hr.white {
 
 .overlay.color {
     background: black;
-    opacity: .7;
 }
 
 .register-page .overlay {
@@ -467,9 +466,9 @@ hr.white {
 }
 
 #hero .hero-big  {
-    font-size: 70px;
+    font-size: 60px;
     text-transform: uppercase;
-    line-height: 75px;
+    line-height: 65px;
     margin-bottom: 25px;
 }
 
@@ -1858,14 +1857,7 @@ label.error {
 
 }
 
-#sponsors .list-inline li{
-    width: 19%;
-    padding-left: 0;
-    padding-right: 0;
-
-}
-
-#organization .list-inline li {
+.logos .list-inline li {
     padding-left: 0;
     padding-right: 0;
     margin-left:15px;
@@ -1876,8 +1868,8 @@ label.error {
     margin-bottom:30px;
 }
 
-#sponsors img {
-    width: 100%;
+#sponsors div.btn-wrapper{
+    margin-bottom: 30px;
 }
 
 #location-gmap {
@@ -2110,8 +2102,8 @@ label.error {
 
 }
   #hero .hero-big {
-    font-size: 30px !important;
-    line-height: 50px;
+    font-size: 25px !important;
+    line-height: 42px;
     margin-top: 10px;
 
 }
@@ -2200,9 +2192,9 @@ label.error {
 }
 
   #hero .hero-big {
-    font-size: 30px;
+    font-size: 25px;
     text-transform: uppercase;
-    line-height: 35px;
+    line-height: 30px;
     margin-top: 10px;
     margin-bottom: 0px;
 }
@@ -2374,7 +2366,7 @@ label.error {
   }
 
   #hero .hero-big {
-    font-size: 50px;
+    font-size: 40px;
   }
 
   .navigation-bar-header .navigation-bar > li a {
