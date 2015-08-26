@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'tvxp6xkk_)uc4egydwvr&ny_(j+d9^g!b3t4jf&7z0(e-&#r%v'
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['valpomobileconf.com',
                  'valpomobileconf.cl',
