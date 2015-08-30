@@ -66,8 +66,7 @@
               <div class="hero-normal">desde Valparaíso para todo Chile</div>
             </div>
           </div>
-          <a class="btn btn-lg">
-            <span>¡Pronto! Obtener tu entrada</span></a>
+          <a href="https://eventioz.cl/e/valparaiso-mobile-conf?from_button=yes&source=orevib&utm_campaign=or_valparaiso-mobile-conf&utm_content=integrated_button&utm_medium=integration_tool&utm_source=eventioz" target="_blank"><img src="https://eventioz.cl/e/valparaiso-mobile-conf/promotion_button.png?size=large&content=Inscribirme+ahora&from=FE4918&to=FE4918&font=FFFFFF" alt="Eventioz - valparaiso-mobile-conf"></a>
         </div>
       </div>
     </div>
@@ -205,10 +204,10 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
           <div class="counter animated hiding" data-animation="fadeInDown" data-delay="500">
-            <div class="stat"><span class="value" data-from="0" data-to="10">10</span></div>
+            <div class="stat"><span class="value" data-from="0" data-to="12">12</span></div>
             <div class="stat-info">expositores</div>
             <hr />
-            <p class="small">Expertos en programación y diseño.</p>
+            <p class="small">Expertos en programación, diseño y más.</p>
           </div>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -287,45 +286,255 @@
 
               <!-- DIA 1 - TRACK 1-->
               <div class="tab-pane fade in active" id="DayOne-1">
-                {% if not paper_list_first %}
-                  <article>
-                   <p>Aún no hay charlas programadas.</p>
-                  </article>
-                {% else %}
                   <div class="panel-group timeline-schedule" id="panelTimelineOne">
                     <!-- CHARLAS DIA 1-->
-                    {% for paper in paper_list_first %}
+
+                    <!-- Charla 1 -->
+                    <!--
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
-                        <img src="/media/{{paper.author.1.photo_thumb}}" class="img-responsive img-circle" alt="{{paper.author.1.get_full_name}}" />
+                        <img src="{% static 'img/speaker/fernando_ruiz.jpg'%}" class="img-responsive img-circle" alt="Foto Fernando Ruiz" />
                       </div>
                       <div class="panel-heading">
                         <div class="panel-title">
                           <div class="time">
                             <i class="fa fa-clock-o"></i>
-                            {{paper.start_time|date:"H:i"}}
+                            10.00
                           </div>
-                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item{{paper.id}}" class="collapsed">
-                            {{paper.title}}
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item1" class="collapsed">
+                            Landscape of Mobile Malware Threats
                             <div class="pull-right fa fa-angle-up"></div>
                             <div class="pull-right fa fa-angle-down"></div>
                           </a>
                         </div>
                       </div>
 
-                      <div id="item{{paper.id}}" class="panel-collapse collapse">
+                      <div id="item1" class="panel-collapse collapse">
                         <div class="panel-body">
                           <article>
-                            <p>{{ paper.abstract }}</p>
-                            <p class="author"><a href="{{paper.author.1.twitter}}" target="_blank"><strong><i class="fa fa-user"></i> {{paper.author.1.get_full_name}}</strong></a></p>
+                            <p>Resumen del trabajo que realiza el equipo de Mobile Research
+                            de Inter Security. Describe las amenazas para dispositivos móviles
+                            más activas y peligrosas del último año, estadísticas de prevalencia
+                            y comportamiento, pasando desde aplicaciones que amenazan la
+                            privacidad de los usuarios, bitcoin mining, rooting, etc.</p>
+                            <p class="author"><a href="https://twitter.com/ferruiz" target="_blank"><strong><i class="fa fa-user"></i>@ferruiz</strong></a></p>
                           </article>
                         </div>
                       </div>
                     </div>
-                    {% endfor %}
+                    -->
+                    <!-- End Charla 1 -->
+
+                    <!-- Charla 2 -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/abraham_barrera.jpeg' %}" class="img-responsive img-circle" alt="Foto Abraham Barrera" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            11.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item2" class="collapsed">
+                            Experiencia Transición Universidad-Laboral
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>(No disponible)</p>
+                            <p class="author"><a href="https://twitter.com/abraham_barrera" target="_blank"><strong><i class="fa fa-user"></i>@abraham_barrera</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Charla 2 -->
+
+                    <!-- Charla 3 -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/catalina_araya.jpg'%}" class="img-responsive img-circle" alt="Foto Catalina Araya" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            12.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item3" class="collapsed">
+                            "Programa tus ideas": una mirada social de la programación
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>Programa tus Ideas es una estrategia que buscar acercar la
+                            programación a jóvenes que muchas veces no tienen los medios para
+                            financiar cursos de programación y que ven en esta área una eventual
+                             alternativa de empleo.  Esta charla dará a conocer como se vinculan
+                             proyectos sociales, con tecnología y educación y el impacto que
+                             esto tiene a nivel social.</p>
+                            <p class="author"><a href="https://twitter.com/cataarayalira" target="_blank"><strong><i class="fa fa-user"></i>@cataarayalira</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Charla 3 -->
+
+
+                    <!-- Charla 4 -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/fernando_ruiz.jpg'%}" class="img-responsive img-circle" alt="Foto Fernando Ruiz" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            15.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item4" class="collapsed">
+                            Landscape of Mobile Malware Threats
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>Resumen del trabajo que realiza el equipo de Mobile Research
+                            de Inter Security. Describe las amenazas para dispositivos móviles
+                            más activas y peligrosas del último año, estadísticas de prevalencia
+                            y comportamiento, pasando desde aplicaciones que amenazan la
+                            privacidad de los usuarios, bitcoin mining, rooting, etc.</p>
+                            <p class="author"><a href="https://twitter.com/ferruiz" target="_blank"><strong><i class="fa fa-user"></i>@ferruiz</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Charla 4 -->
+
+                    <!-- Charla 5 -->
+                    <!--
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/fernando_ruiz.jpg'%}" class="img-responsive img-circle" alt="Foto Fernando Ruiz" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            16.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item5" class="collapsed">
+                            Landscape of Mobile Malware Threats
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item5" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>Resumen del trabajo que realiza el equipo de Mobile Research
+                            de Inter Security. Describe las amenazas para dispositivos móviles
+                            más activas y peligrosas del último año, estadísticas de prevalencia
+                            y comportamiento, pasando desde aplicaciones que amenazan la
+                            privacidad de los usuarios, bitcoin mining, rooting, etc.</p>
+                            <p class="author"><a href="https://twitter.com/ferruiz" target="_blank"><strong><i class="fa fa-user"></i>@ferruiz</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    -->
+                    <!-- End Charla 5 -->
+
+                    <!-- Charla 6 -->
+                    <!--
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/fernando_ruiz.jpg'%}" class="img-responsive img-circle" alt="Foto Fernando Ruiz" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            17.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item6" class="collapsed">
+                            Landscape of Mobile Malware Threats
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item6" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>Resumen del trabajo que realiza el equipo de Mobile Research
+                            de Inter Security. Describe las amenazas para dispositivos móviles
+                            más activas y peligrosas del último año, estadísticas de prevalencia
+                            y comportamiento, pasando desde aplicaciones que amenazan la
+                            privacidad de los usuarios, bitcoin mining, rooting, etc.</p>
+                            <p class="author"><a href="https://twitter.com/ferruiz" target="_blank"><strong><i class="fa fa-user"></i>@ferruiz</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    -->
+                    <!-- End Charla 6 -->
+
+                    <!-- Charla 7 -->
+                    <!--
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/fernando_ruiz.jpg'%}" class="img-responsive img-circle" alt="Foto Fernando Ruiz" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            18.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item7" class="collapsed">
+                            Landscape of Mobile Malware Threats
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item7" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>Resumen del trabajo que realiza el equipo de Mobile Research
+                            de Inter Security. Describe las amenazas para dispositivos móviles
+                            más activas y peligrosas del último año, estadísticas de prevalencia
+                            y comportamiento, pasando desde aplicaciones que amenazan la
+                            privacidad de los usuarios, bitcoin mining, rooting, etc.</p>
+                            <p class="author"><a href="https://twitter.com/ferruiz" target="_blank"><strong><i class="fa fa-user"></i>@ferruiz</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    -->
+                    <!-- End Charla 7 -->
+
                     <!-- END CHARLAS DIA 1-->
                   </div>
-                {% endif %}
               </div>
               <!-- END DIA 1 - TRACK 1-->
 
@@ -338,7 +547,7 @@
                 {% else %}
                   <div class="panel-group timeline-schedule" id="panelTimelineThree">
 
-                    <!-- CHARLAS DIA 1-->
+                    <!-- WORKSHOPS DIA 1-->
                     {% for workshop in workshop_list_first %}
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
@@ -395,45 +604,92 @@
             <div class="tab-content">
               <!-- DIA 2 - TRACK 1 -->
               <div class="tab-pane fade in active" id="DayTwo-1">
-                {% if not paper_list_second %}
-                  <article>
-                    <p>Aún no hay charlas programadas.</p>
-                  </article>
-                {% else %}
                   <div class="panel-group timeline-schedule" id="panelTimelineTwo">
 
                     <!-- CHARLAS DIA 2-->
-                    {% for paper in paper_list_second %}
+                    <!-- Charla 8 -->
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
-                        <img src="/media/{{paper.author.1.photo_thumb}}" class="img-responsive img-circle" alt="{{paper.author.1.get_full_name}}" />
+                        <img src="{% static 'img/speaker/rodrigo_ayala.jpg' %}" class="img-responsive img-circle" alt="Foto Rodrigo Ayala" />
                       </div>
                       <div class="panel-heading">
                         <div class="panel-title">
                           <div class="time"><i class="fa fa-clock-o"></i>
-                            {{paper.start_time|date:"H:i"}}
+                            10.00
                           </div>
-                          <a data-toggle="collapse" data-parent="#panelTimelineTwo" href="#item{{paper.id}}" class="collapsed">
-                            {{paper.title}}
+                          <a data-toggle="collapse" data-parent="#panelTimelineTwo" href="#item8" class="collapsed">
+                            Testing móvil: Automatizando pruebas para un desarrollo ágil
                             <div class="pull-right fa fa-angle-up"></div>
                             <div class="pull-right fa fa-angle-down"></div>
                           </a>
                         </div>
                       </div>
 
-                      <div id="item{{paper.id}}" class="panel-collapse collapse">
+                      <div id="item8" class="panel-collapse collapse">
                         <div class="panel-body">
                           <article>
-                            <p>{{ paper.abstract }}</p>
-                            <p class="author"><a href="{{paper.author.1.twitter}}" target="_blank"><strong><i class="fa fa-user"></i> {{paper.author.1.get_full_name}}</strong></a></p>
+                            <p>Realizar testing ha sido una tarea que por mucho tiempo se
+                            ha creído que es una labor exclusiva por departamentos de QA.
+                            Pero la agilidad nos ha enseñado y demostrado que los desarrolladores
+                            podemos (y debemos) testear nuestras aplicaciones, y bajo este concepto,
+                            el testing para apps móviles ha ido evolucionando de forma paulatina.
+                            El objectivo de la presentación es mostrar las opciones de testing para
+                            Android e iOS, incluyendo testing unitario y de interfaz gráfica para
+                            realizar pruebas de integración, como también la automatización de la
+                            ejecución de los mismos a través de un servidor de integración continua.
+                            </p>
+                            <p class="author"><a href="https://twitter.com/RodrigoAyala" target="_blank"><strong><i class="fa fa-user"></i>@RodrigoAyala</strong></a></p>
                           </article>
                         </div>
                       </div>
                     </div>
-                    {% endfor %}
+                    <!-- End Charla 8 -->
+
+
+                    <!-- Charla 9 -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/juan_calderon.jpg' %}" class="img-responsive img-circle" alt="Foto Juan Felipe Calderón" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time"><i class="fa fa-clock-o"></i>
+                            11.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineTwo" href="#item9" class="collapsed">
+                            TICs y mobile learning: desafíos desde el diseño instruccional y la
+ingeniería de software
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item9" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>Incorporar tecnología en la sala de clases puede ser positivo,
+                            cuando esta sea un apoyo al trabajo pedagógico del profesor o
+                            profesora. En el caso de las plataformas móviles, la experiencia
+                            de usuario que generan en los estudiantes es muy rica; no obstante
+                            sin una aplicación que esté inserta dentro de un contexto educativo,
+                            su aporte al aprendizaje de los estudiantes puede ser nulo. En esta
+                            charla se expondrán los desafíos de desarrollar investigación en el
+                            área, combinando ciencias de la computación, ingeniería de software
+                            y ciencias de la educación, en particular el desarrollo de frameworks
+                            para dispositivos móviles y satisfacción de requisitos de calidad en
+                            estos ambientes.
+                            </p>
+                            <p class="author"><a href="https://twitter.com/jfcalder" target="_blank"><strong><i class="fa fa-user"></i>@jfcalder</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Charla 8 -->
+
+
                     <!-- END CHARLAS DIA 2-->
                   </div>
-                {% endif %}
               </div>
               <!-- END DIA 2 - TRACK 1 -->
 
@@ -728,10 +984,10 @@
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="speaker-item animated hiding" data-animation="fadeInUp" data-delay="500">
           <div class="img-wrapper">
-          <img src="{% static 'img/speaker/rodrigo_ayala.jpg' %}" class="img-responsive img-circle" alt="Foto Rodrigo Ayala" />
+          <img src="{% static 'img/speaker/rodrigo_ayala_2.jpg' %}" class="img-responsive img-circle" alt="Foto Rodrigo Ayala" />
           </div>
           <div class="name">Rodrigo Ayala</div>
-          <div class="sub">Desarrollador y Lider Técnico en Continuum</div>
+          <div class="sub">Gerente de tecnologías móviles en Continuum</div>
           <p class="small"></p>
           <div class="social-link">
             <a href="https://twitter.com/RodrigoAyala"><span class="fa fa-twitter"></span></a>
@@ -754,23 +1010,24 @@
           </div>
         </div>
       </div>
-
       <div class="clearfix visible-xs"></div>
-<!-- Por confirmar
+    </section>
+
+    <section class="row">
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="speaker-item animated hiding" data-animation="fadeInUp" data-delay="500">
           <div class="img-wrapper">
           <img src="{% static 'img/speaker/juan_calderon.jpg' %}" class="img-responsive img-circle" alt="Foto Juan Felipe Calderón" />
           </div>
           <div class="name">Juan Felipe Calderón Maureira</div>
-          <div class="sub">Profesor Jornada Ing. Civil Informática en U. Andrés Bello</div>
+          <div class="sub">Profesor Jornada completa en U. Andrés Bello</div>
           <p class="small"></p>
           <div class="social-link">
             <a href="https://cl.linkedin.com/pub/juan-felipe-calder%C3%B3n-maureira/10/b40/8b6"><span class="fa fa-linkedin"></span></a>
           </div>
         </div>
       </div>
-
+<!-- Por confirmar
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="speaker-item animated hiding" data-animation="fadeInUp" data-delay="500">
           <div class="img-wrapper">
@@ -834,7 +1091,7 @@
       <section class="vc-example">
         <article class="article-big">
           <h5><span class="highlight">Una hackathon como debe ser</span></h5>
-          <p class="big">Porque a nosotros también <strong>nos apasiona programar</strong>, creemos que una hackathon debe centrarse en los desarrolladores y diseñadores. Esperamos que resuelvan problemas, que demuestren sus habilidades con el teclado, la pantalla y su IDE favorita.</p>
+          <p class="big">Porque a nosotros también <strong>nos apasiona |gramar</strong>, creemos que una hackathon debe centrarse en los desarrolladores y diseñadores. Esperamos que resuelvan problemas, que demuestren sus habilidades con el teclado, la pantalla y su IDE favorita.</p>
           <div class="sub-title">
             <h6><span class="highlight ">¡Y tenemos excelentes premios! </span></h6>
           </div>
@@ -861,7 +1118,7 @@
       <div class="col-md-12 center">
         <div class="row">
           <div class="col-md-12 center">
-            <a class="btn btn-sm btn-primary">¡Pronto! Inscripciones</a>
+            <a href="https://eventioz.cl/e/valparaiso-mobile-conf?from_button=yes&source=orevib&utm_campaign=or_valparaiso-mobile-conf&utm_content=integrated_button&utm_medium=integration_tool&utm_source=eventioz" target="_blank"><img src="https://eventioz.cl/e/valparaiso-mobile-conf/promotion_button.png?size=large&content=Inscribirme+ahora&from=FE4918&to=FE4918&font=FFFFFF" alt="Eventioz - valparaiso-mobile-conf"></a>
           </div>
         </div>
       </div>
@@ -920,10 +1177,11 @@
 src="static/img/patrocinio/paisdigital.png" alt="Logo Fundación País Digital" /></a></li>
             <li><a href="http://www.rree.utfsm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/rree.png" alt="Logo Relaciones Estudiantiles U T F S M" /></a></li>
             <li><a href="http://www.exalumnos.usm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/aexa.png" alt="Logo Red de Ex Alumnos U T F S M" /></a></li>
+            <li><a href="http://www.valparaisocb.com" target="_blank"><img class="org-logo" src="static/img/patrocinio/vcb.jpg" alt="Logo Valparaíso Convention Bureau" /></a></li>
             <li><a href="http://www.industrias.usm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/industrias.png" alt="Logo" /></a></li>
           </ul>
           <div class="btn-wrapper">
-            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary">Auspiciar/patrocinar este evento</a>
+            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary" target="_blank">Auspiciar/patrocinar este evento</a>
           </div>
         </div>
     </div>
