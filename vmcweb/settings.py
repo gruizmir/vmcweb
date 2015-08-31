@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from secrets import *
+import secrets
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -57,12 +57,12 @@ WSGI_APPLICATION = 'vmcweb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': DB_ENGINE,
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'ENGINE': secrets.DB_ENGINE,
+        'NAME': secrets.DB_NAME,
+        'USER': secrets.DB_USER,
+        'PASSWORD': secrets.DB_PASSWORD,
+        'HOST': secrets.DB_HOST,
+        'PORT': secrets.DB_PORT,
     }
 }
 
