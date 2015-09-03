@@ -93,7 +93,6 @@
           <li><a href="#hackathon">Hackathon</a></li>
           <li><a href="#organization">Organizadores</a></li>
           <li><a href="#map">Contacto</a></li>
-<!--          <li class="featured"><a href="{% url 'register' %}"><i class="fa fa-ticket fa-1x"></i>Obtener entrada</a></li> -->
         </ul>
       </nav>
     </div>
@@ -177,6 +176,7 @@
                   <li><i class="fa fa-angle-right"></i> Deberán presentar su aplicación funcionando, más screenshots de otras vistas que hayan planeado crear.</li>
                   <li><i class="fa fa-angle-right"></i> Preocupate sólo por programar (o diseñar): nosotros ponemos las pizzas y las bebidas.</li>
                 </ul>
+                <a href="{% static 'VMC_2015_BasesHackathon.pdf' %}" target="_blank">Bases Hackathon</a>
               </div>
             </article>
           </div>
@@ -218,16 +218,6 @@
             <p class="small">Porque una mente creativa no duerme.</p>
           </div>
         </div>
-        <!-- ESPACIO PARA LA EXPO
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="counter animated hiding" data-animation="fadeInDown" data-delay="1500">
-            <div class="stat"><span class="value" data-from="0" data-to="3">3</span></div>
-            <div class="stat-info">halls</div>
-            <hr />
-            <p class="small">It is a long established fact that a reader will be.</p>
-          </div>
-        </div>
-        -->
       </div>
     </div>
   </section>
@@ -1094,6 +1084,7 @@ ingeniería de software
           <p class="big">Porque a nosotros también <strong>nos apasiona |gramar</strong>, creemos que una hackathon debe centrarse en los desarrolladores y diseñadores. Esperamos que resuelvan problemas, que demuestren sus habilidades con el teclado, la pantalla y su IDE favorita.</p>
           <div class="sub-title">
             <h6><span class="highlight ">¡Y tenemos excelentes premios! </span></h6>
+            <a href="{% static 'VMC_2015_BasesHackathon.pdf' %}" target="_blank">Bases Hackathon</a>
           </div>
         </article>
       </section>
@@ -1101,14 +1092,19 @@ ingeniería de software
     <!-- PREMIOS HACKATHON -->
     <section class="vc-example">
       <div class="row">
-      {% for premio in premios %}
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <a href="{{premio.img}}" class="thumb-wrapper fancybox" data-fancybox-group="gallery">
-            <div class="overlay">{{premio.name}}</div>
-            <img src="{% static 'img/gallery/thumb-1.jpg' %}" class="img-responsive" alt="thumb-1" />
+        <div class="col-md-offset-3 col-md-3 col-sm-3 col-xs-6">
+          <a href="" class="thumb-wrapper fancybox" data-fancybox-group="gallery">
+            <div class="overlay">2 Moto 360</div>
+            <img src="{% static 'img/moto_360.jpg' %}" class="img-responsive" alt="Moto 360" />
           </a>
         </div>
-      {% endfor %}
+
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <a href="" class="thumb-wrapper fancybox" data-fancybox-group="gallery">
+            <div class="overlay">2 Moto G 2° Generación</div>
+            <img src="{% static 'img/moto_g.png' %}" class="img-responsive" alt="Moto G" />
+          </a>
+        </div>
       </div>
     </section>
     <!-- END PREMIOS HACKATHON -->		
