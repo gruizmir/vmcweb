@@ -534,45 +534,47 @@
 
               <!-- DIA 1 - TRACK 2 -->
               <div class="tab-pane fade" id="DayOne-2">
-                {% if not workshop_list_first %}
-                  <article>
-                    <p>Los talleres aún no están confirmados.</p>
-                  </article>
-                {% else %}
                   <div class="panel-group timeline-schedule" id="panelTimelineThree">
 
                     <!-- WORKSHOPS DIA 1-->
-                    {% for workshop in workshop_list_first %}
+
+                    <!-- Taller 1 -->
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
-                        <img src="/media/{{workshop.expositor.photo_thumb}}" class="img-responsive img-circle" alt="{{workshop.expositor.get_full_name}}" />
+                        <img src="{% static 'img/speaker/chihau.jpg' %}" class="img-responsive img-circle" alt="Foto Chihau Chau" />
                       </div>
                       <div class="panel-heading">
                         <div class="panel-title">
                           <div class="time"><i class="fa fa-clock-o"></i>
-                            {{workshop.start_time|date:"H:i"}}
+                            11:00
                           </div>
-                          <a data-toggle="collapse" data-parent="#panelTimelineThree" href="#item{{workshop.id}}" class="collapsed">
-                            {{workshop.name}}
+                          <a data-toggle="collapse" data-parent="#panelTimelineThree" href="#itemtaller1" class="collapsed">
+                        Taller para la creación de tu primera aplicación Android
                             <div class="pull-right fa fa-angle-up"></div>
                             <div class="pull-right fa fa-angle-down"></div>
                           </a>
                         </div>
                       </div>
 
-                      <div id="item{{workshop.id}}" class="panel-collapse collapse">
+                      <div id="itemtaller1" class="panel-collapse collapse">
                         <div class="panel-body">
                           <article>
-                            <p>{{ workshop.abstract }}</p>
-                            <p class="author"><a href="{{workshop.expositor.twitter}}" target="_blank"><strong><i class="fa fa-user"></i> {{workshop.expositor.get_full_name}}</strong></a></p>
+                            <p>
+                            En este taller se explicarán los conceptos fundamentales para el
+                            desarrollo de aplicaciones en Android a través del desarrollo de
+                            algunos ejemplos que contemplan la creación en un Hola Mundo!,
+                            creación de interfaces de interfaces de usuario, Intents y
+                            almacenamiento de datos.
+                            </p>
+                            <p class="author"><a href="https://twitter.com/chihau" target="_blank"><strong><i class="fa fa-user"></i>@chihau</strong></a></p>
                           </article>
                         </div>
                       </div>
                     </div>
-                    {% endfor %}
+                    <!-- END Taller 1 -->
+
                     <!-- END CHARLAS DIA 1-->
                   </div>
-                {% endif %}
               </div>
               <!-- END DIA 1 - TRACK 2 -->
 
@@ -1193,7 +1195,7 @@ ingeniería de software
       <section class="vc-example">
         <article class="article-big">
           <h5><span class="highlight">Una hackathon como debe ser</span></h5>
-          <p class="big">Porque a nosotros también <strong>nos apasiona |gramar</strong>, creemos que una hackathon debe centrarse en los desarrolladores y diseñadores. Esperamos que resuelvan problemas, que demuestren sus habilidades con el teclado, la pantalla y su IDE favorita.</p>
+          <p class="big">Porque a nosotros también <strong>nos apasiona programar</strong>, creemos que una hackathon debe centrarse en los desarrolladores y diseñadores. Esperamos que resuelvan problemas, que demuestren sus habilidades con el teclado, la pantalla y su IDE favorita.</p>
           <div class="sub-title">
             <h6><span class="highlight ">¡Y tenemos excelentes premios! </span></h6>
             <a href="{% static 'VMC_2015_BasesHackathon.pdf' %}" target="_blank">Bases Hackathon</a>
