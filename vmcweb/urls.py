@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^sponsor/', 'main.views.become_sponsor',
                                     name='become_sponsor'),
     url(r'^pitches/', 'main.views.pitch_view', name='new_pitch'),
+    #url(r'^workshop/', 'main.views.workshop_user', name='user_to_workshop'),
     url(r'^contact/', 'main.views.contact', name='contact'),
     url(r'^admin/', include(admin.site.urls)),
 )
