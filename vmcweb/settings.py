@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'tvxp6xkk_)uc4egydwvr&ny_(j+d9^g!b3t4jf&7z0(e-&#r%v'
 
-DEBUG = True
+DEBUG = secrets.DEBUG
 TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = secrets.ALLOWED_HOSTS
 
@@ -82,7 +82,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'cargas')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
