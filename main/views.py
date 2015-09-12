@@ -196,14 +196,14 @@ class RegisterPitchView(FormView):
         return render(request, self.template_name, data)
 
     def post(self, request):
-        form = PitchForm(request.POST)
+        form = PitchForm(request.POST, request.FILES)
         if form.is_valid():
             pitch = form.save()
             subject = "Registro de Pitch a Valparaíso Mobile Conf"
             msg = u"%(name)s, bienvenido a Valparaíso Mobile Conf. \n\n" +\
                   u"Nuestro equipo te contactará en breve para asignar un " +\
                   u"horario para el pitch. ¡Gracias por tu interés!"
-
+            msg = msg % {'name': form.cleaned_data['name']}
             try:
                 connection = mail.get_connection()
                 connection.open()

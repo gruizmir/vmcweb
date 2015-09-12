@@ -547,29 +547,20 @@ hr.white {
 }
 .navigation-bar > li a {
   font-size: 18px;
-
   color: #fff;
-
   display: inline-block;
-
   padding-left: 15px;
-
   padding-right: 15px;
-
   padding-bottom: 10px;
-
   padding-top: 10px;
-
 }
 .navigation-bar > li a:Hover,
 .navigation-bar > li a.active {
     color: #fe4918;
      text-decoration: none;
-
 }
 .navigation-bar > li.active a {
     color: #fe4918;
-
 }
 
 .navigation-bar > li.featured {opacity:0;
@@ -592,17 +583,11 @@ hr.white {
 
 .navigation-bar > li.featured a {
   background:#fe4918;
-
   outline: 1px solid #fe4918;
-
   text-decoration: none;
-
   padding-left: 10px;
-
   padding-right: 15px;
-
   margin-left: 15px;
-
   font-size: 14px;
 
 }
@@ -619,12 +604,10 @@ hr.white {
     font-size:15pt;
      padding-left: 20px;
      padding-right: 20px;
-
 }
 .navigation-social {
     z-index: 100;
      position: relative;
-
 }
 
 

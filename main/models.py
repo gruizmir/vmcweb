@@ -26,7 +26,7 @@ class Pitch(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True,
                     verbose_name="Fecha de registro")
     extras = models.FileField(null=True, verbose_name="Anexos", blank=True,
-                            upload_to="extras")
+                            upload_to="pitches")
 
     class Meta:
         verbose_name = "Pitch"
