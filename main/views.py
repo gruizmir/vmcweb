@@ -33,6 +33,8 @@ class HomeView(View):
         data = {}
         if request.session.pop('team_registered', False):
             data['success_message'] = "Tu equipo ha sido registrado"
+        elif request.session.pop('pitch_registered', False):
+            data['success_message'] = "Te has registrado exitosamente para mostrar tu app!"
         elif request.session.pop('registered', False):
             data['success_message'] = "¡Gracias por inscribirte en " + \
                                       "Valparaíso Mobile Conf!"
@@ -190,6 +192,7 @@ class RegisterPitchView(FormView):
         data = {}
         data['bg'] = random.choice(bgs)
         data['title'] = u'Registro de pitch'
+        data['form'] = self.form_class()
         return render(request, self.template_name, data)
 
     def post(self, request):
@@ -213,7 +216,7 @@ class RegisterPitchView(FormView):
                 connection.close()
             except:
                 print traceback.format_exc()
-            self.request.session['team_registered'] = True
+            self.request.session['pitch_registered'] = True
             return HttpResponseRedirect(self.get_success_url())
         else:
             data = {}

@@ -23,6 +23,7 @@ class ContactForm(forms.Form):
 
 
 class PitchForm(forms.ModelForm):
+    phone = forms.CharField(required=False)
     class Meta:
         model = Pitch
-        exclude = ('creation_date', 'accepted', 'logo')
+        exclude = ('creation_date', 'accepted')

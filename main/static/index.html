@@ -222,7 +222,6 @@
   </section>
   <!-- FIN ESTADISTICAS -->
 
-  {% if schedule %}
   <!-- Sección Programa -->
   <section id="schedule" class="section dark">
     <div class="container">
@@ -1006,7 +1005,6 @@ ingeniería de software
     </div>
   </section>
   <!-- FIN PROGRAMA-->
-  {% endif %}
 
   <!-- Speakers Section -->
   <section id="speakers" class="section light">
@@ -1216,14 +1214,46 @@ ingeniería de software
 -->
 
     </section>
-    <!--
-    <div class="btn-wrapper">
-      <a href="#" class="btn btn-sm btn-default">See all speakers</a>
-    </div>
-    -->
     </div>
   </section>
   <!-- End Speakers Section -->
+  <section id="pitches" class="section dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <h6>¿Estás desarrollando una app?</h6>
+          <p>¡Te damos 5 minutos para que la presentes
+          frente al público como tú quieras! En el espacio entre cada charla, puedes
+          hacer un pitch sobre la aplicación que estás desarrollando. ¡Inscríbete!
+          </p>
+        </div>
+        <div class="col-sm-4">
+          <div class="btn-wrapper">
+            <a href="{% url 'new_pitch' %}" class="btn btn-sm btn-primary" target="_blank">¡Quiero mostrar mi app!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workshops" class="section light">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <h6>¡Inscríbete a un taller!</h6>
+          <p>Puedes inscribirte en los talleres de Valparaíso Mobile Conf y
+          aprender a desarrollar con la ayuda de un tutor experto!
+          </p>
+        </div>
+        <div class="col-sm-4">
+          <div class="btn-wrapper">
+            <a href="#" class="btn btn-sm btn-primary" target="_blank">¡Pronto!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- HACKATHON Y PREMIOS -->
   <section id="hackathon" class="section dark">

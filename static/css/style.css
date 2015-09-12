@@ -361,7 +361,7 @@ hr.white {
 }
 
 .section {
-    min-height: 350px;
+    min-height: 200px;
     background-color: #fff;
     padding-bottom: 50px;
     padding-top: 50px;
@@ -713,8 +713,6 @@ hr.white {
     padding-top: 60px;
 
 }
-
-
 
 #hackathon {
     text-align: left;
@@ -1085,15 +1083,10 @@ hr.white {
 
 .progress {
   height: 30px;
-
   border-radius: 0;
-
   -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0);
-
   box-shadow: inset 0 0px 0px rgba(0,0,0,0);
-
   border: 1px solid #FF714A;
-
   background: #fff;
 
 }
@@ -1123,15 +1116,10 @@ hr.white {
 }
 .form .form-control {
   height: 55px;
-
   border: 1px solid #ddd;
-
   border-radius: 0;
-
   box-shadow: 0px 0px 0px transparent;
-
   background: #fff;
-
   font-size: 18px;
 
 }
@@ -1146,20 +1134,24 @@ hr.white {
 
 }
 
-.form-control {-webkit-border-radius: 1px;
+.form-control {
+    -webkit-border-radius: 1px;
     -moz-border-radius: 1px;
     border-radius: 1px;
-    }
-.form-control {height: 44px;
-
 }
-.form-group {margin-bottom: 20px;
-    }
-.form-control:focus {border-color: #fff !important;
+.form-control {
+    height: 44px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control:focus {
+    border-color: #fff !important;
     outline: 0 !important;
      -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    }
+}
 .form .form-group {
     margin-bottom: 25px;
      color:#000;
@@ -1178,21 +1170,20 @@ hr.white {
 
 .form-register .form-control {
     height: 50px;
-     border: 1px solid #d1d8dd;
-     border-radius: 0;
-     box-shadow: 0px 0px 0px transparent;
-     background: #fff;
-     font-size: 17px;
-     font-weight: 300;
+    border: 1px solid #d1d8dd;
+    border-radius: 0;
+    box-shadow: 0px 0px 0px transparent;
+    background: #fff;
+    font-size: 17px;
+    font-weight: 300;
 
 }
 
 .form .form-group label {
     text-align: right;
-     line-height: 50px;
-     margin-bottom: 0;
-     font-family:'Roboto', sans-serif;
-     font-weight:300;
+    margin-bottom: 0;
+    font-family:'Roboto', sans-serif;
+    font-weight:300;
 }
 
 .form .form-group label.multiline {
@@ -1860,8 +1851,8 @@ label.error {
 .logos .list-inline li {
     padding-left: 0;
     padding-right: 0;
-    margin-left:15px;
-    margin-right:15px;
+    margin: 15px;
+
 }
 
 #sponsors .list-inline, #organization .list-inline {
@@ -2170,6 +2161,10 @@ label.error {
     line-height: 30px;
     margin-top: 15px;
     text-align: left;
+  }
+
+  h3 {
+    font-size:40px;
   }
 }
 
