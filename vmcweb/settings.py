@@ -96,4 +96,3 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'valpomobileconf'
 EMAIL_HOST_PASSWORD = 'kenolamasca2veces'
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'contacto@vmc.cl'
