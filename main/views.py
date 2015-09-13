@@ -13,7 +13,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg']
+bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg', 'bg/bg04.jpg',
+       'bg/bg05.jpg', 'bg/bg06.jpg', 'bg/bg07.jpg', 'bg/bg08.jpg',
+       'bg/bg09.jpg', 'bg/bg10.jpg', 'bg/bg11.jpg', 'bg/bg12.jpg',
+       'bg/bg13.jpg'
+      ]
 
 
 class HomeView(View):
