@@ -16,6 +16,7 @@ def upload(msg="."):
     local(cmt)
     local('git push')
 
+
 @roles('prod')
 def pull():
     code_dir = 'vmcweb'

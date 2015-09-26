@@ -53,6 +53,7 @@ class HomeView(View):
                                       "usted a la brevedad."
 
         data['bg'] = random.choice(bgs)
+        data['bg_reg'] = random.choice(bgs)
         data['contact_form'] = ContactForm(prefix='contact')
         data['sponsor_list'] = Sponsor.objects.all()
         data['schedule'] = True

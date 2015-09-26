@@ -94,6 +94,7 @@
           <li><a href="#speakers">Expositores</a></li>
           <li><a href="#hackathon">Hackathon</a></li>
           <li><a href="#organization">Organizadores</a></li>
+          <li><a href="{% url 'lodging' %}" target="_blank">Alojamiento</a></li>
           <li><a href="#map">Contacto</a></li>
         </ul>
       </nav>
@@ -1239,6 +1240,7 @@ ingeniería de software
           </div>
         </div>
       </div>
+
       <div class="clearfix visible-xs"></div>
 
 
@@ -1299,7 +1301,7 @@ ingeniería de software
     </div>
   </section>
 
-  <section id="workshops" class="section light">
+  <section id="workshops" class="section light" style="background: url({% static bg_reg %});background-position-y: center;background-size: cover;">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
