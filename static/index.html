@@ -207,7 +207,7 @@
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
           <div class="counter animated hiding" data-animation="fadeInDown" data-delay="500">
-            <div class="stat"><span class="value" data-from="0" data-to="12">12</span></div>
+            <div class="stat"><span class="value" data-from="0" data-to="10">10</span>+</div>
             <div class="stat-info">expositores</div>
             <hr />
             <p class="small">Expertos en programación, diseño y más.</p>
@@ -281,11 +281,29 @@
                   <div class="panel-group timeline-schedule" id="panelTimelineOne">
                     <!-- CHARLAS DIA 1-->
 
-                    <!-- Charla 1 -->
-                    <!--
+                    <!-- Acreditación -->
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
-                        <img src="{% static 'img/speaker/fernando_ruiz.jpg'%}" class="img-responsive img-circle" alt="Foto Fernando Ruiz" />
+                        <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Foto Abraham Barrera" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            9.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" class="collapsed">
+                            Acreditación
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Acreditación -->
+
+                    <!-- Charla 1 -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/victor_munoz.jpg'%}" class="img-responsive img-circle" alt="Foto Victor Hugo Muñoz" />
                       </div>
                       <div class="panel-heading">
                         <div class="panel-title">
@@ -294,7 +312,7 @@
                             10.00
                           </div>
                           <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item1" class="collapsed">
-                            Landscape of Mobile Malware Threats
+                            NFC
                             <div class="pull-right fa fa-angle-up"></div>
                             <div class="pull-right fa fa-angle-down"></div>
                           </a>
@@ -304,17 +322,12 @@
                       <div id="item1" class="panel-collapse collapse">
                         <div class="panel-body">
                           <article>
-                            <p>Resumen del trabajo que realiza el equipo de Mobile Research
-                            de Inter Security. Describe las amenazas para dispositivos móviles
-                            más activas y peligrosas del último año, estadísticas de prevalencia
-                            y comportamiento, pasando desde aplicaciones que amenazan la
-                            privacidad de los usuarios, bitcoin mining, rooting, etc.</p>
-                            <p class="author"><a href="https://twitter.com/ferruiz" target="_blank"><strong><i class="fa fa-user"></i>@ferruiz</strong></a></p>
+                            <p></p>
+                            <p class="author"><strong><i class="fa fa-user"></i>Victor Hugo Muñoz</strong></p>
                           </article>
                         </div>
                       </div>
                     </div>
-                    -->
                     <!-- End Charla 1 -->
 
                     <!-- Charla 2 -->
@@ -635,9 +648,11 @@
               <li class="active">
                 <a href="#DayTwo-1" data-toggle="tab">Charlas - Salón de Honor</a>
               </li>
+              {% if workshop_list_second %}
               <li>
                 <a href="#DayTwo-2" data-toggle="tab">Talleres - F-106</a>
               </li>
+              {% endif %}
             </ul>
 
             <!-- DIA 2 Tab panes -->
@@ -647,6 +662,25 @@
                   <div class="panel-group timeline-schedule" id="panelTimelineTwo">
 
                     <!-- CHARLAS DIA 2-->
+                    <!-- Acreditación -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Foto Abraham Barrera" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            9.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" class="collapsed">
+                            Acreditación
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Acreditación -->
+
                     <!-- Charla 8 -->
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
@@ -809,7 +843,7 @@ ingeniería de software
               </div>
               <!-- END DIA 2 - TRACK 1 -->
 
-
+              {% if workshop_list_second %}
               <!-- DIA 2 - TRACK 2 -->
               <div class="tab-pane fade" id="DayTwo-2">
                 {% if not workshop_list_second %}
@@ -853,7 +887,7 @@ ingeniería de software
                 {% endif %}
               </div>
               <!-- DIA 2 - TRACK 2 -->
-
+              {% endif %}
             </div>
             <div class="clearfix"></div>
           </div>
