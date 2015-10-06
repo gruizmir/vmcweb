@@ -331,38 +331,6 @@
                     <!-- End Charla 1 -->
 
                     <!-- Charla 2 -->
-<!--
-                    <div class="panel panel-default">
-                      <div class="speaker-wrapper">
-                        <img src="{% static 'img/speaker/abraham_barrera.jpeg' %}" class="img-responsive img-circle" alt="Foto Abraham Barrera" />
-                      </div>
-                      <div class="panel-heading">
-                        <div class="panel-title">
-                          <div class="time">
-                            <i class="fa fa-clock-o"></i>
-                            11.00
-                          </div>
-                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item2" class="collapsed">
-                            Experiencia Transición Universidad-Laboral
-                            <div class="pull-right fa fa-angle-up"></div>
-                            <div class="pull-right fa fa-angle-down"></div>
-                          </a>
-                        </div>
-                      </div>
-
-                      <div id="item2" class="panel-collapse collapse">
-                        <div class="panel-body">
-                          <article>
-                            <p>(No disponible)</p>
-                            <p class="author"><a href="https://twitter.com/abraham_barrera" target="_blank"><strong><i class="fa fa-user"></i>@abraham_barrera</strong></a></p>
-                          </article>
-                        </div>
-                      </div>
-                    </div>
--->
-                    <!-- End Charla 2 -->
-
-                    <!-- Charla 2 -->
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
                         <img src="{% static 'img/speaker/andres_duran.jpeg' %}" class="img-responsive img-circle" alt="Foto Andrés Durán" />
@@ -837,57 +805,41 @@ ingeniería de software
                     </div>
                     <!-- End Charla 11 -->
 
-
-                    <!-- END CHARLAS DIA 2-->
-                  </div>
-              </div>
-              <!-- END DIA 2 - TRACK 1 -->
-
-              {% if workshop_list_second %}
-              <!-- DIA 2 - TRACK 2 -->
-              <div class="tab-pane fade" id="DayTwo-2">
-                {% if not workshop_list_second %}
-                  <article>
-                   <p>Los talleres aún no están confirmados.</p>
-                  </article>
-                {% else %}
-                  <div class="panel-group timeline-schedule" id="panelTimelineFour">
-
-                    <!-- TALLERES DIA 2-->
-                    {% for workshop in workshop_list_second %}
+                    <!-- Charla 12 -->
                     <div class="panel panel-default">
                       <div class="speaker-wrapper">
-                        <img src="/media/{{workshop.expositor.photo_thumb}}" class="img-responsive img-circle" alt="{{workshop.expositor.get_full_name}}" />
+                        <img src="{% static 'img/speaker/nicolas_vera.jpg' %}" class="img-responsive img-circle" alt="Foto Nicolás Vera" />
                       </div>
                       <div class="panel-heading">
                         <div class="panel-title">
                           <div class="time"><i class="fa fa-clock-o"></i>
-                            {{workshop.start_time|date:"H:i"}}
+                            16.00
                           </div>
-                          <a data-toggle="collapse" data-parent="#panelTimelineFour" href="#item{{workshop.id}}" class="collapsed">
-                            {{workshop.name}}
+                          <a data-toggle="collapse" data-parent="#panelTimelineTwo" href="#item12" class="collapsed">
+                            Beacons, una solución móvil para un Campus Universitario inclusivo
                             <div class="pull-right fa fa-angle-up"></div>
                             <div class="pull-right fa fa-angle-down"></div>
                           </a>
                         </div>
                       </div>
 
-                      <div id="item{{workshop.id}}" class="panel-collapse collapse">
+                      <div id="item12" class="panel-collapse collapse">
                         <div class="panel-body">
                           <article>
-                            <p>{{ workshop.abstract }}</p>
-                            <p class="author"><a href="{{workshop.expositor.twitter}}" target="_blank"><strong><i class="fa fa-user"></i> {{workshop.expositor.get_full_name}}</strong></a></p>
+                            <p>
+                            </p>
+                            <p class="author"><a><strong><i class="fa fa-user"></i>Nicolás Vera</strong></a></p>
                           </article>
                         </div>
                       </div>
                     </div>
-                    {% endfor %}
-                    <!-- END TALLERES DIA 2-->
+                    <!-- End Charla 12 -->
+
+                    <!-- END CHARLAS DIA 2-->
                   </div>
-                {% endif %}
               </div>
-              <!-- DIA 2 - TRACK 2 -->
-              {% endif %}
+              <!-- END DIA 2 - TRACK 1 -->
+
             </div>
             <div class="clearfix"></div>
           </div>
@@ -1277,40 +1229,21 @@ ingeniería de software
 
       <div class="clearfix visible-xs"></div>
 
-
-<!-- Por confirmar
       <div class="col-md-3 col-sm-3 col-xs-6">
         <div class="speaker-item animated hiding" data-animation="fadeInUp" data-delay="500">
           <div class="img-wrapper">
-          <img src="{% static 'img/speaker/juan_calderon.jpg' %}" class="img-responsive img-circle" alt="Foto Juan Felipe Calderón" />
+          <img src="{% static 'img/speaker/nicolas_vera.jpg' %}" class="img-responsive img-circle" alt="Foto Nicolás Vera" />
           </div>
-          <div class="name">Juan Felipe Calderón Maureira</div>
-          <div class="sub">Profesor Jornada Ing. Civil Informática en U. Andrés Bello</div>
+          <div class="name">Nicolás Vera Ulloa</div>
+          <div class="sub">Estudiante de Ing. Civil Informática</div>
           <p class="small"></p>
           <div class="social-link">
-            <a href="https://cl.linkedin.com/pub/juan-felipe-calder%C3%B3n-maureira/10/b40/8b6"><span class="fa fa-linkedin"></span></a>
-          </div>
-        </div>
-      </div>
--->
-
-<!-- Por confirmar
-      <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="speaker-item animated hiding" data-animation="fadeInUp" data-delay="500">
-          <div class="img-wrapper">
-          <img src="{% static 'img/speaker/juan_calderon.jpg' %}" class="img-responsive img-circle" alt="Foto Juan Felipe Calderón" />
-          </div>
-          <div class="name">Juan Felipe Calderón Maureira</div>
-          <div class="sub">Profesor Jornada Ing. Civil Informática en U. Andrés Bello</div>
-          <p class="small"></p>
-          <div class="social-link">
-            <a href="https://cl.linkedin.com/pub/juan-felipe-calder%C3%B3n-maureira/10/b40/8b6"><span class="fa fa-linkedin"></span></a>
+            <a href="https://www.linkedin.com/in/nicolasvera1"><span class="fa fa-linkedin"></span></a>
           </div>
         </div>
       </div>
 
       <div class="clearfix visible-xs"></div>
--->
 
     </section>
     </div>
