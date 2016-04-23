@@ -9,6 +9,47 @@ from django.dispatch import receiver
 from PIL import Image
 
 
+class Speaker(models.Model):
+    DAY_OPTIONS = ((1, '1'), (2, '2'))
+    name = models.CharField(max_length=50, null=True, blank=False,
+                    verbose_name='Nombre')
+    lastname = models.CharField(max_length=50, null=True, blank=False,
+                    verbose_name='Apellido')
+    occupation = models.CharField(max_length=200, null=True, blank=True,
+                    verbose_name='Cargo/Trabajo')
+    email = models.EmailField(max_length=100, null=False, blank=False,
+                    verbose_name='Email')
+    profile_picture = models.ImageField(upload_to="speakers",
+                    verbose_name="Logo", null=True, blank=True)
+    phone = models.CharField(max_length=15, null=True, blank=True,
+                    verbose_name='Fono')
+    twitter = models.CharField(max_length=60, null=True, blank=True,
+                    verbose_name='Twitter')
+    linkedin = models.CharField(max_length=200, null=True, blank=True,
+                    verbose_name='Linkedin')
+    title = models.CharField(max_length=100, null=True, blank=False,
+                    verbose_name='Nombre de la app')
+    description = models.TextField(verbose_name='Description', null=True,
+                                                               blank=True)
+    day = models.IntegerField(verbose_name="Día", null=True, blank=True,
+                                                choices=DAY_OPTIONS)
+    start_time = models.TimeField(verbose_name='Inicio de charla', null=True,
+                                                                    blank=True)
+    version = models.IntegerField(verbose_name="Día", null=False, blank=False,
+                                                    default=2016)
+    created = models.DateTimeField(auto_now_add=True,
+                                            verbose_name="Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Actualización")
+
+    def __unicode__(self):
+        return self.name + " " + self.lastname
+
+    class Meta:
+        verbose_name = "Speaker"
+        verbose_name_plural = "Speakers"
+        app_label = 'main'
+
+
 class Pitch(models.Model):
     name = models.CharField(max_length=50, null=True, blank=False,
                     verbose_name='Nombre')
@@ -28,9 +69,13 @@ class Pitch(models.Model):
     extras = models.FileField(null=True, verbose_name="Anexos", blank=True,
                             upload_to="pitches")
 
+    def __unicode__(self):
+        return self.name + " " + self.lastname
+
     class Meta:
         verbose_name = "Pitch"
         verbose_name_plural = "Pitches"
+        app_label = 'main'
 
 
 class HackTeam(models.Model):
@@ -76,6 +121,7 @@ class HackTeam(models.Model):
     class Meta:
         verbose_name = "Equipo"
         verbose_name_plural = "Equipos"
+        app_label = 'main'
 
 
 class Sponsor(models.Model):
@@ -92,6 +138,11 @@ class Sponsor(models.Model):
     logo_thumb = models.ImageField(upload_to="logos",
                     verbose_name="Thumbnail", null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Auspiciador"
+        verbose_name_plural = "Auspiciadores"
+        app_label = 'main'
 
     def __unicode__(self):
         return self.name

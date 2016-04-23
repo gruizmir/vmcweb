@@ -1,0 +1,454 @@
+{% load static from staticfiles %}
+{% load i18n %}
+
+<!-- Sección Programa -->
+  <section id="schedule" class="section dark">
+    <div class="container">
+      <div class="icon-wrap"><i class="fa fa-calendar"></i></div>
+      <h3>Programa</h3>
+      <div class="sub-title">Averigua como estará distribuida el Mobile Conf</div>
+      <br />
+      <br />
+      <section class="nav-tabs-default hidden-xs">
+      <!-- Parent Nav Tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#DayOne" data-toggle="tab">
+              <div class="title">Día 1</div>
+              <div class="subtitle">04/11/2015</div>
+            </a>
+          </li>
+          <li>
+            <a href="#DayTwo" data-toggle="tab">
+              <div class="title">Día 2</div>
+              <div class="subtitle">05/11/2015</div>
+            </a>
+          </li>
+          <li>
+            <a href="#HackNight" data-toggle="tab">
+              <div class="title">Hackathon</div>
+              <div class="subtitle">4-5/11/2015</div>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Parent Tab panes -->
+        <div class="tab-content">
+
+          <!-- DIA 1 -->
+          <div class="tab-pane fade in active" id="DayOne">
+
+            <!-- DIA 1 Tabs -->
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#DayOne-1" data-toggle="tab">Charlas - Salón de Honor</a>
+              </li>
+              {% comment %}
+              <li>
+                <a href="#DayOne-2" data-toggle="tab">Talleres - F-106</a>
+              </li>
+              {% endcomment %}
+            </ul>
+
+            <!-- DIA 1 Tab panes -->
+            <div class="tab-content">
+
+              <!-- DIA 1 - TRACK 1-->
+              <div class="tab-pane fade in active" id="DayOne-1">
+                  <div class="panel-group timeline-schedule" id="panelTimelineOne">
+                    <!-- CHARLAS DIA 1-->
+
+                    <!-- Acreditación -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Foto Abraham Barrera" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            9.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" class="collapsed">
+                            Acreditación
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Acreditación -->
+                    {% for speaker in speakers_day_1 %}
+                    <!-- Charla {{forloop.counter}} -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{{speaker.profile_picture.url}}" class="img-responsive img-circle" alt="Foto {{speaker}}" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            {{speaker.start_time|time:"H.m"}}
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item{{speaker.id}}" class="collapsed">
+                            {{speaker.title}}
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item{{speaker.id}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>{{speaker.description}}</p>
+                            <p class="author">
+                            {% if speaker.twitter %}
+                            <a href="https://twitter.com/{{speaker.twitter}}" target="_blank"><strong><i class="fa fa-user"></i>@{{speaker.twitter}}</strong></a>
+                            {% else %}
+                            <strong><i class="fa fa-user"></i>{{speaker}}</strong>
+                            {% endif %}
+                            </p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Charla {{forloop.counter}} -->
+                    {% endfor %}
+
+                    <!-- END CHARLAS DIA 1-->
+                  </div>
+              </div>
+              <!-- END DIA 1 - TRACK 1-->
+
+              <!-- DIA 1 - TRACK 2 -->
+              <div class="tab-pane fade" id="DayOne-2">
+                  <div class="panel-group timeline-schedule" id="panelTimelineThree">
+
+                    <!-- WORKSHOPS DIA 1-->
+
+                    {% comment %}
+                    <!-- Taller 1 -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/speaker/chihau.jpg' %}" class="img-responsive img-circle" alt="Foto Chihau Chau" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time"><i class="fa fa-clock-o"></i>
+                            11:00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineThree" href="#itemtaller1" class="collapsed">
+                        Taller para la creación de tu primera aplicación Android
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="itemtaller1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>
+                            En este taller se explicarán los conceptos fundamentales para el
+                            desarrollo de aplicaciones en Android a través del desarrollo de
+                            algunos ejemplos que contemplan la creación en un Hola Mundo!,
+                            creación de interfaces de interfaces de usuario, Intents y
+                            almacenamiento de datos.
+                            </p>
+                            <p class="author"><a href="https://twitter.com/chihau" target="_blank"><strong><i class="fa fa-user"></i>@chihau</strong></a></p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Taller 1 -->
+                    {% endcomment %}
+
+                    <!-- END CHARLAS DIA 1-->
+                  </div>
+              </div>
+              <!-- END DIA 1 - TRACK 2 -->
+
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <!-- END DIA 1 -->
+
+
+          <!-- DIA 2 -->
+          <div class="tab-pane fade" id="DayTwo">
+            <!-- DIA 2 Nav Tabs -->
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#DayTwo-1" data-toggle="tab">Charlas - Salón de Honor</a>
+              </li>
+              {% if workshop_list_second %}
+              <li>
+                <a href="#DayTwo-2" data-toggle="tab">Talleres - F-106</a>
+              </li>
+              {% endif %}
+            </ul>
+
+            <!-- DIA 2 Tab panes -->
+            <div class="tab-content">
+              <!-- DIA 2 - TRACK 1 -->
+              <div class="tab-pane fade in active" id="DayTwo-1">
+                  <div class="panel-group timeline-schedule" id="panelTimelineTwo">
+
+                    <!-- CHARLAS DIA 2-->
+                    <!-- Acreditación -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Foto Abraham Barrera" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            9.00
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" class="collapsed">
+                            Acreditación
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Acreditación -->
+
+                    {% for speaker in speakers_day_1 %}
+                    <!-- Charla {{forloop.counter}} -->
+                    <div class="panel panel-default">
+                      <div class="speaker-wrapper">
+                        <img src="{{speaker.profile_picture.url}}" class="img-responsive img-circle" alt="Foto {{speaker}}" />
+                      </div>
+                      <div class="panel-heading">
+                        <div class="panel-title">
+                          <div class="time">
+                            <i class="fa fa-clock-o"></i>
+                            {{speaker.start_time|time:"H.m"}}
+                          </div>
+                          <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#item{{speaker.id}}" class="collapsed">
+                            {{speaker.title}}
+                            <div class="pull-right fa fa-angle-up"></div>
+                            <div class="pull-right fa fa-angle-down"></div>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div id="item{{speaker.id}}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <article>
+                            <p>{{speaker.description}}</p>
+                            <p class="author">
+                            {% if speaker.twitter %}
+                            <a href="https://twitter.com/{{speaker.twitter}}" target="_blank"><strong><i class="fa fa-user"></i>@{{speaker.twitter}}</strong></a>
+                            {% else %}
+                            <strong><i class="fa fa-user"></i>{{speaker}}</strong>
+                            {% endif %}
+                            </p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Charla {{forloop.counter}} -->
+                    {% endfor %}
+
+                    <!-- END CHARLAS DIA 2-->
+                  </div>
+              </div>
+              <!-- END DIA 2 - TRACK 1 -->
+
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <!-- END DIA 2 -->
+
+
+          <!-- HACK NIGHT -->
+          <div class="tab-pane fade" id="HackNight">
+          <!-- HACK NIGHT Tab panes -->
+            <div class="tab-content">
+              <!-- HACK NIGHT - ONLY TRACK -->
+              <div class="tab-pane fade active in" id="HackNight-1">
+                <div class="panel-group timeline-schedule" id="panelTimelineFive">
+
+                  <!-- Intro HACK NIGHT-->
+                  <div class="panel panel-default">
+                    <div class="speaker-wrapper">
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
+                    </div>
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                        <div class="time"><i class="fa fa-clock-o"></i>
+                          09/10 - 20:00
+                        </div>
+                        <a data-toggle="collapse" data-parent="#panelTimelineFive" href="#itemone" class="collapsed">
+                          Presentación de problemas y mentores
+                          <div class="pull-right fa fa-angle-up"></div>
+                          <div class="pull-right fa fa-angle-down"></div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div id="itemone" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <article>
+                          <p>Los organizadores de Valparaíso MobileConf darán una explicación de los
+                          problemas que los equipos pueden optar a resolver. También se presentará a
+                          distintos desarrolladores que apoyarán su tarea durante el transcurso de la
+                          Hackathon.
+                          <strong>¡Habrá comida, lleguen temprano!</strong>
+                          </p>
+                          <p class="author"><a href="http://twitter.com/ValpoMobileConf" target="_blank"><strong><i class="fa fa-user"></i> Organización VMC</strong></a></p>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Intro HACK NIGHT-->
+
+
+                  <!-- Hack time HACK NIGHT-->
+                  <div class="panel panel-default">
+                    <div class="speaker-wrapper">
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
+                    </div>
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                        <div class="time"><i class="fa fa-clock-o"></i>
+                          09/10 - 20:30
+                        </div>
+                        <a data-toggle="collapse" data-parent="#panelTimelineFive" href="#itemtwo" class="collapsed">
+                          Coffee, code, pizza, repeat!
+                          <div class="pull-right fa fa-angle-up"></div>
+                          <div class="pull-right fa fa-angle-down"></div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div id="itemtwo" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <article>
+                          <p><strong>¡A programar!</strong>
+                          Es momento de mover sus dedos y sacar una aplicación en menos de 20 horas.
+                          </p>
+                          <p class="author"><a href="http://twitter.com/ValpoMobileConf" target="_blank"><strong><i class="fa fa-user"></i> Organización VMC</strong></a></p>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Hack time HACK NIGHT-->
+
+
+                  <!-- Descanso HACK NIGHT-->
+                  <div class="panel panel-default">
+                    <div class="speaker-wrapper">
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
+                    </div>
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                        <div class="time"><i class="fa fa-clock-o"></i>
+                          10/10 - 16:30
+                        </div>
+                        <a data-toggle="collapse" data-parent="#panelTimelineFive" href="#itemthree" class="collapsed">
+                          ¡Suelten teclados!
+                          <div class="pull-right fa fa-angle-up"></div>
+                          <div class="pull-right fa fa-angle-down"></div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div id="itemthree" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <article>
+                          <p> Deben dejar de programar y prepararse psicológicamente para la
+                          presentación. Como suponemos que a esa hora ya no querrán ver ni pizza
+                          ni bebidas energéticas, habrá comida un poco más saludable,
+                          antes de pasar al escenario.
+                          </p>
+                          <p class="author"><a href="http://twitter.com/ValpoMobileConf" target="_blank"><strong><i class="fa fa-user"></i> Organización VMC</strong></a></p>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Descanso HACK NIGHT-->
+
+
+                  <!-- Presentaciones HACK NIGHT-->
+                  <div class="panel panel-default">
+                    <div class="speaker-wrapper">
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
+                    </div>
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                        <div class="time"><i class="fa fa-clock-o"></i>
+                          10/10 - 17:00
+                        </div>
+                        <a data-toggle="collapse" data-parent="#panelTimelineFive" href="#itemfour" class="collapsed">
+                          Presentaciones
+                          <div class="pull-right fa fa-angle-up"></div>
+                          <div class="pull-right fa fa-angle-down"></div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div id="itemfour" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <article>
+                          <p> Cada equipo tendrá 5 minutos para presentar su aplicación en el
+                          escenario. Recuerden: lo importante es la funcionalidad!
+                          </p>
+                          <p class="author"><a href="http://twitter.com/ValpoMobileConf" target="_blank"><strong><i class="fa fa-user"></i> Organización VMC</strong></a></p>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Presentaciones HACK NIGHT-->
+
+
+                  <!-- Premiacion HACK NIGHT-->
+                  <div class="panel panel-default">
+                    <div class="speaker-wrapper">
+                      <img src="{% static 'img/logo_vmc.png' %}" class="img-responsive img-circle" alt="Logo Organizador" />
+                    </div>
+                    <div class="panel-heading">
+                      <div class="panel-title">
+                        <div class="time"><i class="fa fa-clock-o"></i>
+                          10/10 - 18:30
+                        </div>
+                        <a data-toggle="collapse" data-parent="#panelTimelineFive" href="#itemfive" class="collapsed">
+                          Premiación
+                          <div class="pull-right fa fa-angle-up"></div>
+                          <div class="pull-right fa fa-angle-down"></div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div id="itemfive" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <article>
+                          <p> Tenemos espectaculares premios para los equipos ganadores, y regalos para todos los participantes. ¡Quédense hasta el final!
+                          </p>
+                          <p class="author"><a href="http://twitter.com/ValpoMobileConf" target="_blank"><strong><i class="fa fa-user"></i> Organización VMC</strong></a></p>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END Premiacion HACK NIGHT-->
+
+                </div>
+              </div>
+              <!-- END HACK NIGHT - ONLY TRACK -->
+            </div>
+
+          </div>
+          <!-- END HACK NIGHT -->
+
+        </div>
+      </section>
+      {% if paper_list_first %}
+      <div class="btn-wrapper">
+        <a href="/media/Valparaiso_Mobile_Conf.pdf" class="btn btn-xs"><span class="icon icon-filetypes-11 icon-active"></span> <span class="btn-txt">Descargar programa</span></a>
+      </div>
+      {% endif %}
+
+    </div>
+  </section>
+  <!-- FIN PROGRAMA-->

@@ -7,7 +7,7 @@ from django.core import mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import FormView, View
-from main.models import Sponsor
+from main.models import Sponsor, Speaker
 from main.forms import ContactForm, HackTeamForm, PitchForm, SponsorForm
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -38,7 +38,8 @@ class HomeView(View):
         if request.session.pop('team_registered', False):
             data['success_message'] = "Tu equipo ha sido registrado"
         elif request.session.pop('pitch_registered', False):
-            data['success_message'] = "Te has registrado exitosamente para mostrar tu app!"
+            data['success_message'] = \
+                        "Te has registrado exitosamente para mostrar tu app!"
         elif request.session.pop('registered', False):
             data['success_message'] = "¡Gracias por inscribirte en " + \
                                       "Valparaíso Mobile Conf!"
@@ -57,6 +58,12 @@ class HomeView(View):
         data['contact_form'] = ContactForm(prefix='contact')
         data['sponsor_list'] = Sponsor.objects.all()
         data['schedule'] = True
+        speakers = Speaker.objects.filter(version=2016)
+        speakers_copy = speakers
+        data['speakers'] = [speakers[i:i + 4]
+                                        for i in range(0, speakers.count(), 4)]
+        data['speakers_day_1'] = speakers_copy.filter(day=1)
+        data['speakers_day_2'] = speakers_copy.filter(day=2)
         return render(request, self.template_name, data)
 
 
