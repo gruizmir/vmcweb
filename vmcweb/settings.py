@@ -48,11 +48,13 @@ INSTALLED_APPS = (
     'main',
     'rest_framework',
     'rest_framework.authtoken',
-    'debug_toolbar'
+    'debug_toolbar',
+    'corsheaders'
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,8 +63,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'vmcweb.urls'
 
+ROOT_URLCONF = 'vmcweb.urls'
 WSGI_APPLICATION = 'vmcweb.wsgi.application'
 
 
@@ -91,6 +93,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
