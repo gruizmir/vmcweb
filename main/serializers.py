@@ -1,48 +1,59 @@
 # -*- coding: utf-8 -*-
 from rest_framework import serializers
-from main.models import *
+from main.models import Speaker, Pitch, HackTeam, Sponsor
 
 
-class PersonSerializer(serializers.ModelSerializer):
+class SpeakerSerializer(serializers.ModelSerializer):
     """
-    Clase que crea el string en formato JSON con los datos de una persona
-    asistente.
+    Clase que crea el string en formato JSON con los datos de un speaker
     """
     class Meta:
         """
         Configuraciones para la creación del diccionario JSON, como el modelo
         que debe usar, los campos que envía y los campos de solo lectura.
         """
-        model = Person
-        fields = ('id', 'name', 'last_name', 'email', 'twitter',
-                  'institution', 'photo', 'photo_thumb')
+        model = Speaker
+        exclude = ('phone', 'version', 'created', 'updated')
 
 
-class PaperSerializer(serializers.ModelSerializer):
+class PitchSerializer(serializers.ModelSerializer):
     """
     Clase que crea el string en formato JSON con los datos de un paper.
     Incluye los datos del autor(es).
     """
-    authors = PersonSerializer(source='authors')
     class Meta:
         """
         Configuraciones para la creación del diccionario JSON, como el modelo
         que debe usar y los campos que envía.
         """
-        model = Paper
-        fields = ('authors', 'title', 'abstract')
+        model = Pitch
+        fields = ('name', 'lastname', 'email', 'app_name')
 
 
-class WorkshopSerializer(serializers.ModelSerializer):
+class HackTeamSerializer(serializers.ModelSerializer):
     """
     Clase que crea el string en formato JSON con los datos de un taller.
     """
-    expositor = PersonSerializer(source='expositor')
 
     class Meta:
         """
         Configuraciones para la creación del diccionario JSON, como el modelo
         que debe usar, los campos que envía y los campos de solo lectura.
         """
-        model = Workshop
-        fields = ('name', 'description', 'timespan', 'expositor')
+        model = HackTeam
+        fields = ('name', 'leader', 'person2', 'person3', 'person4',
+                  'team_picture')
+
+
+class SponsorSerializer(serializers.ModelSerializer):
+    """
+    Clase que crea el string en formato JSON con los datos de un taller.
+    """
+
+    class Meta:
+        """
+        Configuraciones para la creación del diccionario JSON, como el modelo
+        que debe usar, los campos que envía y los campos de solo lectura.
+        """
+        model = Sponsor
+        fields = ('name', 'url', 'logo', 'logo_thumb')

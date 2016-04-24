@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for vmcweb project.
 
@@ -10,7 +11,17 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import secrets
+
+try:
+    import secrets
+    CONFIG = secrets.CONFIG
+except:
+    CONFIG = {}
+
+
+ADMIN_CONFIGS = CONFIG.get('administration', {})
+ADMINS = ADMIN_CONFIGS.get('admins', ())
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -18,12 +29,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tvxp6xkk_)uc4egydwvr&ny_(j+d9^g!b3t4jf&7z0(e-&#r%v'
+SECRET_KEY = CONFIG.get('secret_key', {})
 
-DEBUG = secrets.DEBUG
+DEBUG = CONFIG.get('debug', True)
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = secrets.ALLOWED_HOSTS
-
+ALLOWED_HOSTS = CONFIG.get('allowed_hosts', [])
+BASE_URL = CONFIG.get('base_url', 'http://localhost:8000')
 
 # Application definition
 
@@ -35,6 +46,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'debug_toolbar'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,16 +68,18 @@ WSGI_APPLICATION = 'vmcweb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+DB_CONFIG = CONFIG.get('databases', {})
+DB_DEFAULT = DB_CONFIG.get('default', {})
 
 DATABASES = {
     'default': {
-        'ENGINE': secrets.DB_ENGINE,
-        'NAME': secrets.DB_NAME,
-        'USER': secrets.DB_USER,
-        'PASSWORD': secrets.DB_PASSWORD,
-        'HOST': secrets.DB_HOST,
-        'PORT': secrets.DB_PORT,
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': DB_DEFAULT.get('name', ''),
+        'USER': DB_DEFAULT.get('user', ''),
+        'PASSWORD': DB_DEFAULT.get('password', ''),
+        'HOST': DB_DEFAULT.get('host', ''),
+        'PORT': DB_DEFAULT.get('port', '3306')
+    },
 }
 
 # Internationalization
@@ -96,3 +112,15 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'valpomobileconf'
 EMAIL_HOST_PASSWORD = 'kenolamasca2veces'
 EMAIL_PORT = 587
+
+# Communication systems
+EMAIL_CONFIGS = CONFIG.get('email', {}).get('smtp', {})
+EMAIL_USE_TLS = EMAIL_CONFIGS.get('use_tls', True)
+EMAIL_HOST = EMAIL_CONFIGS.get('host', '')
+EMAIL_HOST_USER = EMAIL_CONFIGS.get('user', '')
+EMAIL_HOST_PASSWORD = EMAIL_CONFIGS.get('password', '')
+EMAIL_PORT = EMAIL_CONFIGS.get('port', 587)
+
+DEFAULT_FROM_EMAIL = u'Valparaíso Mobile Conf<valpo.mobile.conf@gmail.com>'
+CONTACT_EMAIL = 'valpo.mobile.conf@gmail.com'
+COMMUNICATIONS_EMAIL_SUBJECT_PREFIX = u'[VMC-2016]'

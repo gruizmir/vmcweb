@@ -3,7 +3,7 @@ from __future__ import with_statement
 from fabric.api import *
 
 env.user = 'ubuntu'
-env.key_filename = ['/home/gabriel/keys/MobileConf.pem']
+env.key_filename = ['/home/gabriel/keys/VMC.pem']
 
 env.roledefs = {
     'prod': ['valpomobileconf.com'],
@@ -12,28 +12,33 @@ env.roledefs = {
 
 def upload(msg="."):
     local('git pull')
-    cmt = 'git add -A && git commit -am "%s"' % msg
-    local(cmt)
+    cmd = 'git add -A && git commit -am "%s"' % msg
+    local(cmd)
     local('git push')
 
 
 @roles('prod')
-def pull():
+def deploy():
     code_dir = 'vmcweb'
     with cd(code_dir):
         result = run("git pull")
+        if 'requirements.txt' in str(result):
+            run("sudo pip install -U -r requirements.txt")
         if not result.failed:
-            if 'migrations/' in str(result):
-                run("./manage.py migrate")
-            if ('.png' in str(result)) or ('.jpg' in str(result)) or \
-                ('.css' in str(result)) or ('.js' in str(result)):
-                run("./manage.py collectstatic --noinput")
-            if ('.py' in str(result) or '.mo' in str(result)):
-                run("sudo reboot")
+            packages = ['main']
+            for pkg in packages:
+                cmd = "./manage.py migrate %s" % pkg
+                migrate_result = run(cmd)
+                if migrate_result.failed:
+                    run("./manage.py makemigrations --merge")
+                    run(cmd)
+            run("./manage.py collectstatic --noinput")
+            run("./manage.py migrate")
+        run("sudo supervisorctl restart vmc")
 
 
 @roles('prod')
-def betaupgrade():
+def upgradeserver():
     run("sudo apt-get update")
     run("sudo apt-get dist-upgrade")
     run("sudo apt-get autoremove")

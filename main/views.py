@@ -4,14 +4,19 @@ import traceback
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import mail
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import FormView, View
-from main.models import Sponsor, Speaker
 from main.forms import ContactForm, HackTeamForm, PitchForm, SponsorForm
+from main.models import HackTeam, Pitch, Speaker, Sponsor
+from main.serializers import HackTeamSerializer, PitchSerializer, \
+                             SpeakerSerializer, SponsorSerializer
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.views import APIView
+
 
 bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg', 'bg/bg04.jpg',
        'bg/bg05.jpg', 'bg/bg06.jpg', 'bg/bg07.jpg', 'bg/bg08.jpg',
@@ -236,6 +241,76 @@ class RegisterPitchView(FormView):
             data['form'] = form
             data['title'] = u'Registro de pitch'
             return render(request, self.template_name, data)
+
+
+# TODO: Revisar uso de Mixins
+# http://www.django-rest-framework.org/tutorial/3-class-based-views/#using-mixins
+class SpeakerList(APIView):
+    u"""
+    Lista de todos los speakers de la versión actual. Por ahora solo para
+    obtener datos.
+    """
+
+    def get(self, request, format=None):
+        td = timezone.now()
+        speakers = Speaker.objects.filter(version=td.year)
+        serializer = SpeakerSerializer(speakers, many=True)
+        return Response(serializer.data)
+
+
+class SpeakerDetail(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Speaker.objects.get(pk=pk)
+        except Speaker.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        speaker = self.get_object(pk)
+        serializer = SpeakerSerializer(speaker)
+        return Response(serializer.data)
+
+
+class HackTeamList(APIView):
+    u"""
+    Lista de todos los equipos para la hackathon de la versión actual. Por
+    ahora solo para obtener datos.
+    """
+
+    def get(self, request, format=None):
+        td = timezone.now()
+        teams = HackTeam.objects.filter(version=td.year)
+        serializer = HackTeamSerializer(teams, many=True)
+        return Response(serializer.data)
+
+
+class PitchList(APIView):
+    u"""
+    Lista de todos los speakers de la versión actual. Por ahora solo para
+    obtener datos.
+    """
+
+    def get(self, request, format=None):
+        td = timezone.now()
+        pitchs = Pitch.objects.filter(version=td.year)
+        serializer = PitchSerializer(pitchs, many=True)
+        return Response(serializer.data)
+
+
+class SponsorList(APIView):
+    u"""
+    Lista de todos los speakers de la versión actual. Por ahora solo para
+    obtener datos.
+    """
+
+    def get(self, request, format=None):
+        td = timezone.now()
+        sponsors = Sponsor.objects.filter(version=td.year)
+        serializer = SponsorSerializer(sponsors, many=True)
+        return Response(serializer.data)
 
 
 become_sponsor = SponsorView.as_view()

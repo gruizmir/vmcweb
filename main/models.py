@@ -35,8 +35,8 @@ class Speaker(models.Model):
                                                 choices=DAY_OPTIONS)
     start_time = models.TimeField(verbose_name='Inicio de charla', null=True,
                                                                     blank=True)
-    version = models.IntegerField(verbose_name="Día", null=False, blank=False,
-                                                    default=2016)
+    version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
+                                                    blank=False, default=2016)
     created = models.DateTimeField(auto_now_add=True,
                                             verbose_name="Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Actualización")
@@ -64,6 +64,8 @@ class Pitch(models.Model):
     description = models.TextField(verbose_name='Description', null=True,
                                                                blank=True)
     accepted = models.BooleanField(verbose_name='Aceptado', default=False)
+    version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
+                                                    blank=False, default=2016)
     creation_date = models.DateTimeField(auto_now_add=True,
                     verbose_name="Fecha de registro")
     extras = models.FileField(null=True, verbose_name="Anexos", blank=True,
@@ -108,11 +110,10 @@ class HackTeam(models.Model):
     person4_code = models.CharField(verbose_name="Código registro", null=True,
                 max_length=40, blank=True,
                 help_text="¿Registrado a las charlas? Ingresa tu código.")
-    person5 = models.CharField(verbose_name="Hacker", max_length=40, null=True,
-                                blank=True)
-    person5_code = models.CharField(verbose_name="Código registro", null=True,
-                max_length=40, blank=True,
-                help_text="¿Registrado a las charlas? Ingresa tu código.")
+    version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
+                                                    blank=False, default=2016)
+    team_picture = models.ImageField(upload_to="hackathon",
+                            verbose_name="Foto Equipo", null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
@@ -137,6 +138,8 @@ class Sponsor(models.Model):
                     verbose_name="Logo", null=True, blank=True)
     logo_thumb = models.ImageField(upload_to="logos",
                     verbose_name="Thumbnail", null=True, blank=True)
+    version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
+                                                    blank=False, default=2016)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
