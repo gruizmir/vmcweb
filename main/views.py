@@ -61,7 +61,7 @@ class HomeView(View):
         data['bg'] = random.choice(bgs)
         data['bg_reg'] = random.choice(bgs)
         data['contact_form'] = ContactForm(prefix='contact')
-        data['sponsor_list'] = Sponsor.objects.all()
+        data['sponsors'] = Sponsor.objects.filter(version=2016)
         data['schedule'] = True
         speakers = Speaker.objects.filter(version=2016)
         speakers_copy = speakers
@@ -244,7 +244,7 @@ class RegisterPitchView(FormView):
 
 
 # TODO: Revisar uso de Mixins
-# http://www.django-rest-framework.org/tutorial/3-class-based-views/#using-mixins
+# http://www.django-rest-framework.org/tutorial/3-class-based-views/
 class SpeakerList(APIView):
     u"""
     Lista de todos los speakers de la versión actual. Por ahora solo para
@@ -252,8 +252,8 @@ class SpeakerList(APIView):
     """
 
     def get(self, request, format=None):
-        td = timezone.now()
-        speakers = Speaker.objects.filter(version=td.year)
+        year = request.GET.get('year', timezone.now().year)
+        speakers = Speaker.objects.filter(version=year)
         serializer = SpeakerSerializer(speakers, many=True)
         return Response(serializer.data)
 
@@ -281,8 +281,8 @@ class HackTeamList(APIView):
     """
 
     def get(self, request, format=None):
-        td = timezone.now()
-        teams = HackTeam.objects.filter(version=td.year)
+        year = request.GET.get('year', timezone.now().year)
+        teams = HackTeam.objects.filter(version=year)
         serializer = HackTeamSerializer(teams, many=True)
         return Response(serializer.data)
 
@@ -294,8 +294,8 @@ class PitchList(APIView):
     """
 
     def get(self, request, format=None):
-        td = timezone.now()
-        pitchs = Pitch.objects.filter(version=td.year)
+        year = request.GET.get('year', timezone.now().year)
+        pitchs = Pitch.objects.filter(version=year)
         serializer = PitchSerializer(pitchs, many=True)
         return Response(serializer.data)
 
@@ -307,8 +307,8 @@ class SponsorList(APIView):
     """
 
     def get(self, request, format=None):
-        td = timezone.now()
-        sponsors = Sponsor.objects.filter(version=td.year)
+        year = request.GET.get('year', timezone.now().year)
+        sponsors = Sponsor.objects.filter(version=year)
         serializer = SponsorSerializer(sponsors, many=True)
         return Response(serializer.data)
 

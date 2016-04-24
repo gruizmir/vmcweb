@@ -127,11 +127,13 @@ class HackTeam(models.Model):
 
 class Sponsor(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre")
-    description = models.TextField(verbose_name="Descripción")
+    description = models.TextField(verbose_name="Descripción", null=True,
+                                                                blank=True)
     url = models.URLField(null=True, blank=True)
-    contact_name = models.CharField(max_length=50, verbose_name="Contacto")
-    email = models.EmailField(max_length=40, null=False, blank=False,
-                    verbose_name='Email', unique=True)
+    contact_name = models.CharField(max_length=50, verbose_name="Contacto",
+                                                    null=True, blank=True)
+    email = models.EmailField(max_length=40, null=True, blank=True,
+                                    verbose_name='Email')
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
     logo = models.ImageField(upload_to="logos",

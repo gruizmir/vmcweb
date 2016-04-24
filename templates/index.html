@@ -342,32 +342,7 @@
   </section>
   <!-- End Organization Section -->
 
-  <!-- Sponsors Section -->
-  <section id="sponsors" class="logos section dark">
-    <div class="container">
-      <div class="icon-wrap">
-        <i class="fa fa-briefcase"></i>
-      </div>
-      <h3>Patrocinadores y colaboradores</h3>
-
-        <div class="row">
-          <ul class="list-inline">
-            <li><a href="http://www.rree.utfsm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/rree.png" alt="Logo Relaciones Estudiantiles U T F S M" /></a></li>
-            {% comment %}
-            <li><a href="http://paisdigital.org" target="_blank"><img class="org-logo"
-src="static/img/patrocinio/paisdigital.png" alt="Logo Fundación País Digital" /></a></li>
-            <li><a href="http://www.exalumnos.usm.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/aexa.png" alt="Logo Red de Ex Alumnos U T F S M" /></a></li>
-            <li><a href="http://www.valparaisocb.com" target="_blank"><img class="org-logo" src="static/img/patrocinio/vcb.jpg" alt="Logo Valparaíso Convention Bureau" /></a></li>
-            <li><a href="http://www.acti.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/acti.jpg" alt="Logo Asociación Chilena de Empresas de Tecnologías de Información Asociación Gremial" /></a></li>
-            <li><a href="http://www.crcp.cl" target="_blank"><img class="org-logo" src="static/img/patrocinio/crcp.jpg" alt="Logo Cámara Regional de Comercio de Valparaíso" /></a></li>
-            {% endcomment %}
-          </ul>
-          <div class="btn-wrapper">
-            <a href="{% url 'become_sponsor' %}" class="btn btn-sm btn-primary" target="_blank">Auspiciar/patrocinar este evento</a>
-          </div>
-        </div>
-    </div>
-  <!-- End Sponsor Section -->
+  {% include "blocks/sponsors.html" with sponsors=sponsors%}
 
   <!-- Map Section -->
   <section id="map" class="dark">
