@@ -17,7 +17,7 @@ class Speaker(models.Model):
                     verbose_name='Apellido')
     occupation = models.CharField(max_length=200, null=True, blank=True,
                     verbose_name='Cargo/Trabajo')
-    email = models.EmailField(max_length=100, null=False, blank=False,
+    email = models.EmailField(max_length=100, null=True, blank=True,
                     verbose_name='Email')
     profile_picture = models.ImageField(upload_to="speakers",
                     verbose_name="Logo", null=True, blank=True)
@@ -28,8 +28,8 @@ class Speaker(models.Model):
     linkedin = models.CharField(max_length=200, null=True, blank=True,
                     verbose_name='Linkedin')
     title = models.CharField(max_length=100, null=True, blank=False,
-                    verbose_name='Nombre de la app')
-    description = models.TextField(verbose_name='Description', null=True,
+                    verbose_name='Título de la charla')
+    description = models.TextField(verbose_name='Descripción', null=True,
                                                                blank=True)
     day = models.IntegerField(verbose_name="Día", null=True, blank=True,
                                                 choices=DAY_OPTIONS)

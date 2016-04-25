@@ -18,4 +18,5 @@ urlpatterns = patterns('main.views',
     url(r'^sponsors/$', SponsorList.as_view()),
     url(r'^teams/$', HackTeamList.as_view()),
     url(r'^pitches/$', PitchList.as_view()),
+    url(r'^workshops/$', SponsorList.as_view()),
 )
