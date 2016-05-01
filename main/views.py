@@ -69,9 +69,9 @@ class HomeView(View):
         data['bg'] = random.choice(bgs)
         data['bg_reg'] = random.choice(bgs)
         data['contact_form'] = ContactForm(prefix='contact')
-        data['sponsors'] = Sponsor.objects.filter(version=2016)
+        data['sponsors'] = Sponsor.objects.filter(version=self.year)
         data['schedule'] = True
-        speakers = Speaker.objects.filter(version=2016)
+        speakers = Speaker.objects.filter(version=self.year)
         speakers_copy = speakers
         data['speakers'] = [speakers[i:i + 4]
                                         for i in range(0, speakers.count(), 4)]
