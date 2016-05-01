@@ -1,0 +1,101 @@
+{% extends "register_base.html" %}
+{% load static from staticfiles %}
+{% load i18n %}
+
+{% block maincontainer %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>¡Registra a tu equipo para la <span class="highlight">Hackathon</span>!</h2>
+      <br/>
+      <br/>
+    </div>
+    <div class="col-md-10 col-md-offset-1 col-xs-12">
+      <form class="form form-register" method="post" action="">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_name" class="col-sm-3 col-xs-12 control-label">Nombre del equipo</label>
+          <div class="col-sm-9 col-xs-12">
+		      <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre del equipo" value="{{form.name.value}}">
+		    </div>
+        </div>
+
+        <div class="form-group">
+          <label for="id_email" class="col-sm-3 col-xs-12 control-label">Email de contacto</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email del líder de equipo" value="{{form.email.value}}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="id_phone" class="col-sm-3 col-xs-12 control-label">Teléfono de contacto</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono del líder de equipo" value="{{form.phone.value}}">
+          </div>
+        </div>
+
+        <div class="dark sub-title">Miembros del equipo</div>
+        <div class="dark">
+          <p>
+            Si ya se registraron para el evento, ingresen su código de registro para aplicar el descuento respectivo.
+          </p>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="leader" id="id_leader" placeholder="Líder de equipo" value="{{form.leader.value}}">
+            {{form.leader.errors}}
+          </div>
+
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="leader_code" id="id_leader_code" placeholder="Código de registro" value="{{form.leader_code.value}}">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person2" id="id_person2" placeholder="Integrante 2" value="{{form.person2.value}}">
+            {{form.person2.errors}}
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person2_code" id="id_person2_code" placeholder="Código de registro" value="{{form.person2_code.value}}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person3" id="id_person3" placeholder="Integrante 3" value="{{form.person3.value}}">
+            {{form.person3.errors}}
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person3_code" id="id_person3_code" placeholder="Código de registro" value="{{form.person3_code.value}}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person4" id="id_person4" placeholder="Integrante 4" value="{{form.person4.value}}">
+            {{form.person4.errors}}
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person4_code" id="id_person4_code" placeholder="Código de registro" value="{{form.person4_code.value}}">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person5" id="id_person5" placeholder="Integrante 5" value="{{form.person5.value}}">
+            {{form.person5.errors}}
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <input type="text" class="form-control" name="person5_code" id="id_person5_code" placeholder="Código de registro" value="{{form.person5_code.value}}">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-sm btn-block">¡Regístranos!</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock maincontainer %}

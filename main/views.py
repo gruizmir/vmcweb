@@ -4,18 +4,14 @@ import traceback
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import mail
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.utils import timezone
 from django.views.generic import FormView, View
 from main.forms import ContactForm, HackTeamForm, PitchForm, SponsorForm
-from main.models import HackTeam, Pitch, Speaker, Sponsor
-from main.serializers import HackTeamSerializer, PitchSerializer, \
-                             SpeakerSerializer, SponsorSerializer
+from main.models import Speaker, Sponsor
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 
 bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg', 'bg/bg04.jpg',
@@ -24,6 +20,8 @@ bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg', 'bg/bg04.jpg',
        'bg/bg13.jpg'
       ]
 
+available_years = [2015, 2016]
+
 
 class HomeView(View):
     """
@@ -31,15 +29,25 @@ class HomeView(View):
     """
     success_url = '/'
     template_name = 'index.html'
+    year = None
 
-    def dispatch(self, request):
+    def get_template(self):
+        return str(self.year) + '/' + self.template_name
+
+    def dispatch(self, request, year=2016):
         """
         Primera función llamada cuando se accede normalmente por navegador.
         """
+        try:
+            self.year = int(year)
+        except:
+            self.year = available_years[-1]
+
         return super(HomeView, self).dispatch(request=request)
 
     def get(self, request):
-        data = {}
+        # TODO: Documentar. Enviar a dispatch
+        data = {'year': self.year}
         if request.session.pop('team_registered', False):
             data['success_message'] = "Tu equipo ha sido registrado"
         elif request.session.pop('pitch_registered', False):
@@ -69,7 +77,7 @@ class HomeView(View):
                                         for i in range(0, speakers.count(), 4)]
         data['speakers_day_1'] = speakers_copy.filter(day=1)
         data['speakers_day_2'] = speakers_copy.filter(day=2)
-        return render(request, self.template_name, data)
+        return render(request, self.get_template(), data)
 
 
 @api_view(["POST"])
@@ -89,20 +97,29 @@ class RegisterTeamView(FormView):
     success_url = '/'
     template_name = 'register_team.html'
     form_class = HackTeamForm
+    year = None
 
-    def dispatch(self, request):
+    def get_template(self):
+        return str(self.year) + '/' + self.template_name
+
+    def dispatch(self, request, year=2016):
         """
         Primera función llamada cuando se accede normalmente por navegador.
         """
+        try:
+            self.year = int(year)
+        except:
+            self.year = available_years[-1]
         return super(RegisterTeamView, self).dispatch(request=request)
 
     def get(self, request):
-        data = {}
+        data = {'year': self.year}
         data['bg'] = random.choice(bgs)
         data['title'] = u'Registro de equipos'
-        return render(request, self.template_name, data)
+        return render(request, self.get_template(), data)
 
     def post(self, request):
+        data = {'year': self.year}
         form = HackTeamForm(request.POST)
         if form.is_valid():
             team = form.save()
@@ -126,11 +143,10 @@ class RegisterTeamView(FormView):
             self.request.session['team_registered'] = True
             return HttpResponseRedirect(self.get_success_url())
         else:
-            data = {}
             data['bg'] = random.choice(bgs)
             data['form'] = form
             data['title'] = u'Registro de equipos'
-            return render(request, self.template_name, data)
+            return render(request, self.get_template(), data)
 
 
 class SponsorView(SuccessMessageMixin, FormView):
@@ -140,21 +156,29 @@ class SponsorView(SuccessMessageMixin, FormView):
     success_url = '/'
     template_name = 'new_sponsor.html'
     form_class = SponsorForm
+    year = None
 
-    def dispatch(self, request):
+    def get_template(self):
+        return str(self.year) + '/' + self.template_name
+
+    def dispatch(self, request, year=2016):
         """
         Primera función llamada cuando se accede normalmente por navegador.
         """
+        try:
+            self.year = int(year)
+        except:
+            self.year = available_years[-1]
         return super(SponsorView, self).dispatch(request=request)
 
     def get(self, request):
-        data = {}
+        data = {'year': self.year}
         data['bg'] = random.choice(bgs)
         data['title'] = u'Auspicio'
-        return render(request, self.template_name, data)
+        return render(request, self.get_template(), data)
 
     def post(self, request):
-        data = {}
+        data = {'year': self.year}
         data['bg'] = random.choice(bgs)
         data['title'] = u'Auspicio'
         form = SponsorForm(request.POST)
@@ -164,7 +188,7 @@ class SponsorView(SuccessMessageMixin, FormView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             data['form'] = form
-            return render(request, self.template_name, data)
+            return render(request, self.get_template(), data)
 
     def sendEmail(self, sponsor):
         """
@@ -198,21 +222,30 @@ class RegisterPitchView(FormView):
     success_url = '/'
     template_name = 'register_pitch.html'
     form_class = PitchForm
+    year = None
 
-    def dispatch(self, request):
+    def get_template(self):
+        return str(self.year) + '/' + self.template_name
+
+    def dispatch(self, request, year=2016):
         """
         Primera función llamada cuando se accede normalmente por navegador.
         """
+        try:
+            self.year = int(year)
+        except:
+            self.year = available_years[-1]
         return super(RegisterPitchView, self).dispatch(request=request)
 
     def get(self, request):
-        data = {}
+        data = {'year': self.year}
         data['bg'] = random.choice(bgs)
         data['title'] = u'Registro de pitch'
         data['form'] = self.form_class()
-        return render(request, self.template_name, data)
+        return render(request, self.get_template(), data)
 
     def post(self, request):
+        data = {'year': self.year}
         form = PitchForm(request.POST, request.FILES)
         if form.is_valid():
             pitch = form.save()
@@ -236,84 +269,41 @@ class RegisterPitchView(FormView):
             self.request.session['pitch_registered'] = True
             return HttpResponseRedirect(self.get_success_url())
         else:
-            data = {}
             data['bg'] = random.choice(bgs)
             data['form'] = form
             data['title'] = u'Registro de pitch'
-            return render(request, self.template_name, data)
+            return render(request, self.get_template(), data)
 
 
-# TODO: Revisar uso de Mixins
-# http://www.django-rest-framework.org/tutorial/3-class-based-views/
-class SpeakerList(APIView):
-    u"""
-    Lista de todos los speakers de la versión actual. Por ahora solo para
-    obtener datos.
+class MapView(View):
     """
-
-    def get(self, request, format=None):
-        year = request.GET.get('year', timezone.now().year)
-        speakers = Speaker.objects.filter(version=year)
-        serializer = SpeakerSerializer(speakers, many=True)
-        return Response(serializer.data)
-
-
-class SpeakerDetail(APIView):
+    Recibe el formulario de registro de un equipo para la hackathon.
     """
-    Retrieve, update or delete a snippet instance.
-    """
-    def get_object(self, pk):
+    success_url = '/'
+    template_name = 'map.html'
+    year = None
+
+    def get_template(self):
+        return str(self.year) + '/' + self.template_name
+
+    def dispatch(self, request, year=2016):
+        """
+        Primera función llamada cuando se accede normalmente por navegador.
+        """
         try:
-            return Speaker.objects.get(pk=pk)
-        except Speaker.DoesNotExist:
-            raise Http404
+            self.year = int(year)
+        except:
+            self.year = available_years[-1]
+        return super(MapView, self).dispatch(request=request)
 
-    def get(self, request, pk, format=None):
-        speaker = self.get_object(pk)
-        serializer = SpeakerSerializer(speaker)
-        return Response(serializer.data)
-
-
-class HackTeamList(APIView):
-    u"""
-    Lista de todos los equipos para la hackathon de la versión actual. Por
-    ahora solo para obtener datos.
-    """
-
-    def get(self, request, format=None):
-        year = request.GET.get('year', timezone.now().year)
-        teams = HackTeam.objects.filter(version=year)
-        serializer = HackTeamSerializer(teams, many=True)
-        return Response(serializer.data)
-
-
-class PitchList(APIView):
-    u"""
-    Lista de todos los speakers de la versión actual. Por ahora solo para
-    obtener datos.
-    """
-
-    def get(self, request, format=None):
-        year = request.GET.get('year', timezone.now().year)
-        pitchs = Pitch.objects.filter(version=year)
-        serializer = PitchSerializer(pitchs, many=True)
-        return Response(serializer.data)
-
-
-class SponsorList(APIView):
-    u"""
-    Lista de todos los speakers de la versión actual. Por ahora solo para
-    obtener datos.
-    """
-
-    def get(self, request, format=None):
-        year = request.GET.get('year', timezone.now().year)
-        sponsors = Sponsor.objects.filter(version=year)
-        serializer = SponsorSerializer(sponsors, many=True)
-        return Response(serializer.data)
+    def get(self, request):
+        # TODO: Documentar. Enviar a dispatch
+        data = {'year': self.year}
+        return render(request, self.get_template(), data)
 
 
 become_sponsor = SponsorView.as_view()
 register_hack_team = RegisterTeamView.as_view()
 pitch_view = RegisterPitchView.as_view()
 home_view = HomeView.as_view()
+map_view = MapView.as_view()

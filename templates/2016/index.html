@@ -96,8 +96,9 @@
           <li><a href="#speakers">Expositores</a></li>
           <li><a href="#hackathon">Hackathon</a></li>
           <li><a href="#organization">Organizadores</a></li>
-          <li><a href="{% url 'lodging' %}" target="_blank">Alojamiento</a></li>
+          <li><a href="{% url 'lodging' year %}" target="_blank">Alojamiento</a></li>
           <li><a href="#map">Contacto</a></li>
+          <li><a href="/2015/">Versión 2015</a></li>
         </ul>
       </nav>
     </div>
@@ -229,8 +230,8 @@
   <!-- FIN ESTADISTICAS -->
 
 
-  {% include "blocks/programa.html" with speakers_day_1=speakers_day_1 speakers_day_2=speakers_day_2%}
-  {% include "blocks/speakers.html" with speakers=speakers%}
+  {% include "2016/blocks/programa.html" with speakers_day_1=speakers_day_1 speakers_day_2=speakers_day_2%}
+  {% include "2016/blocks/speakers.html" with speakers=speakers%}
 
   <section id="pitches" class="section dark">
     <div class="container">
@@ -244,7 +245,7 @@
         </div>
         <div class="col-sm-4">
           <div class="btn-wrapper">
-            <a href="{% url 'new_pitch' %}" class="btn btn-sm btn-primary" target="_blank">¡Quiero mostrar mi app!</a>
+            <a href="{% url 'new_pitch' year%}" class="btn btn-sm btn-primary" target="_blank">¡Quiero mostrar mi app!</a>
           </div>
         </div>
       </div>
@@ -342,7 +343,7 @@
   </section>
   <!-- End Organization Section -->
 
-  {% include "blocks/sponsors.html" with sponsors=sponsors%}
+  {% include "2016/blocks/sponsors.html" with sponsors=sponsors year=year %}
 
   <!-- Map Section -->
   <section id="map" class="dark">
