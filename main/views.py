@@ -4,8 +4,10 @@ import traceback
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import mail
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import FormView, View
 from main.forms import ContactForm, HackTeamForm, PitchForm, SponsorForm
 from main.models import Speaker, Sponsor
@@ -301,6 +303,11 @@ class MapView(View):
         data = {'year': self.year}
         return render(request, self.get_template(), data)
 
+
+# TODO: Documentar
+def initial_redirect(request):
+    td = timezone.now()
+    return HttpResponseRedirect(reverse('home', kwargs={'year': td.year}))
 
 become_sponsor = SponsorView.as_view()
 register_hack_team = RegisterTeamView.as_view()

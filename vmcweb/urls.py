@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = patterns('',
+    url(r'^$', 'main.views.initial_redirect'),
     url(r'(?P<year>[0-9]+)/', include('main.urls')),
     url(r'^api/', include('main.api_urls')),
     url(r'^contact/', 'main.views.contact', name='contact'),
