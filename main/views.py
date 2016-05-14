@@ -16,11 +16,21 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
-bgs = ['bg/bg01.jpg', 'bg/bg02.jpg', 'bg/bg03.jpg', 'bg/bg04.jpg',
-       'bg/bg05.jpg', 'bg/bg06.jpg', 'bg/bg07.jpg', 'bg/bg08.jpg',
-       'bg/bg09.jpg', 'bg/bg10.jpg', 'bg/bg11.jpg', 'bg/bg12.jpg',
-       'bg/bg13.jpg'
-      ]
+bgs = [
+    '2015/bg/bg01.jpg',
+    '2015/bg/bg02.jpg',
+    '2015/bg/bg03.jpg',
+    '2015/bg/bg04.jpg',
+    '2015/bg/bg05.jpg',
+    '2015/bg/bg06.jpg',
+    '2015/bg/bg07.jpg',
+    '2015/bg/bg08.jpg',
+    '2015/bg/bg09.jpg',
+    '2015/bg/bg10.jpg',
+    '2015/bg/bg11.jpg',
+    '2015/bg/bg12.jpg',
+    '2015/bg/bg13.jpg'
+]
 
 available_years = [2015, 2016]
 

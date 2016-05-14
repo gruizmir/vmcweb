@@ -1,382 +1,1085 @@
-{% load static from staticfiles %}
-{% load i18n %}
-<!doctype html>
-<html lang="en">
+{% load static from staticfiles %} {% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" class="js">
+
 <head>
-  <meta charset="utf-8">
-  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <title>Valparaíso Mobile Conf</title>
-  <meta name="description" content="Conferencia sobre tecnologías móviles">
-  <meta name="keywords" content="Android, iOS, Windows Phone, Valparaíso, Conferencia, Hackathon, Charlas, Talleres, Cursos, Móvil">
-  <meta name="author" content="Valparaíso Mobile Conf">
-  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
-  <link href='http://fonts.googleapis.com/css?family=Ubuntu:700&family=Roboto:100,300,700' rel='stylesheet' type='text/css' />
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" media="all" />
-  <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conferencia sobre tecnologías móviles">
+    <meta name="keywords" content="Android, iOS, Windows Phone, Valparaíso, Conferencia, Hackathon, Charlas, Talleres, Cursos, Móvil">
+    <meta name="author" content="Valparaíso Mobile Conf">
+    <title>Valparaíso Mobile Conf - 2016</title>
 
-  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css" media="all" />
+    <style type="text/css">
+        .gm-style .gm-style-mtc label,
+        .gm-style .gm-style-mtc div {
+            font-weight: 400
+        }
 
-  <link rel="stylesheet" href="{% static 'css/font-lineicons.min.css' %}" type="text/css" media="all" />
+    </style>
+    <style type="text/css">
+        .gm-style-pbc {
+            transition: opacity ease-in-out;
+            background-color: black;
+            text-align: center
+        }
 
-  <link rel="stylesheet" href="{% static 'css/jquery.fancybox.css' %}" type="text/css" media="all" />
-  <link rel="stylesheet" href="{% static 'css/style.min.css' %}" id="mainstyle" type="text/css" media="all" />
+        .gm-style-pbt {
+            font-size: 22px;
+            color: white;
+            font-family: Roboto, Arial, sans-serif;
+            position: relative;
+            margin: 0;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%)
+        }
+
+    </style>
+
+    <style type="text/css">
+        .gm-style .gm-style-cc span,
+        .gm-style .gm-style-cc a,
+        .gm-style .gm-style-mtc div {
+            font-size: 10px
+        }
+
+    </style>
+    <style type="text/css">
+        @media print {
+            .gm-style .gmnoprint,
+            .gmnoprint {
+                display: none
+            }
+        }
+
+        @media screen {
+            .gm-style .gmnoscreen,
+            .gmnoscreen {
+                display: none
+            }
+        }
+
+    </style>
+    <style type="text/css">
+        .gm-style {
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            text-decoration: none
+        }
+
+        .gm-style img {
+            max-width: none
+        }
+
+    </style>
+
+    <link href="{% static '2016/img/favicon_32x32.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static '2016/img/favicon_32x32.png' %}" rel="icon" type="image/x-icon">
+    <link href="{% static '2016/css/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '2016/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '2016/css/jquery.bxslider.css' %}">
+    <link rel="stylesheet" href="{% static '2016/css/superslides.css' %}">
+    <link href="{% static '2016/css/style.css' %}" rel="stylesheet">
+
 </head>
 
-<body id="index">
-  <!-- Preloader -->
-  <div id="mask">
-    <div id="loader"><img src="{% static 'img/preloader.gif' %}" alt="preloader" /></div>
-  </div>
+<body style="margin: 0px;">
+    <div class="left_bar text-center">
+        <div id="slides" style="position: relative; overflow: hidden; width: 100%; height: 649px;">
+            <div class="slides-control" style="position: relative; height: 100%; width: 280px; left: -280px;">
+                <div class="slides-container" style="display: block; margin: 0px; padding: 0px; list-style: none; position: relative; height: 100%; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease;">
 
-  <header id="mobileheader" class="navigation-bar-header light visible-xs"></header>
+                    <!-- SLIDE IMAGES -->
+                    <div style="display: none; left: 280px; position: absolute; overflow: hidden; height: 100%; width: 280px; top: 0px; z-index: 0; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease;">
+                        <img src="{% static '2016/img/ms-1.jpg' %}" alt="Cinelli" style="backface-visibility: hidden; position: absolute; left: 0px; top: -125.5px; z-index: -1; max-width: none; height: 900px; width: 280px;">
+                    </div>
 
-  <!-- Hero Section -->
-  <section id="hero" class="light color" style="background-image: url({% static bg %});">
-    <div class="overlay color"></div>
-      <div class="container">
-        {% if success_message %}
-          <div class="alert alert-success top-alert alert-dismissible" role="alert">
-   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          {{success_message}}</div>
-        {% endif %}
-        <div class="home-bg">
-        <div class="hero-content text-center ">
-          <div class="hero-small">
-            <hr />
-            <span>
-              <i class="fa fa-calendar"></i>
-              <a class="indicator" href="#schedule">4-5 Noviembre, 2016, 9:00 </a>
-              <div class="sep"></div>
-              <a href="https://twitter.com/ValpoMobileConf" target="_blank"><span class="fa fa-twitter"></span></a>
-              <div class="sep"></div>
-              <a href="https://facebook.com/ValpoMobileConf" target="_blank"><span class="fa fa-facebook"></span></a>
-              <div class="sep"></div>
-              <span class="fa fa-map-marker"></span>
-              <a class="indicator" href="#map">UTFSM, Valparaíso, Chile</a>
-            </span>
-            <hr />
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="hero-big"><img class="logo" src="{% static 'img/logo_white.png' %}" alt="Logo Valparaíso Mobile Conf"/></div>
+                    <div style="display: block; left: 280px; position: absolute; overflow: hidden; height: 100%; width: 280px; top: 0px; z-index: 2; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease;">
+                        <img src="{% static '2016/img/ms-2.jpg' %}" alt="Cinelli" style="backface-visibility: hidden; position: absolute; left: 0px; top: -126px; z-index: -1; max-width: none; height: 901px; width: 280px;">
+                    </div>
+
+                    <div style="display: none; left: 280px; position: absolute; overflow: hidden; height: 100%; width: 280px; top: 0px; z-index: 0; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease;">
+                        <img src="{% static '2016/img/ms-3.jpg' %}" alt="Cinelli" style="backface-visibility: hidden; position: absolute; left: 0px; top: -126px; z-index: -1; max-width: none; height: 901px; width: 280px;">
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-6">
-              <div class="hero-big">La primera conferencia de <span class="highlight"><strong>tecnologías móviles</strong></span></div>
-              <div class="hero-normal">desde Valparaíso para todo Chile. <br> Edición 2016</div>
-            </div>
-          </div>
-          {% comment %}
-          <div class="row">
-            <a href="https://eventioz.cl/e/valparaiso-mobile-conf?from_button=yes&source=orevib&utm_campaign=or_valparaiso-mobile-conf&utm_content=integrated_button&utm_medium=integration_tool&utm_source=eventioz" target="_blank"><img src="https://eventioz.cl/e/valparaiso-mobile-conf/promotion_button.png?size=large&content=Inscribirme+ahora&from=FE4918&to=FE4918&font=FFFFFF" alt="Eventioz - valparaiso-mobile-conf"></a>
-          </div>
-          {% endcomment %}
         </div>
-      </div>
+
+        <header>
+            <nav>
+                <div class="navigation_me">
+                    <div class="logo clearfix">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <h1>
+                              <a class="navbar-brand" href="#home" >
+                                <img id="lateral-logo" src="{% static '2016/img/logo_vmc.png' %}" alt="LOGO VMC">
+                              </a>
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                        <ul class="main_navigation">
+                            <li>
+                                <a href="#conference" >
+                                    <p>La conferencia</p>
+                                </a>
+                            </li>
+                            {% if speaker_list %}
+                            <li>
+                                <a href="#speaker" >
+                                    <p>Expositores</p>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            <li>
+                                <a href="#hackathon" >
+                                    <p>Hackathon y talleres</p>
+                                </a>
+                            </li>
+
+                            {% if speaker_list %}
+                            <li>
+                                <a href="#schedule" >
+                                    <p>Programa</p>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            {% comment %}
+                            <li>
+                                <a href="#pricing_table" >
+                                    <p>Registro</p>
+                                </a>
+                            </li>
+                            {% endcomment %}
+
+
+                            <li>
+                                <a href="#gallery" >
+                                    <p>Galería 2015</p>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#sponsors" >
+                                    <p>Patrocinadores</p>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#location" >
+                                    <p>Ubicación</p>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/2015" >
+                                    <p>Versión 2015</p>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#contact" >
+                                    <p>Contacto</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
     </div>
-  </section>
-  <!-- End Hero Section -->
 
-  <!-- Header -->
-  <header id="header" class="navigation-bar-header light hidden-xs">
-    <div class="container">
-      <nav class="navigation">
-        <div class="navigation-txt visible-xs" data-toggle="dropdown">Home</div>
-        <button class="navigation-toggle visible-xs" type="button" data-toggle="dropdown">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <ul class="navigation-bar navigation-bar-left">
-          <li><a href="#about">Evento</a></li>
-          <!--<li><a href="#stat">Number Facts</a></li>-->
-          {% if schedule %}
-          <li><a href="#schedule">Programa</a></li>
-          {% endif %}
-          <li><a href="#speakers">Expositores</a></li>
-          <li><a href="#hackathon">Hackathon</a></li>
-          <li><a href="#organization">Organizadores</a></li>
-          <li><a href="{% url 'lodging' year %}" target="_blank">Alojamiento</a></li>
-          <li><a href="#map">Contacto</a></li>
-          <li><a href="/2015/">Versión 2015</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <!-- End Header -->
+    <div class="right_content">
+        <div class="container-fluid no-padding">
+            <section>
+                <div class="row" id="home">
+                    <div class="col-md-12 slider text-center">
+                        <div class="overlay_home">
+                            <h1 class="site_title">
+                  <img src="{% static '2016/img/logo_white.png' %}" alt="Logo VMC">
+                </h1>
+                            <h3>4-5 de Noviembre de 2016</h3>
+                            <ul class="shortcuts">
+                                <li>
+                                    <a href="#location" class="btn-loc" >Find Us</a>
+                                </li>
+                                <li>
+                                    <a href="#pricing_table" class="btn-reg' %}" >Register</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-  <!-- About Section -->
-  <section id="about" class="section dark">
-    <div class="container">
-      <div class="icon-wrap"><i class="fa fa-mobile fa-2x"></i></div>
-      <h3>Móvil a la vena</h3>
-      <div class="sub-title">Charlas, talleres y una hackathon <span class="highlight">en un solo evento</span>. Aprende sobre las tecnologías actuales junto a personas que comparten tu misma pasión.</div>
-      <br />
-      <br />
-      <section class="nav-tabs-simple">
-      <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-justified">
-          <li class="active"><a href="#charlas" data-toggle="tab"><i class="fa fa-microphone"></i> Charlas</a></li>
-          <li><a href="#talleres" data-toggle="tab"><i class="fa fa-code"></i> Talleres</a></li>
-          <li><a href="#deschack" data-toggle="tab"><i class="fa fa-laptop"></i> Hackathon</a></li>
-        </ul>
+            <section>
+                <div class="row" id="conference">
+                    <div class="col-md-7 middle no-padding cont_rl text-center">
+                        <img src="{% static '2016/img/co-1.jpg' %}" class="{% static '2016/img100" alt="{% static '2016/img">
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <div class="registration text-center">
+                            <h2 class="double">VMC 2016</h2>
+                            <h6 class="simple">4-5 de Noviembre | UTFSM Valparaíso</h6>
+                            {% comment %}
+                            <a href="#pricing_table" class="btn-reg' %}" >Regístrate ahora!</a>
+                            {% endcomment %}
+                        </div>
+                        <div class="sidebar_content">
+                            <h1 class="double">Las charlas</h1>
+                            <p class="simple">La versión 2015 tuvo a 11 expositores que
+                            compartieron su conocimiento y experiencia alrededor de las
+                            tecnologías móviles en 11 charlas, 2 talleres y una espectacular
+                            hackathon.
+                            Este año, repetiremos eso y más: no solo smartphones y smartwatches:
+                            habrá distintos vestibles, Raspberry Pi, y muchas más sorpresas!
+                            </p>
+                            <hr class="divder">
+                        </div>
+                        <div class="sidebar_content text-center">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <i class="fa fa-comments"></i>
+                                    <p class="simple">GRANDES EXPOSITORES</p>
+                                    <hr class="divder-sm">
+                                </div>
+                                <div class="col-sm-6">
+                                    <i class="fa fa-clock-o"></i>
+                                    <p class="simple">20 HORAS DE PROGRAMACIÓN</p>
+                                    <hr class="divder-sm">
+                                </div>
+                                <div class="col-sm-6">
+                                    <i class="fa fa-map-marker"></i>
+                                    <p class="simple">2+ TALLERES</p>
+                                    <hr class="divder-sm">
+                                </div>
+                                <div class="col-sm-6">
+                                    <i class="fa fa-gift"></i>
+                                    <p class="simple">MÁS SORPRESAS!</p>
+                                    <hr class="divder-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-
-          <!-- CHARLAS -->
-          <div class="tab-pane fade in active" id="charlas">
-            <article class="row">
-              <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInLeft" data-delay="500">
-                    <img class="img-responsive" src="{% static 'img/speaker.jpg' %}" alt="Charlas" />
-              </div>
-              <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
-                <h6>¿Qué haremos?</h6>
-  	       <p>
-  	         Valparaíso Mobile Conf es desarrollo, es sociedad, es emprendimiento. Podrás aprender sobre las últimas tecnologías móviles, la integración entre plataformas, programación, diseño  y mucho más. Contaremos con cuatro categorías de charlas: técnicas para principiante, nivel medio y avanzado, además de charlas de carácter general.
-	       </p>
-                <ul class="sub-list">
-	         <li><i class="fa fa-angle-right"></i> Diseño para móviles</li>
-                  <li><i class="fa fa-angle-right"></i> Tips de programación</li>
-                  <li><i class="fa fa-angle-right"></i> Educación, sociedad y más.</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-          <!-- END CHARLAS -->
-
-          <!-- TALLERES -->
-          <div class="tab-pane fade" id="talleres">
-            <article class="row">
-              <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInLeft" data-delay="500">
-                <h6>¿Qué aprenderás?</h6>
-                <p>
-                  Tendremos dos talleres (posiblemente un tercero, queda por confirmar) para que aprendas bases y algunos trucos de programación y diseño para Android. Deberás llevar tu notebook con Android Studio instalado, y ojalá tu smartphone para probar tu aplicación de inmediato!
-                </p>
-                <ul class="sub-list">
-                  <li><i class="fa fa-angle-right"></i> Introducción a desarrollo para Android. <strong>Nivel principiante</strong></li>
-                  <li><i class="fa fa-angle-right"></i> Diseño para Android Wear. <strong>Nivel: Medio</strong></li>
-                </ul>
-              </div>
-              <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInRight" data-delay="500">
-                <img class="img-responsive" src="{% static 'img/about-placeholder-mbp.jpg' %}" alt="Imagen Talleres" />
-              </div>
-            </article>
-          </div>
-          <!-- END TALLERES -->
-
-          <!-- HACKATHON -->
-          <div class="tab-pane fade" id="deschack">
-            <article class="row">
-              <div class="col-md-5 col-sm-5 animated hiding" data-animation="fadeInLeft" data-delay="500">
-                <img class="img-responsive" src="{% static 'img/hackathon01.jpg' %}" alt="Hackathon" />
-              </div>
-              <div class="col-md-6 col-sm-6 text-left animated hiding" data-animation="fadeInRight" data-delay="500">
-                <h6>Demuestra tus habilidades creativas</h6>
-                <p>Si te gusta el desarrollo de aplicaciones, estás invitado a participar de esta hackathon. No te pediremos modelo de negocios ni proyecciones financieras: queremos que programen una aplicación buena en poco tiempo. Las reglas son simples:
-                </p>
-                <ul class="sub-list">
-                  <li><i class="fa fa-angle-right"></i> Debes conformar equipos de 3 a 4 personas (se recomienda tener al menos un programador y un diseñador) e inscribirte en el <a>formulario de registro de equipos</a> que pronto pondremos a disposición.</li>
-                  <li><i class="fa fa-angle-right"></i> Pondremos una temática como desafío, y los equipos de desarrollo deberán crear una aplicación que ayude a resolver un problema de esa área.</li>
-                  <li><i class="fa fa-angle-right"></i> Tendrán 20 horas para crear una aplicación. Aunque no la terminen, deben ser capaces de demostrar su funcionalidad principal.</li>
-                  <li><i class="fa fa-angle-right"></i> Deberán presentar su aplicación funcionando, más screenshots de otras vistas que hayan planeado crear.</li>
-                  <li><i class="fa fa-angle-right"></i> Preocupate sólo por programar (o diseñar): nosotros ponemos las pizzas y las bebidas.</li>
-                </ul>
-                <a href="{% static 'VMC_2015_BasesHackathon.pdf' %}" target="_blank">Bases Hackathon</a>
-              </div>
-            </article>
-          </div>
-          <!-- END HACKATHON -->
-
-        </div>
-      </section>
-    </div>
-  </section>
-  <!-- End About Section -->
-
-
-  <!-- ESTADISTICAS-->
-  <section id="stat" class="section light">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <div class="counter animated hiding" data-animation="fadeInDown" data-delay="0">
-            <div class="stat"><span class="value" data-from="0" data-to="36">36</span>+</div>
-            <div class="stat-info">horas</div>
-            <hr />
-            <p class="small">De tecnología móvil.</p>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <div class="counter animated hiding" data-animation="fadeInDown" data-delay="500">
-            <div class="stat"><span class="value" data-from="0" data-to="10">10</span>+</div>
-            <div class="stat-info">expositores</div>
-            <hr />
-            <p class="small">Expertos en programación, diseño y más.</p>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <div class="counter animated hiding" data-animation="fadeInDown" data-delay="1000">
-            <div class="stat"><span class="value" data-from="0" data-to="20">20</span></div>
-            <div class="stat-info">horas de programación</div>
-            <hr />
-            <p class="small">Porque una mente creativa no duerme.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- FIN ESTADISTICAS -->
-
-
-  {% include "2016/blocks/programa.html" with speakers_day_1=speakers_day_1 speakers_day_2=speakers_day_2%}
-  {% include "2016/blocks/speakers.html" with speakers=speakers%}
-
-  <section id="pitches" class="section dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8">
-          <h6>¿Estás desarrollando una app?</h6>
-          <p>¡Te damos 5 minutos para que la presentes
-          frente al público como tú quieras! En el espacio entre cada charla, puedes
-          hacer un pitch sobre la aplicación que estás desarrollando. ¡Inscríbete!
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <div class="btn-wrapper">
-            <a href="{% url 'new_pitch' year%}" class="btn btn-sm btn-primary" target="_blank">¡Quiero mostrar mi app!</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="workshops" class="section light" style="background: url({% static bg_reg %});background-position-y: center;background-size: cover;">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8">
-          <h6>¡Inscríbete a un taller!</h6>
-          <p>Puedes inscribirte en los talleres de Valparaíso Mobile Conf y
-          aprender a desarrollar con la ayuda de un tutor experto!
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <div class="btn-wrapper">
-            <a href="#" class="btn btn-sm btn-primary" target="_blank">¡Pronto!</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HACKATHON Y PREMIOS -->
-  <section id="hackathon" class="section dark">
-    <div class="container">
-      <section class="vc-example">
-        <article class="article-big">
-          <h5><span class="highlight">Una hackathon como debe ser</span></h5>
-          <p class="big">Porque a nosotros también <strong>nos apasiona programar</strong>, creemos que una hackathon debe centrarse en los desarrolladores y diseñadores. Esperamos que resuelvan problemas, que demuestren sus habilidades con el teclado, la pantalla y su IDE favorita.</p>
-          <div class="sub-title">
-            <h6><span class="highlight ">¡Y tendremos excelentes premios! </span></h6>
             {% comment %}
-            <a href="{% static 'VMC_2015_BasesHackathon.pdf' %}" target="_blank">Bases Hackathon</a>
+            <section>
+                <div id="newsleter" class="row newsleter parallax text-center">
+                    <div class="overlay">
+                        <div class="col-md-12">
+                            <h3 class="double">¿Interesado en asistir?</h3>
+                            <a href="#location" class="btn-sq btn-loc" >Revisa la ubicación del evento</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
             {% endcomment %}
-          </div>
-        </article>
-      </section>
 
-    {% comment %}
-    <!-- PREMIOS HACKATHON -->
-    <section class="vc-example">
-      <div class="row">
-        <div class="col-md-offset-3 col-md-3 col-sm-3 col-xs-6">
-          <a href="" class="thumb-wrapper fancybox" data-fancybox-group="gallery">
-            <div class="overlay">2 Moto 360</div>
-            <img src="{% static 'img/moto_360.jpg' %}" class="img-responsive" alt="Moto 360" />
-          </a>
+
+            {% if speaker_list %}
+            <!-- LISTA DE EXPOSITORES -->
+            <section>
+                <div class="row" id="speakers">
+                    <div class="col-md-7 middle no-padding">
+                        <div class="container-fluid no-padding">
+                            <div class="row text-center">
+                               {% for speaker in speaker_list %}
+                                <div class="col-md-4 col-sm-6 single_speaker no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#myModal">
+                                        <img src="{{speaker.profile_picture.url}}" alt="{{speaker}}">
+                                        <h5 class="simple">{{speaker}}</h5>
+                                    </a>
+                                </div>
+
+                                {% endfor %}
+
+                        {% comment %}
+                        <!-- MODAL DEBE LLEVAR DETALLES DEL EXPOSITOR -->
+                        <!-- DATOS EN data-text data-name etc -->
+                            <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="sidebar_content">
+                                                            <h1 class="double"><span>DO IT</span> <span>YOURSELF</span> PR CLASS</h1>
+                                                            <p class="simple"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pelntesque eu, pretium quis, sem. Nulla consequat massa quis enim.aliquet nec, vulputate eget arcu. </p>
+                                                            <hr class="divder">
+                                                        </div>
+                                                        <div class="sidebar_content text-center">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <i class="fa fa-bullhorn"></i>
+                                                                    <p class="simple">DO IT YOURSELF PR CLASS</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <i class="fa fa-map-marker"></i>
+                                                                    <p class="simple">DHAKA ART CENTER AUDITORIUM</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <p class="simple">12 TH NOV, 2013</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <p class="simple">08:00 AM - 08:45 AM</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="container-fluid">
+                                                            <div class="row ev-ov-bg">
+                                                                <div class="col-sm-5 no-padding">
+                                                                    <img src="{% static '2016/img/speaker/1.jpg' %}" class="{% static '2016/img-responsive" alt="{% static '2016/img">
+                                                                </div>
+                                                                <div class="col-sm-7 no-padding ev-ov-id text-center">
+                                                                    <h3 class="double">Jane Doe</h3>
+                                                                    <h6 class="">CEO, Crown IT</h6>
+                                                                    <ul class="speaker_soc text-center">
+                                                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-unlink"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-sm-12 no-padding ev-ov-dec">
+                                                                    <p class="simple">
+                                                                        In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 no-padding mt-30">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endcomment %}
+
+
+                        </div>
+                    </div>
+                    <!-- FIN DE LISTA DE EXPOSITORES -->
+
+                    <div class="col-md-5 no-padding">
+                        <div class="sidebar_content">
+                            <h1 class="double"><span>LOS</span> EXPOSITORES</h1>
+                            <p class="simple">Expertos en desarrollo, emprendedores, diseñadores
+                            y académicos compartirán su conocimiento y su experiencia con
+                            proyectos ligados a las tecnologías móviles y de vanguardia.
+                            </p>
+                            <hr class="divder">
+                        </div>
+                        <div class="sidebar_content ad">
+                            {% comment %}
+                              Se debe poner el link para participar de la charla
+                              con el link al formulario, o crear un formulario
+                              completo en línea.
+                            {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+
+            {% comment %}
+            <section>
+                <div id="per_action" class="row per_action parallax text-center">
+                    <div class="overlay">
+                        <div class="col-md-12">
+                            <h3 class="double">Did You Like Point</h3>
+                            <a class="btn-sq btn-loc" href="#location" >Purchases</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endcomment %}
+
+            {% comment %}
+            <!-- PROGRAMA ? -->
+            <section>
+                <div class="row" id="events">
+                    <div class="col-md-7 no-padding middle">
+                        <div class="container-fluid no-padding">
+                            <div class="row text-center">
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-bullhorn"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-search"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-star"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-check"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-clock-o"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-flag"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-camera"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-edit"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-heart"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa  fa-comment"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-cloud"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 single_events no-padding">
+                                    <a href="#" data-toggle="modal" data-target="#event_details">
+                                        <i class="fa fa-dropbox"></i>
+                                        <h6 class="">LOREM IPSUM</h6>
+                                        <p class="simple">Opening Ceremony</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="modal fade bs-example-modal-lg' %}" id="event_details" tabindex="-1" role="dialog' %}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="sidebar_content">
+                                                            <h1 class="double"><span>DO IT</span> <span>YOURSELF</span> PR CLASS</h1>
+                                                            <p class="simple">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pelntesque eu, pretium quis, sem. Nulla consequat massa quis enim.aliquet nec, vulputate eget arcu.
+                                                            </p>
+                                                            <hr class="divder">
+                                                        </div>
+                                                        <div class="sidebar_content text-center">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <i class="fa fa-bullhorn"></i>
+                                                                    <p class="simple">DO IT YOURSELF PR CLASS</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <i class="fa fa-map-marker"></i>
+                                                                    <p class="simple">DHAKA ART CENTER AUDITORIUM</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <p class="simple">12 TH NOV, 2013</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <p class="simple">08:00 AM - 08:45 AM</p>
+                                                                    <hr class="divder-sm">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="container-fluid">
+                                                            <div class="row ev-ov-bg">
+                                                                <div class="col-sm-5 no-padding">
+                                                                    <img src="{% static '2016/img/speaker/1.jpg' %}" class="{% static '2016/img-responsive" alt="{% static '2016/img">
+                                                                </div>
+                                                                <div class="col-sm-7 no-padding ev-ov-id text-center">
+                                                                    <h3 class="double">Jane Doe</h3>
+                                                                    <h6 class="">CEO, Crown IT</h6>
+                                                                    <ul class="speaker_soc text-center">
+                                                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-unlink"></i></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-sm-12 no-padding ev-ov-dec">
+                                                                    <p class="simple">In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 no-padding mt-30">
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <div class="sidebar_content">
+                            <h1 class="double"><span>THE</span> Events</h1>
+                            <p class="simple">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pelntesque eu, pretium quis, sem. Nulla consequat massa quis enim.aliquet nec, vulputate eget arcu.
+                            </p>
+                            <hr class="divder">
+                            <h3 class="double">Lorem ipsum dolor sit amet</h3>
+                            <p class="simple">Consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis.
+                            </p>
+                            <hr class="divder">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {% endcomment %}
+
+            <!-- PRECIOS -->
+            <section>
+                <div class="row pricing_table parallax" id="pricing_table">
+                    <div class="col-md-12 overlay">
+                        <div class="container-fluid">
+                            <div class="row text-center sap_title">
+                                <h2 class="double">¡Consigue tu entrada!</h2>
+                            </div>
+                            <div class="row pricing text-center">
+
+                                <div class="pricing-table group">
+
+                                    <div class="col-md-4 block professional fl">
+                                        <h2 class="title">Hackathon</h2>
+
+                                        <div class="content" style="display: block;">
+                                            <p class="price">
+                                                <sup>$</sup>
+                                                <span>5.000</span>
+                                            </p>
+                                            <p class="hint">Para fervientes desarrolladores</p>
+                                        </div>
+
+                                        <ul class="features">
+                                            <li>Participación de la hackathon</li>
+                                            <li>Comida gratis</li>
+                                            <li>Merchandising del evento</li>
+                                        </ul>
+
+
+                                        <div class="pt-footer">
+                                            <p><a href="#">¡Pronto!</a></p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4 block personal fl">
+                                        <h2 class="title">Charlas</h2>
+
+                                        <div class="content" style="display: block;">
+                                            <p class="price">
+                                              <sup>$</sup>
+                                              <span>6.000</span>
+                                            </p>
+                                            <p class="hint">Para todo público</p>
+                                        </div>
+
+
+                                        <ul class="features">
+                                            <li>Acceso a todas las charlas</li>
+                                            <li>Acceso a Talleres</li>
+                                            <li>Coffee breaks</li>
+                                            <li>Merchandising del evento</li>
+                                        </ul>
+
+                                        <div class="pt-footer">
+                                            <p><a href="#">¡Pronto!</a></p>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-4 block business fl">
+                                        <h2 class="title">Full pack</h2>
+
+                                        <div class="content" style="display: block;">
+                                            <p class="price">
+                                                <sup>$</sup>
+                                                <span>8.000</span>
+                                            </p>
+                                            <p class="hint">Para hardcore developers</p>
+                                        </div>
+
+
+                                        <ul class="features">
+                                            <li>Acceso a todas las charlas</li>
+                                            <li>Acceso a talleres</li>
+                                            <li>Participar de la hackathon</li>
+                                            <li>Coffee breaks</li>
+                                            <li>Comida durante la hackathon</li>
+                                            <li>Merchandising del evento</li>
+                                        </ul>
+
+
+                                        <div class="pt-footer">
+                                            <p><a href="#">¡Pronto!</a></p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FIN SECCION PRECIOS -->
+
+
+
+            <section>
+                <div class="row gallery" id="gallery-area">
+                    <div class="col-md-7 middle no-padding text-center">
+                        <div id="gallery" class="content" style="display: block;">
+                            <div class="slideshow-container">
+                                <div id="slideshow" class="slideshow">
+                                  <span class="image-wrapper current" style="opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease;">
+                                    <a class="advance-link" rel="history" href="#drop" title="Title #0" >&nbsp;<img alt="Charlas" src="{% static '2016/img/gallery/gallery_01_big.jpg' %}"></a>
+                                    </span>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <div class="sidebar_content">
+                            <h1 class="double"><span>FOTOS</span> VERSIÓN 2015</h1>
+                            <div id="thumbs" class="navigation" style="float: left; transition-property: all; transition-duration: 0s; transition-timing-function: ease; opacity: 1;">
+                                <div class="top pagination"></div>
+                                <ul class="thumbs">
+
+
+                                    <li style="opacity: 0.67; transition-property: opacity; transition-duration: 200ms; transition-timing-function: ease-in-out;" class="selected">
+                                        <a class="thumb" href="#leaf" title="Charlas" rel="history">
+                                            <img src="{% static '2016/img/gallery/gallery_01_small.jpg' %}" alt="Charlas">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#drop" title="Charlas" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_02_small.jpg' %}" alt="Charlas">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#bigleaf" title="Coffee Break" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_03_small.jpg' %}" alt="Coffee Break">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#lizard" title="Talleres" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_04_small.jpg' %}" alt="Talleres">
+                                        </a>
+                                    </li>
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#5" title="Charlas" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_05_small.jpg' %}" alt="Charlas">
+                                        </a>
+                                    </li>
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#6" title="Charlas" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_06_small.jpg' %}" alt="Charlas">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#7" title="Exposición Hackathon" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_07_small.jpg' %}" alt="Exposición Hackathon">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#8" title="Premios hackathon" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_08_small.jpg' %}" alt="Premios hackathon">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#9" title="Evaluación Hackathon" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_09_small.jpg' %}" alt="Evaluación Hackathon">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#10" title="Premiación Hackathon" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_10_small.jpg' %}" alt="Premiación Hackathon">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#11" title="Premiación Hackathon" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_11_small.jpg' %}" alt="Premiación Hackathon">
+                                        </a>
+                                    </li>
+
+                                    <li style="opacity: 0.67;">
+                                        <a class="thumb" href="#9" title="Hackathon" rel="history" >
+                                            <img src="{% static '2016/img/gallery/gallery_12_small.jpg' %}" alt="Hackathon">
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="bottom pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCION QUIERO EXPONER -->
+            <section>
+                <div id="spek_action" class="row spek_action parallax text-center">
+                    <div class="overlay">
+                        <div class="col-md-12">
+                            <h3 class="double">¿Quieres exponer?</h3>
+                            <a class="btn-sq btn-spek" href="#speakers" >¡Contáctanos!</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FIN SECCION QUIERO EXPONER -->
+
+
+            <!-- SECCION PATROCINADORES -->
+            <section>
+                <div class="row partners" id="sponsors">
+                    <div class="col-md-12 middle text-center" id="partners_list">
+                        <div class="row">
+                           <h1 class="double">NOS APOYAN</h1>
+
+                           {% for sponsor in sponsors %}
+                            <div class="col-md-4 col-sm-6">
+                                <div class="single_partner">
+                                  <a href="{{sponsor.url}}">
+                                    <img src="{{sponsor.logo.url}}" alt="{{sponsor.name}}">
+                                  </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FIN SECCION PATROCINADORES -->
+
+
+            <!-- INVITACIÓN A AUSPICIAR -->
+            <section>
+                <div id="be_partners" class="row be_partners parallax text-center">
+                    <div class="overlay">
+                        <div class="col-md-12">
+                            <h3 class="double">¿Quieres auspiciar a VMC 2016?</h3>
+                            <a href="#" class="btn-sq">¡Contacta a los organizadores aquí!</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FIN INVITACIÓN A AUSPICIAR -->
+
+
+            <!-- UBICACION -->
+            <section>
+                <div class="row location" id="location">
+                    <div class="col-md-7 middle no-padding text-center">
+                        <!-- MAPA DEL EVENTO -->
+                        <div id="map-canvas" style="position: relative; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);">
+
+                        </div>
+                    </div>
+                    <div class="col-md-5 no-padding">
+                        <div class="sidebar_content">
+                            <h1 class="double"><span>UBICACIÓN</span> Y CONTACTO</h1>
+                            <p class="simple">
+                              El evento se realiza por segundo año consecutivo en la
+                              Casa Central de la Universidad Técnica Federico Santa María,
+                              el "Castillo frente al mar" de Valparaíso.
+                            </p>
+                            <hr class="divder">
+                        </div>
+                        <div class="sidebar_content text-center">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <i class="fa fa-map-marker"></i>
+                                    <p class="simple">Av. España 1680, Valparaíso</p>
+                                    <hr class="divder-sm">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <i class="fa fa-envelope"></i>
+                                    <p class="simple">valpo.mobile.conf@gmail.com</p>
+                                    <hr class="divder-sm">
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <a href="https://www.facebook.com/ValpoMobileConf" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                  </a>
+                                    <p class="simple">
+                                      <a href="https://www.facebook.com/ValpoMobileConf" target="_blank">ValpoMobileConf</a>
+                                    </p>
+                                  <hr class="divder-sm">
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <a href="https://twitter.com/ValpoMobileConf" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                  </a>
+                                    <p class="simple">
+                                        <a href="https://twitter.com/ValpoMobileConf" target="_blank">@ValpoMobileConf</a>
+                                        </p>
+                                  <hr class="divder-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            {% comment %}
+            <section>
+                <div id="contact_action" class="row contact_action parallax text-center">
+                    <div class="overlay">
+                        <div class="col-md-12">
+                            <h3 class="double">Call Us +00 100 999 6758</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endcomment %}
+
+
+            {% comment %}
+            <section>
+                <div class="row contact" id="contact">
+
+                    <!-- FORMULARIO DE CONTACTO -->
+                    <div class="col-md-7 middle">
+                        <h4 class="double">¿Dudas? ¡Envíanos un mensaje!.</h4>
+                        <form class="contact_form" action="{% url 'contact' %}">
+                            {% csrf_token %}
+                            <input type="text" placeholder="Nombre">
+                            <input type="text" placeholder="Email">
+                            <input type="text" placeholder="Teléfono">
+                            <textarea name="message" placeholder="Mensaje"></textarea>
+                            <input type="submit" class="btn-su" value="Enviar">
+                        </form>
+                    </div>
+                    <!-- FIN FORMULARIO DE CONTACTO -->
+
+
+                    <div class="col-md-5 no-padding">
+                        <div class="sidebar_content">
+                            <h1 class="double">CONTACTO</h1>
+                            <p class="simple">
+                            </p>
+                            <hr class="divder">
+                        </div>
+                        <div class="sidebar_content text-center">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <p class="simple">valpo.mobile.conf@gmail.com</p>
+                                    <hr class="divder-sm">
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <a href="https://www.facebook.com/ValpoMobileConf" target="_blank">
+                                    <i class="fa fa-facebook"></i>
+                                  </a>
+                                    <p class="simple">
+                                      <a href="https://www.facebook.com/ValpoMobileConf" target="_blank">ValpoMobileConf</a>
+                                    </p>
+
+                                  <hr class="divder-sm">
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <a href="https://twitter.com/ValpoMobileConf" target="_blank">
+                                    <i class="fa fa-twitter"></i>
+                                  </a>
+                                    <p class="simple">
+                                        <a href="https://twitter.com/ValpoMobileConf" target="_blank">@ValpoMobileConf</a>
+                                        </p>
+
+                                  <hr class="divder-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% endcomment %}
+
+            <footer>
+                <div class="row copyright text-center">
+                    <div class="col-md-12">
+                        <p class="simple">VMC 2016| UTFSM </p>
+                    </div>
+                </div>
+            </footer>
         </div>
-
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <a href="" class="thumb-wrapper fancybox" data-fancybox-group="gallery">
-            <div class="overlay">2 Moto G 2° Gen</div>
-            <img src="{% static 'img/moto_g.png' %}" class="img-responsive" alt="Moto G" />
-          </a>
-        </div>
-      </div>
-    </section>
-    <!-- END PREMIOS HACKATHON -->		
-    {% endcomment %}
-
-    {% comment %}
-    <div class="row">
-      <div class="col-md-12 center">
-        <div class="row">
-          <div class="col-md-12 center">
-            <a href="https://eventioz.cl/e/valparaiso-mobile-conf?from_button=yes&source=orevib&utm_campaign=or_valparaiso-mobile-conf&utm_content=integrated_button&utm_medium=integration_tool&utm_source=eventioz" target="_blank"><img src="https://eventioz.cl/e/valparaiso-mobile-conf/promotion_button.png?size=large&content=Inscribirme+ahora&from=FE4918&to=FE4918&font=FFFFFF" alt="Eventioz - valparaiso-mobile-conf"></a>
-          </div>
-        </div>
-      </div>
-      {% endcomment %}
-
     </div>
-  </div>
-</section>
-  <!-- END HACKATHON Y PREMIOS -->
 
-  <!-- Organization Section -->
-  <section id="organization" class="logos section dark">
-    <div class="container">
-      <div class="icon-wrap">
-        <i class="fa fa-briefcase"></i>
-      </div>
-      <h3>Organiza</h3>
-        <br/>
-        <div class="row">
-          <ul class="list-inline">
-            <li><a href="http://www.usm.cl" target="_blank"><img class="org-logo" src="{% static 'img/patrocinio/utfsm.png' %}" alt="Logo U T F S M" /></a></li>
-            <li><a href="http://www.inf.utfsm.cl" target="_blank"><img class="org-logo" src="{% static 'img/patrocinio/di.jpg' %}" alt="Logo D I" /></a></li>
-          </ul>
-        </div>
-    </div>
-  </section>
-  <!-- End Organization Section -->
 
-  {% include "2016/blocks/sponsors.html" with sponsors=sponsors year=year %}
 
-  <!-- Map Section -->
-  <section id="map" class="dark">
-    <div id="canvas-map"></div>
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-sm-offset-1 animated hiding location" data-animation="fadeInLeft" data-delay="0">
-	 <h3>Ubicación</h3>
-          <ul itemscope="" itemtype="http://schema.org/PostalAddress">
-            <li itemprop="address"><i class="fa fa-map-marker highlight"></i>Universidad Técnica Federico Santa María</li>
-            <li itemprop="address"><i class="fa fa-map-marker highlight"></i>Avenida España 1680, Valparaíso</li>
-            <li itemprop="email"><i class="fa fa-envelope highlight"></i>valpo.mobile.conf@gmail.com</li>
-            <li itemscope="" itemtype="http://schema.org/Event"><i class="fa fa-clock-o highlight"></i><time itemprop="startDate" datetime="2016-11-04T09:00">09:00</time> - <time itemprop="endDate" datetime="2016-11-04T19:00">19:00</time></li>
-          </ul>
-        </div>
-    </div>
-  </section>
-  <!-- End Map Section -->
+    <script type="text/javascript" src="{% static '2016/js/jquery-1.11.1.min.js' %}"/>
+    <script type="text/javascript" src="{% static '2016/assets/js/bootstrap.min.js' %}" />
+    <script type="text/javascript" src="{% static '2016/lib/jquery.bxslider/jquery.bxslider.min.js' %}" />
+    <script type="text/javascript" src="{% static '2016/lib/galleriffic-2.0/js/jquery.galleriffic.js' %}"/>
+    <script type="text/javascript" src="{% static '2016/lib/galleriffic-2.0/js/jquery.opacityrollover.js' %}"/>
+    <script type="text/javascript" src="{% static 'lib/superslides/examples/javascripts/jquery.easing.1.3.js' %}" />
+    <script type="text/javascript" src="{% static '2016/lib/superslides/examples/javascripts/jquery.animate-enhanced.min.js' %}" />
+    <script type="text/javascript" src="{% static '2016/lib/superslides/dist/jquery.superslides.min.js' %}" />
+    <script type="text/javascript" src="{% static '2016/lib/rendro-countdown/jquery.countdown.js' %}" />
+    <script type="text/javascript" src="{% static '2016/lib/jquery-parallax/scripts/jquery.parallax-1.1.3.js' %}"/>
+    <script type="text/javascript" src="{% static '2016/lib/jQuery-One-Page-Nav/jquery.scrollTo.js' %}" />
+    <script type="text/javascript" src="{% static '2016/lib/jQuery-One-Page-Nav/jquery.nav.js' %}"/>
+    <script type="text/javascript" src="{% static '2016/js/custom.js' %}" />
 
-  <footer id="footer">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3"/>
 
-  </footer>
+    <script type="text/javascript">
+    <script>
+  var map, geocoder;
+  var marker;
+  var fullAddress = "Avenida España 1680, Valparaíso, Valparaíso, Chile"
+  var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green.png';
 
-  <div class="back-to-top"><i class="fa fa-angle-up fa-3x"></i></div>
+  function initialize() {
+      console.log("inicializa");
+    var mapOptions = {
+      zoom: 10,
+      center: new google.maps.LatLng(-33.0360358,-71.5985076),
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: false,
+      streetViewControl: false,
+      draggable: false,
+    };
+    geocoder = new google.maps.Geocoder();
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    setMapByAddress(fullAddress);
+  }
 
-  <script type="text/javascript" src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
-  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/jquery.nav.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/jquery.appear.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/jquery.countTo.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/waypoints.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/waypoints-sticky.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/jquery.fancybox.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/scripts.min.js' %}"></script>
+  function setMapByAddress(mAddress) {
+    geocoder.geocode({ 'address': mAddress}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        map.panTo(results[0].geometry.location);
+        map.setZoom(16);
+        clearMarkers();
+        addMarker(results[0].geometry.location);
+      }
+    });
+  }
+
+  function addMarker(location) {
+    var markerIcon = MARKER_PATH;
+    marker = new google.maps.Marker({
+      position: location,
+      animation: google.maps.Animation.DROP,
+      title: "Valparaíso Mobile Conf",
+      icon: MARKER_PATH
+    });
+    marker.setMap(map);
+  }
+
+  function clearMarkers() {
+    if(marker==null)
+      return;
+    marker.setMap(null);
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+  </script>
+
 </body>
+
 </html>
