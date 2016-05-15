@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.http import Http404
 from django.utils import timezone
-from main.models import HackTeam, Pitch, Speaker, Sponsor
+from main.models import HackTeam, Pitch, Speaker, Sponsor, Workshop
 from main.serializers import HackTeamSerializer, PitchSerializer, \
-                             SpeakerSerializer, SponsorSerializer
+    SpeakerSerializer, SponsorSerializer, WorkshopSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -75,4 +75,17 @@ class SponsorList(APIView):
         year = request.GET.get('year', timezone.now().year)
         sponsors = Sponsor.objects.filter(version=year)
         serializer = SponsorSerializer(sponsors, many=True)
+        return Response(serializer.data)
+
+
+class WorkshopList(APIView):
+    u"""
+    Lista de todos los speakers de la versión actual. Por ahora solo para
+    obtener datos.
+    """
+
+    def get(self, request, format=None):
+        year = request.GET.get('year', timezone.now().year)
+        workshops = Workshop.objects.filter(version=year)
+        serializer = WorkshopSerializer(workshops, many=True)
         return Response(serializer.data)

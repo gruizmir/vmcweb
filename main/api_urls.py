@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url
 from main.api import SpeakerList, SpeakerDetail, SponsorList, HackTeamList,\
-                        PitchList
+                        PitchList, WorkshopList
 
 urlpatterns = patterns('main.api',
     url(r'^speakers/$', SpeakerList.as_view()),
@@ -9,5 +9,5 @@ urlpatterns = patterns('main.api',
     url(r'^sponsors/$', SponsorList.as_view()),
     url(r'^teams/$', HackTeamList.as_view()),
     url(r'^pitches/$', PitchList.as_view()),
-    url(r'^workshops/$', SponsorList.as_view()),
+    url(r'^workshops/$', WorkshopList.as_view()),
 )
