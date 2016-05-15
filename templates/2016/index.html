@@ -89,9 +89,49 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/alertify.rtl.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.rtl.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/semantic.rtl.min.css"/>
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
 </head>
 
 <body style="margin: 0px;">
+
+<!-- MODAL DE GALERIA -->
+
+<div id="blueimp-gallery" class="blueimp-gallery" data-use-bootstrap-modal="false">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Anterior
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Siguiente
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FIN MODAL DE GALERIA -->
+
 
 <!-- SPONSORS MODAL -->
 <div id="sponsorsModal" class="modal fade" role="dialog">
@@ -836,76 +876,76 @@
                     <div class="col-md-12 no-padding">
                       <div class="sidebar_content">
                         <h1 class="double"><span>FOTOS</span> VERSIÓN 2015</h1>
-                        <div id="thumbs" class="navigation" style="float: left; transition-property: all; transition-duration: 0s; transition-timing-function: ease; opacity: 1;">
+                        <div id="links" class="navigation" style="float: left; transition-property: all; transition-duration: 0s; transition-timing-function: ease; opacity: 1;">
                           <div class="top pagination"></div>
                             <ul class="thumbs">
 
                               <li >
-                                <a class="thumb" href="#" title="Charlas" rel="history">
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_01_big.jpg' %}" title="Charlas" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_01_small.jpg' %}" alt="Charlas">
                                 </a>
                               </li>
 
                               <li >
-                                <a class="thumb" href="#" title="Charlas" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_02_big.jpg' %}" title="Charlas" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_02_small.jpg' %}" alt="Charlas">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Coffee Break" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_03_big.jpg' %}" title="Coffee Break" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_03_small.jpg' %}" alt="Coffee Break">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Talleres" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_04_big.jpg' %}" title="Talleres" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_04_small.jpg' %}" alt="Talleres">
                                 </a>
                               </li>
                               <li style="">
-                                <a class="thumb" href="#" title="Charlas" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_05_big.jpg' %}" title="Charlas" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_05_small.jpg' %}" alt="Charlas">
                                 </a>
                               </li>
                               <li>
-                                <a class="thumb" href="#" title="Charlas" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_06_big.jpg' %}" title="Charlas" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_06_small.jpg' %}" alt="Charlas">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Exposición Hackathon" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_07_big.jpg' %}" title="Exposición Hackathon" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_07_small.jpg' %}" alt="Exposición Hackathon">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Premios hackathon" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_08_big.jpg' %}" title="Premios Hackathon" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_08_small.jpg' %}" alt="Premios hackathon">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Evaluación Hackathon" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_09_big.jpg' %}" title="Evaluación Hackathon" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_09_small.jpg' %}" alt="Evaluación Hackathon">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Premiación Hackathon" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_10_big.jpg' %}" title="Premiación Hackathon" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_10_small.jpg' %}" alt="Premiación Hackathon">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Premiación Hackathon" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_11_big.jpg' %}" title="Premiación Hackathon" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_11_small.jpg' %}" alt="Premiación Hackathon">
                                 </a>
                               </li>
 
                               <li>
-                                <a class="thumb" href="#" title="Hackathon" rel="history" >
+                                <a class="thumb" href="{% static '2016/img/gallery/gallery_12_big.jpg' %}" title="Hackathon" data-gallery>
                                   <img src="{% static '2016/img/gallery/gallery_12_small.jpg' %}" alt="Hackathon">
                                 </a>
                               </li>
@@ -1140,136 +1180,138 @@ target="#sponsorsModal">¡Contacta a los organizadores aquí!</a>
     <script type="text/javascript" src="{% static '2016/js/custom.js' %}" ></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3"></script>
     <script src="//cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="{% static '2016/js/bootstrap-image-gallery.min.js' %}"></script>
     <script type="text/javascript">
-  var map, geocoder;
-  var marker;
-  var fullAddress = "Avenida España 1680, Valparaíso, Valparaíso, Chile"
-  var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green.png';
+      var map, geocoder;
+      var marker;
+      var fullAddress = "Avenida España 1680, Valparaíso, Valparaíso, Chile"
+      var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green.png';
 
-  function initialize() {
-    var mapOptions = {
-      zoom: 10,
-      center: new google.maps.LatLng(-33.0360358,-71.5985076),
-      mapTypeControl: false,
-      panControl: false,
-      zoomControl: false,
-      streetViewControl: false,
-      draggable: false,
-    };
-    geocoder = new google.maps.Geocoder();
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    setMapByAddress(fullAddress);
-  }
-
-  function setMapByAddress(mAddress) {
-    geocoder.geocode({ 'address': mAddress}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        map.panTo(results[0].geometry.location);
-        map.setZoom(16);
-        clearMarkers();
-        addMarker(results[0].geometry.location);
+      function initialize() {
+        var mapOptions = {
+          zoom: 10,
+          center: new google.maps.LatLng(-33.0360358,-71.5985076),
+          mapTypeControl: false,
+          panControl: false,
+          zoomControl: false,
+          streetViewControl: false,
+          draggable: false,
+        };
+        geocoder = new google.maps.Geocoder();
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        setMapByAddress(fullAddress);
       }
-    });
-  }
 
-  function addMarker(location) {
-    var markerIcon = MARKER_PATH;
-    marker = new google.maps.Marker({
-      position: location,
-      animation: google.maps.Animation.DROP,
-      title: "Valparaíso Mobile Conf",
-      icon: MARKER_PATH
-    });
-    marker.setMap(map);
-  }
-
-  function clearMarkers() {
-    if(marker==null)
-      return;
-    marker.setMap(null);
-  }
-
-  google.maps.event.addDomListener(window, 'load', initialize);
-
-  </script>
-
-  <script>
-  $(document).ready(function(){
-
-    $(function() {
-      $('a[href*="#"]:not([href="#"])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-          if (target.length) {
-
-            $('html,body').animate({
-              scrollTop: target.offset().top
-            }, 700);
-            return false;
+      function setMapByAddress(mAddress) {
+        geocoder.geocode({ 'address': mAddress}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            map.panTo(results[0].geometry.location);
+            map.setZoom(16);
+            clearMarkers();
+            addMarker(results[0].geometry.location);
           }
-        }
+        });
+      }
+
+      function addMarker(location) {
+        var markerIcon = MARKER_PATH;
+        marker = new google.maps.Marker({
+          position: location,
+          animation: google.maps.Animation.DROP,
+          title: "Valparaíso Mobile Conf",
+          icon: MARKER_PATH
+        });
+        marker.setMap(map);
+      }
+
+      function clearMarkers() {
+        if(marker==null)
+          return;
+        marker.setMap(null);
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+      </script>
+
+      <script>
+      $(document).ready(function(){
+
+        $(function() {
+          $('a[href*="#"]:not([href="#"])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+
+                $('html,body').animate({
+                  scrollTop: target.offset().top
+                }, 700);
+                return false;
+              }
+            }
+          });
+        });
+
+
+        $('#sponsorForm').submit(function(event){
+          event.preventDefault();
+          var actionURL =  $(this).attr("action");
+          var postData = $(this).serialize();
+          $.ajax({
+            type: "POST",
+            url: actionURL,
+            data: postData,
+            success: function(response) {
+              alertify.success('Mensaje enviado correctamente', 5);
+              $('#sponsorsModal').modal('hide');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                var response = jqXHR.responseJSON;
+                $.each(response, function(key, value) {
+                    if( key != 'status' ) {
+                        var fieldId = '#sponsor_' + key + '_error';
+                        $(fieldId).html(value[0]);
+                    }
+                });
+            }
+          }).fail(function(){
+              alertify.error('No se pudo enviar el mensaje', 5);
+          });
+        });
+
+
+        $('#speakerForm').submit(function(event){
+          event.preventDefault();
+          var actionURL = $(this).attr("action");
+          var postData = $(this).serialize();
+          $.ajax({
+            type: "POST",
+            url: actionURL,
+            data: postData,
+            success: function(response) {
+              alertify.success('Mensaje enviado correctamente', 5);
+              $('#speakersModal').modal('hide');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var response = jqXHR.responseJSON;
+                $.each(response, function(key, value) {
+                    if( key != 'status' ) {
+                        var fieldId = '#speaker_' + key + '_error';
+                        $(fieldId).html(value[0]);
+                    }
+                });
+            }
+          }).fail(function(){
+              alertify.error('No se pudo enviar el mensaje', 5);
+          });
+        });
+
       });
-    });
-
-
-    $('#sponsorForm').submit(function(event){
-      event.preventDefault();
-      var actionURL =  $(this).attr("action");
-      var postData = $(this).serialize();
-      $.ajax({
-        type: "POST",
-        url: actionURL,
-        data: postData,
-        success: function(response) {
-          alertify.success('Mensaje enviado correctamente', 5);
-          $('#sponsorsModal').modal('hide');
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            var response = jqXHR.responseJSON;
-            $.each(response, function(key, value) {
-                if( key != 'status' ) {
-                    var fieldId = '#sponsor_' + key + '_error';
-                    $(fieldId).html(value[0]);
-                }
-            });
-        }
-      }).fail(function(){
-          alertify.error('No se pudo enviar el mensaje', 5);
-      });
-    });
-
-
-    $('#speakerForm').submit(function(event){
-      event.preventDefault();
-      var actionURL = $(this).attr("action");
-      var postData = $(this).serialize();
-      $.ajax({
-        type: "POST",
-        url: actionURL,
-        data: postData,
-        success: function(response) {
-          alertify.success('Mensaje enviado correctamente', 5);
-          $('#speakersModal').modal('hide');
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            var response = jqXHR.responseJSON;
-            $.each(response, function(key, value) {
-                if( key != 'status' ) {
-                    var fieldId = '#speaker_' + key + '_error';
-                    $(fieldId).html(value[0]);
-                }
-            });
-        }
-      }).fail(function(){
-          alertify.error('No se pudo enviar el mensaje', 5);
-      });
-    });
-
-  });
   </script>
 
 </body>

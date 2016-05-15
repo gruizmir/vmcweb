@@ -5,5 +5,4 @@ secrets.py
 */secrets.py
 *.db
 cargas/*
-static/*
-static/
+vmcweb/static/
