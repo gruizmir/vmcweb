@@ -18,7 +18,7 @@ def upload(msg="."):
 
 
 @roles('prod')
-def deploy():
+def deployprod():
     code_dir = 'vmcweb'
     with cd(code_dir):
         result = run("git pull")
@@ -35,6 +35,26 @@ def deploy():
             run("./manage.py collectstatic --noinput")
             run("./manage.py migrate")
         run("sudo supervisorctl restart vmc")
+
+
+@roles('prod')
+def deploy():
+    code_dir = 'testing'
+    with cd(code_dir):
+        result = run("git pull")
+        if 'requirements.txt' in str(result):
+            run("sudo pip install -U -r requirements.txt")
+        if not result.failed:
+            packages = ['main']
+            for pkg in packages:
+                cmd = "./manage.py migrate %s" % pkg
+                migrate_result = run(cmd)
+                if migrate_result.failed:
+                    run("./manage.py makemigrations --merge")
+                    run(cmd)
+            run("./manage.py collectstatic --noinput")
+            run("./manage.py migrate")
+        run("sudo supervisorctl restart testing")
 
 
 @roles('prod')
