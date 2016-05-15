@@ -10,6 +10,10 @@
 .modal .form-group div {
     margin-bottom: 10px;
 }
+.modal .form-buttons {
+    text-align: right;
+    margin-right: 15px;
+}
 #lateral-logo {
     max-width: 40%;
 }

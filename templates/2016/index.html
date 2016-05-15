@@ -99,44 +99,44 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">¿Quieres auspiciar o patrocinar a VMC?</h4>
       </div>
-      <form class="form form-register" method="post" action="/sponsors">
+
       <div class="modal-body">
         <p class="simple">Envíanos un mensaje y nos contactaremos contigo.</p>
-        {% csrf_token %}
+        <form id="sponsorForm" class="form form-register" method="post" action="{% url 'become_sponsor' 2016 %}">
+          {% csrf_token %}
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre de empresa" value="">
-            <span class="form-error" id="sponsor_name_error"></span>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre de empresa" value="">
+              <span class="form-error" id="sponsor_name_error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control required" name="contact_name" id="id_contact_name" placeholder="Nombre de contacto" value="">
+              <span class="form-error" id="sponsor_contact_name_error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
+              <span class="form-error" id="sponsor_email_error"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
+              <span class="form-error" id="sponsor_phone_error"></span>
+            </div>
+          </div>
+          <div class="form-group form-buttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
           </div>
         </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control required" name="contact_name" id="id_contact_name" placeholder="Nombre de contacto" value="">
-            <span class="form-error" id="sponsor_contact_name_error"></span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
-            <span class="form-error" id="sponsor_email_error"></span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
-            <span class="form-error" id="sponsor_phone_error"></span>
-          </div>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Enviar</button>
-      </div>
       </form>
     </div>
 
@@ -157,38 +157,38 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">¿Quieres dar una charla en VMC?</h4>
       </div>
-      <form class="form form-register" method="post" action="/sponsors">
       <div class="modal-body">
         <p class="simple">Envíanos un mensaje y nos contactaremos contigo.</p>
-        {% csrf_token %}
+        <form id="speakerForm" class="form form-register" method="post" action="{% url 'become_speaker' 2016 %}">
+          {% csrf_token %}
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre completo" value="">
-            <span class="form-error" id="speaker_name_error"></span>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre completo" value="">
+              <span class="form-error" id="speaker_name_error"></span>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
-            <span class="form-error" id="speaker_email_error"></span>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
+              <span class="form-error" id="speaker_email_error"></span>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
-            <span class="form-error" id="speaker_phone_error"></span>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
+              <span class="form-error" id="speaker_phone_error"></span>
+            </div>
           </div>
-        </div>
-
+          <div class="form-buttons">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+       </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Enviar</button>
-      </div>
-      </form>
+
     </div>
 
   </div>
@@ -828,7 +828,7 @@
 
 
             <section>
-                <div class="row gallery" id="gallery-area">
+                <div class="row gallery" id="gallery">
                     <div class="col-md-12 no-padding">
                       <div class="sidebar_content">
                         <h1 class="double"><span>FOTOS</span> VERSIÓN 2015</h1>
@@ -1142,7 +1142,6 @@ target="#sponsorsModal">¡Contacta a los organizadores aquí!</a>
   var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green.png';
 
   function initialize() {
-      console.log("inicializa");
     var mapOptions = {
       zoom: 10,
       center: new google.maps.LatLng(-33.0360358,-71.5985076),
@@ -1188,6 +1187,53 @@ target="#sponsorsModal">¡Contacta a los organizadores aquí!</a>
 
   google.maps.event.addDomListener(window, 'load', initialize);
 
+  </script>
+
+  <script>
+  $(document).ready(function(){
+
+    $(function() {
+      $('a[href*="#"]:not([href="#"])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+
+            $('html,body').animate({
+              scrollTop: target.offset().top
+            }, 700);
+            return false;
+          }
+        }
+      });
+    });
+
+    $('#sponsorForm').submit(function(event){
+      event.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        success: function(response) {
+          console.log(response);
+        }
+      });
+    });
+
+
+    $('#speakerForm').submit(function(event){
+      event.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        success: function(response) {
+          console.log(response);
+        }
+      });
+    });
+
+  });
   </script>
 
 </body>
