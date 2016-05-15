@@ -10,6 +10,9 @@
 .modal .form-group div {
     margin-bottom: 10px;
 }
+.modal .form-group .form-error {
+    line-height: 1.8;
+}
 .modal .form-buttons {
     text-align: right;
     margin-right: 15px;

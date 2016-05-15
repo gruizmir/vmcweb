@@ -16,7 +16,7 @@ class SpeakerApplication(models.Model):
                     verbose_name='Apellido')
     occupation = models.CharField(max_length=200, null=True, blank=True,
                     verbose_name='Cargo/Trabajo')
-    email = models.EmailField(max_length=100, null=True, blank=True,
+    email = models.EmailField(max_length=100, null=True, blank=False,
                     verbose_name='Email')
     profile_picture = models.ImageField(upload_to="speakers",
                     verbose_name="Logo", null=True, blank=True)
@@ -32,16 +32,17 @@ class SpeakerApplication(models.Model):
                                                                blank=True)
     version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
                                                     blank=False, default=2016)
+    accepted = models.BooleanField("Aprobado", default=False)
     created = models.DateTimeField(auto_now_add=True,
                                             verbose_name="Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Actualización")
 
     def __unicode__(self):
-        return self.name + " " + self.lastname
+        return self.name
 
     class Meta:
-        verbose_name = "Speaker"
-        verbose_name_plural = "Speakers"
+        verbose_name = u"Postulación de Speaker"
+        verbose_name_plural = u"Postulaciones de Speakers"
         app_label = 'main'
 
 
@@ -167,8 +168,8 @@ class Sponsor(models.Model):
                                                                 blank=True)
     url = models.URLField(null=True, blank=True)
     contact_name = models.CharField(max_length=50, verbose_name="Contacto",
-                                                    null=True, blank=True)
-    email = models.EmailField(max_length=40, null=True, blank=True,
+                                                    null=True, blank=False)
+    email = models.EmailField(max_length=40, null=True, blank=False,
                                     verbose_name='Email')
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
@@ -176,6 +177,7 @@ class Sponsor(models.Model):
                     verbose_name="Logo", null=True, blank=True)
     logo_thumb = models.ImageField(upload_to="logos",
                     verbose_name="Thumbnail", null=True, blank=True)
+    accepted = models.BooleanField("Aprobado", default=False)
     version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
                                                     blank=False, default=2016)
     creation_date = models.DateTimeField(auto_now_add=True)

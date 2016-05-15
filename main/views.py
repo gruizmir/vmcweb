@@ -82,7 +82,8 @@ class HomeView(View):
         data['bg'] = random.choice(bgs)
         data['bg_reg'] = random.choice(bgs)
         data['contact_form'] = ContactForm(prefix='contact')
-        data['sponsors'] = Sponsor.objects.filter(version=self.year)
+        data['sponsors'] = Sponsor.objects.filter(version=self.year,
+                                                  accepted=True)
         data['schedule'] = True
         speakers = Speaker.objects.filter(version=self.year)
         speakers_copy = speakers
@@ -196,7 +197,9 @@ class SponsorView(SuccessMessageMixin, FormView):
         data['title'] = u'Auspicio'
         form = SponsorForm(request.POST)
         if form.is_valid():
-            form.save()
+            sponsor = form.save()
+            if not settings.DEBUG:
+                self.send_email(sponsor)
             if request.is_ajax():
                 return JsonResponse({'status': 'ok'}, status=200)
             else:
@@ -211,7 +214,7 @@ class SponsorView(SuccessMessageMixin, FormView):
             else:
                 return render(request, self.get_template(), data)
 
-    def sendEmail(self, sponsor):
+    def send_email(self, sponsor):
         """
         Función encargada de enviar un email de confirmación de recepción de
         email a la empresa interesada y un email a los organizadores.
@@ -351,7 +354,8 @@ class SpeakerApplicationView(SuccessMessageMixin, FormView):
             speaker_application = form.save(commit=False)
             speaker_application.year = self.year
             speaker_application.save()
-            self.send_email(speaker_application)
+            if not settings.DEBUG:
+                self.send_email(speaker_application)
             return JsonResponse({'status': 'ok'}, status=200)
         else:
             data = form.errors

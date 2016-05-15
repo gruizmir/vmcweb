@@ -85,6 +85,10 @@
     <link rel="stylesheet" href="{% static '2016/css/superslides.css' %}">
     <link href="{% static '2016/css/style.css' %}" rel="stylesheet">
 
+    <!-- ALERTIFY -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/alertify.rtl.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.rtl.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/semantic.rtl.min.css"/>
 </head>
 
 <body style="margin: 0px;">
@@ -1135,6 +1139,8 @@ target="#sponsorsModal">¡Contacta a los organizadores aquí!</a>
     <script type="text/javascript" src="{% static '2016/lib/jQuery-One-Page-Nav/jquery.nav.js' %}"/>
     <script type="text/javascript" src="{% static '2016/js/custom.js' %}" ></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3"></script>
+    <script src="//cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>
+
     <script type="text/javascript">
   var map, geocoder;
   var marker;
@@ -1208,28 +1214,58 @@ target="#sponsorsModal">¡Contacta a los organizadores aquí!</a>
       });
     });
 
+
     $('#sponsorForm').submit(function(event){
       event.preventDefault();
+      var actionURL =  $(this).attr("action");
+      var postData = $(this).serialize();
       $.ajax({
         type: "POST",
-        url: $(this).attr("action"),
-        data: $(this).serialize(),
+        url: actionURL,
+        data: postData,
         success: function(response) {
-          console.log(response);
+          alertify.success('Mensaje enviado correctamente', 5);
+          $('#sponsorsModal').modal('hide');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            var response = jqXHR.responseJSON;
+            $.each(response, function(key, value) {
+                if( key != 'status' ) {
+                    var fieldId = '#sponsor_' + key + '_error';
+                    $(fieldId).html(value[0]);
+                }
+            });
         }
+      }).fail(function(){
+          alertify.error('No se pudo enviar el mensaje', 5);
       });
     });
 
 
     $('#speakerForm').submit(function(event){
       event.preventDefault();
+      var actionURL = $(this).attr("action");
+      var postData = $(this).serialize();
       $.ajax({
         type: "POST",
-        url: $(this).attr("action"),
-        data: $(this).serialize(),
+        url: actionURL,
+        data: postData,
         success: function(response) {
-          console.log(response);
+          alertify.success('Mensaje enviado correctamente', 5);
+          $('#speakersModal').modal('hide');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            var response = jqXHR.responseJSON;
+            $.each(response, function(key, value) {
+                if( key != 'status' ) {
+                    var fieldId = '#speaker_' + key + '_error';
+                    $(fieldId).html(value[0]);
+                }
+            });
         }
+      }).fail(function(){
+          alertify.error('No se pudo enviar el mensaje', 5);
       });
     });
 

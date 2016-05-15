@@ -12,7 +12,7 @@ class HackTeamForm(forms.ModelForm):
 class SponsorForm(forms.ModelForm):
     class Meta:
         model = Sponsor
-        exclude = ('creation_date', 'logo_thumb', 'logo')
+        fields = ('name', 'contact_name', 'email', 'phone')
 
 
 class ContactForm(forms.Form):
@@ -34,4 +34,4 @@ class SpeakerApplicationForm(forms.ModelForm):
 
     class Meta:
         model = SpeakerApplication
-        exclude = ('creation_date', 'logo_thumb', 'logo')
+        fields = ('name', 'email', 'phone')
