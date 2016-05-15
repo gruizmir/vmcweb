@@ -88,6 +88,116 @@
 </head>
 
 <body style="margin: 0px;">
+
+<!-- SPONSORS MODAL -->
+<div id="sponsorsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Quieres auspiciar o patrocinar a VMC?</h4>
+      </div>
+      <form class="form form-register" method="post" action="/sponsors">
+      <div class="modal-body">
+        <p class="simple">Envíanos un mensaje y nos contactaremos contigo.</p>
+        {% csrf_token %}
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre de empresa" value="">
+            <span class="form-error" id="sponsor_name_error"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control required" name="contact_name" id="id_contact_name" placeholder="Nombre de contacto" value="">
+            <span class="form-error" id="sponsor_contact_name_error"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
+            <span class="form-error" id="sponsor_email_error"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
+            <span class="form-error" id="sponsor_phone_error"></span>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Enviar</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+<!-- END SPONSORS MODAL -->
+
+
+
+
+<!-- SPEAKERS MODAL -->
+<div id="speakersModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Quieres dar una charla en VMC?</h4>
+      </div>
+      <form class="form form-register" method="post" action="/sponsors">
+      <div class="modal-body">
+        <p class="simple">Envíanos un mensaje y nos contactaremos contigo.</p>
+        {% csrf_token %}
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre completo" value="">
+            <span class="form-error" id="speaker_name_error"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
+            <span class="form-error" id="speaker_email_error"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
+            <span class="form-error" id="speaker_phone_error"></span>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Enviar</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+<!-- END SPEAKERS MODAL -->
+
+
+
+
     <div class="left_bar text-center">
         <div id="slides" style="position: relative; overflow: hidden; width: 100%; height: 649px;">
             <div class="slides-control" style="position: relative; height: 100%; width: 280px; left: -280px;">
@@ -214,11 +324,15 @@
                 </h1>
                             <h3>4-5 de Noviembre de 2016</h3>
                             <ul class="shortcuts">
+<!--
+
                                 <li>
                                     <a href="#location" class="btn-loc" >Find Us</a>
                                 </li>
+-->
+
                                 <li>
-                                    <a href="#pricing_table" class="btn-reg' %}" >Register</a>
+                                    <a href="#pricing_table" class="btn-reg" >Registro</a>
                                 </li>
                             </ul>
                         </div>
@@ -229,7 +343,7 @@
             <section>
                 <div class="row" id="conference">
                     <div class="col-md-7 middle no-padding cont_rl text-center">
-                        <img src="{% static '2016/img/co-1.jpg' %}" class="{% static '2016/img100" alt="{% static '2016/img">
+                        <img src="{% static '2016/img/speaker.jpg' %}" class="img100" alt="img">
                     </div>
                     <div class="col-md-5 no-padding">
                         <div class="registration text-center">
@@ -715,97 +829,85 @@
 
             <section>
                 <div class="row gallery" id="gallery-area">
-                    <div class="col-md-7 middle no-padding text-center">
-                        <div id="gallery" class="content" style="display: block;">
-                            <div class="slideshow-container">
-                                <div id="slideshow" class="slideshow">
-                                  <span class="image-wrapper current" style="opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease;">
-                                    <a class="advance-link" rel="history" href="#drop" title="Title #0" >&nbsp;<img alt="Charlas" src="{% static '2016/img/gallery/gallery_01_big.jpg' %}"></a>
-                                    </span>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5 no-padding">
-                        <div class="sidebar_content">
-                            <h1 class="double"><span>FOTOS</span> VERSIÓN 2015</h1>
-                            <div id="thumbs" class="navigation" style="float: left; transition-property: all; transition-duration: 0s; transition-timing-function: ease; opacity: 1;">
-                                <div class="top pagination"></div>
-                                <ul class="thumbs">
+                    <div class="col-md-12 no-padding">
+                      <div class="sidebar_content">
+                        <h1 class="double"><span>FOTOS</span> VERSIÓN 2015</h1>
+                        <div id="thumbs" class="navigation" style="float: left; transition-property: all; transition-duration: 0s; transition-timing-function: ease; opacity: 1;">
+                          <div class="top pagination"></div>
+                            <ul class="thumbs">
 
+                              <li >
+                                <a class="thumb" href="#" title="Charlas" rel="history">
+                                  <img src="{% static '2016/img/gallery/gallery_01_small.jpg' %}" alt="Charlas">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67; transition-property: opacity; transition-duration: 200ms; transition-timing-function: ease-in-out;" class="selected">
-                                        <a class="thumb" href="#leaf" title="Charlas" rel="history">
-                                            <img src="{% static '2016/img/gallery/gallery_01_small.jpg' %}" alt="Charlas">
-                                        </a>
-                                    </li>
+                              <li >
+                                <a class="thumb" href="#" title="Charlas" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_02_small.jpg' %}" alt="Charlas">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#drop" title="Charlas" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_02_small.jpg' %}" alt="Charlas">
-                                        </a>
-                                    </li>
+                              <li>
+                                <a class="thumb" href="#" title="Coffee Break" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_03_small.jpg' %}" alt="Coffee Break">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#bigleaf" title="Coffee Break" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_03_small.jpg' %}" alt="Coffee Break">
-                                        </a>
-                                    </li>
+                              <li>
+                                <a class="thumb" href="#" title="Talleres" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_04_small.jpg' %}" alt="Talleres">
+                                </a>
+                              </li>
+                              <li style="">
+                                <a class="thumb" href="#" title="Charlas" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_05_small.jpg' %}" alt="Charlas">
+                                </a>
+                              </li>
+                              <li>
+                                <a class="thumb" href="#" title="Charlas" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_06_small.jpg' %}" alt="Charlas">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#lizard" title="Talleres" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_04_small.jpg' %}" alt="Talleres">
-                                        </a>
-                                    </li>
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#5" title="Charlas" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_05_small.jpg' %}" alt="Charlas">
-                                        </a>
-                                    </li>
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#6" title="Charlas" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_06_small.jpg' %}" alt="Charlas">
-                                        </a>
-                                    </li>
+                              <li>
+                                <a class="thumb" href="#" title="Exposición Hackathon" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_07_small.jpg' %}" alt="Exposición Hackathon">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#7" title="Exposición Hackathon" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_07_small.jpg' %}" alt="Exposición Hackathon">
-                                        </a>
-                                    </li>
+                              <li>
+                                <a class="thumb" href="#" title="Premios hackathon" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_08_small.jpg' %}" alt="Premios hackathon">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#8" title="Premios hackathon" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_08_small.jpg' %}" alt="Premios hackathon">
-                                        </a>
-                                    </li>
+                              <li>
+                                <a class="thumb" href="#" title="Evaluación Hackathon" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_09_small.jpg' %}" alt="Evaluación Hackathon">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#9" title="Evaluación Hackathon" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_09_small.jpg' %}" alt="Evaluación Hackathon">
-                                        </a>
-                                    </li>
+                              <li>
+                                <a class="thumb" href="#" title="Premiación Hackathon" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_10_small.jpg' %}" alt="Premiación Hackathon">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#10" title="Premiación Hackathon" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_10_small.jpg' %}" alt="Premiación Hackathon">
-                                        </a>
-                                    </li>
+                              <li>
+                                <a class="thumb" href="#" title="Premiación Hackathon" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_11_small.jpg' %}" alt="Premiación Hackathon">
+                                </a>
+                              </li>
 
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#11" title="Premiación Hackathon" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_11_small.jpg' %}" alt="Premiación Hackathon">
-                                        </a>
-                                    </li>
-
-                                    <li style="opacity: 0.67;">
-                                        <a class="thumb" href="#9" title="Hackathon" rel="history" >
-                                            <img src="{% static '2016/img/gallery/gallery_12_small.jpg' %}" alt="Hackathon">
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="bottom pagination"></div>
-                            </div>
+                              <li>
+                                <a class="thumb" href="#" title="Hackathon" rel="history" >
+                                  <img src="{% static '2016/img/gallery/gallery_12_small.jpg' %}" alt="Hackathon">
+                                </a>
+                              </li>
+                             </ul>
+                            <div class="bottom pagination"></div>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -817,7 +919,12 @@
                     <div class="overlay">
                         <div class="col-md-12">
                             <h3 class="double">¿Quieres exponer?</h3>
+
+<!--
                             <a class="btn-sq btn-spek" href="#speakers" >¡Contáctanos!</a>
+-->
+                            <button type="button" class="btn btn-sq btn-spek" data-toggle="modal" data-target="#speakersModal">¡Contáctanos!</button>
+
                         </div>
                     </div>
                 </div>
@@ -854,7 +961,15 @@
                     <div class="overlay">
                         <div class="col-md-12">
                             <h3 class="double">¿Quieres auspiciar a VMC 2016?</h3>
-                            <a href="#" class="btn-sq">¡Contacta a los organizadores aquí!</a>
+
+<!--
+
+                            <a href="#" class="btn-sq" data-toggle="modal" data-
+target="#sponsorsModal">¡Contacta a los organizadores aquí!</a>
+
+
+-->
+                            <button type="button" class="btn btn-sq btn-spek" data-toggle="modal" data-target="#sponsorsModal">¡Contacta a los organizadores aquí!</button>
                         </div>
                     </div>
                 </div>
@@ -886,13 +1001,11 @@
                                 <div class="col-sm-6">
                                     <i class="fa fa-map-marker"></i>
                                     <p class="simple">Av. España 1680, Valparaíso</p>
-                                    <hr class="divder-sm">
                                 </div>
 
                                 <div class="col-sm-6">
                                     <i class="fa fa-envelope"></i>
                                     <p class="simple">valpo.mobile.conf@gmail.com</p>
-                                    <hr class="divder-sm">
                                 </div>
 
                                 <div class="col-sm-6">
@@ -1008,24 +1121,21 @@
 
 
 
-    <script type="text/javascript" src="{% static '2016/js/jquery-1.11.1.min.js' %}"/>
-    <script type="text/javascript" src="{% static '2016/assets/js/bootstrap.min.js' %}" />
-    <script type="text/javascript" src="{% static '2016/lib/jquery.bxslider/jquery.bxslider.min.js' %}" />
-    <script type="text/javascript" src="{% static '2016/lib/galleriffic-2.0/js/jquery.galleriffic.js' %}"/>
-    <script type="text/javascript" src="{% static '2016/lib/galleriffic-2.0/js/jquery.opacityrollover.js' %}"/>
-    <script type="text/javascript" src="{% static 'lib/superslides/examples/javascripts/jquery.easing.1.3.js' %}" />
-    <script type="text/javascript" src="{% static '2016/lib/superslides/examples/javascripts/jquery.animate-enhanced.min.js' %}" />
-    <script type="text/javascript" src="{% static '2016/lib/superslides/dist/jquery.superslides.min.js' %}" />
-    <script type="text/javascript" src="{% static '2016/lib/rendro-countdown/jquery.countdown.js' %}" />
-    <script type="text/javascript" src="{% static '2016/lib/jquery-parallax/scripts/jquery.parallax-1.1.3.js' %}"/>
-    <script type="text/javascript" src="{% static '2016/lib/jQuery-One-Page-Nav/jquery.scrollTo.js' %}" />
+    <script type="text/javascript" src="{% static '2016/js/jquery-1.11.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '2016/js/bootstrap.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static '2016/lib/jquery.bxslider/jquery.bxslider.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static '2016/lib/galleriffic-2.0/js/jquery.galleriffic.js' %}"></script>
+    <script type="text/javascript" src="{% static '2016/lib/galleriffic-2.0/js/jquery.opacityrollover.js' %}"></script>
+    <script type="text/javascript" src="{% static 'lib/superslides/examples/javascripts/jquery.easing.1.3.js' %}" ></script>
+    <script type="text/javascript" src="{% static '2016/lib/superslides/examples/javascripts/jquery.animate-enhanced.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static '2016/lib/superslides/dist/jquery.superslides.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static '2016/lib/rendro-countdown/jquery.countdown.js' %}" ></script>
+    <script type="text/javascript" src="{% static '2016/lib/jquery-parallax/scripts/jquery.parallax-1.1.3.js' %}"></script>
+    <script type="text/javascript" src="{% static '2016/lib/jQuery-One-Page-Nav/jquery.scrollTo.js' %}" ></script>
     <script type="text/javascript" src="{% static '2016/lib/jQuery-One-Page-Nav/jquery.nav.js' %}"/>
-    <script type="text/javascript" src="{% static '2016/js/custom.js' %}" />
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3"/>
-
+    <script type="text/javascript" src="{% static '2016/js/custom.js' %}" ></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3"></script>
     <script type="text/javascript">
-    <script>
   var map, geocoder;
   var marker;
   var fullAddress = "Avenida España 1680, Valparaíso, Valparaíso, Chile"
