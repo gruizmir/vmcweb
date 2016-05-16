@@ -139,7 +139,7 @@ else:
     # Tell the staticfiles app to use S3Boto storage when writing the collected
     # static files (when you run `collectstatic`).
     STATICFILES_LOCATION = 'static'
-    STATICFILES_STORAGE = 'destacame.custom_storages.StaticStorage'
+    STATICFILES_STORAGE = 'main.custom_storages.StaticStorage'
     STATIC_URL = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
     STATIC_DIRECTORY = '/static/'
 
