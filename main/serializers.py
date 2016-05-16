@@ -27,7 +27,7 @@ class PitchSerializer(serializers.ModelSerializer):
         que debe usar y los campos que envía.
         """
         model = Pitch
-        fields = ('name', 'lastname', 'email', 'app_name')
+        fields = ('id', 'name', 'lastname', 'email', 'app_name')
 
 
 class HackTeamSerializer(serializers.ModelSerializer):
@@ -41,7 +41,7 @@ class HackTeamSerializer(serializers.ModelSerializer):
         que debe usar, los campos que envía y los campos de solo lectura.
         """
         model = HackTeam
-        fields = ('name', 'leader', 'person2', 'person3', 'person4',
+        fields = ('id', 'name', 'leader', 'person2', 'person3', 'person4',
                   'team_picture')
 
 
@@ -70,5 +70,5 @@ class WorkshopSerializer(serializers.ModelSerializer):
         que debe usar, los campos que envía y los campos de solo lectura.
         """
         model = Workshop
-        fields = ('title', 'teacher', 'day', 'start_time', 'description',
+        fields = ('id', 'title', 'teacher', 'day', 'start_time', 'description',
                   'twitter', 'linkedin')
