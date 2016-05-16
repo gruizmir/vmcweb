@@ -16,14 +16,6 @@ gulp.task('browser-sync', function() {
     port: process.env.PORT || 3000
   });
 });
-/*
-gulp.task('reload-css', ['minifyCSS'], function(){
-  browserSync.reload();
-});
-gulp.task('reload-js', ['minifyJS'], function(){
-  browserSync.reload();
-});
-*/
 
 // Concatena y minifica los archivos CSS para el landing.
 gulp.task('concatCSS', function() {
@@ -32,7 +24,8 @@ gulp.task('concatCSS', function() {
                    'main/static/2016/css/reset.css',
                    'main/static/2016/css/layout.css',
                    'main/static/2016/css/font.css',
-                   'main/static/2016/css/color.css'
+                   'main/static/2016/css/color.css',
+                   'main/static/2016/css/bootstrap-image-gallery.min.css',
                    ])
     .pipe(buffer())
     .pipe(concat('concat.min.css'))
@@ -45,8 +38,8 @@ gulp.task('concatCSS', function() {
 gulp.task('concatJS', function() {
   return gulp.src(['main/static/2016/js/jquery-1.11.1.min.js',
                    'main/static/2016/js/bootstrap.min.js',
-                   //'main/static/2016/js/bootstrap-image-gallery.min.js',
-                   'main/static/2016/js/scripts.js'
+                   'main/static/2016/js/bootstrap-image-gallery.min.js',
+                   'main/static/2016/js/scripts.js',
                  ])
     .pipe(buffer())
     .pipe(concat('concat.min.js'))
