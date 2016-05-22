@@ -109,8 +109,8 @@ if LOCAL_DEPLOY:
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'vmcweb/static')
 
-    #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    #MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
 else:
     # Serving static files from AWS S3.
     # Boto: Include this headers in the response when serving from S3
@@ -119,7 +119,7 @@ else:
         'Cache-Control': 'max-age=604800',
     }
     AWS_STORAGE_BUCKET_NAME = AWS_CONFIGS.get('static_bucket_name', '')
-    #AWS_MEDIA_BUCKET_NAME = AWS_CONFIGS.get('media_bucket_name', '')
+    AWS_MEDIA_BUCKET_NAME = AWS_CONFIGS.get('media_bucket_name', '')
     AWS_ACCESS_KEY_ID = AWS_CONFIGS.get('access_key_id', '')
     AWS_SECRET_ACCESS_KEY = AWS_CONFIGS.get('secret_access_key', '')
 
@@ -144,14 +144,12 @@ else:
     STATIC_URL = "https://%s/" % (AWS_S3_CUSTOM_DOMAIN)
     STATIC_DIRECTORY = '/static/'
 
-    #AWS_S3_MEDIA_DOMAIN = '%s.s3.amazonaws.com' % AWS_MEDIA_BUCKET_NAME
-    #MEDIA_URL = "https://%s/" % (AWS_S3_MEDIA_DOMAIN)
-    #MEDIA_ROOT = MEDIA_URL
-    #DEFAULT_FILE_STORAGE = 'destacame.custom_storages.MediaStorage'
+    AWS_S3_MEDIA_DOMAIN = '%s.s3.amazonaws.com' % AWS_MEDIA_BUCKET_NAME
+    MEDIA_URL = "https://%s/" % (AWS_S3_MEDIA_DOMAIN)
+    MEDIA_ROOT = MEDIA_URL
+    DEFAULT_FILE_STORAGE = 'destacame.custom_storages.MediaStorage'
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
