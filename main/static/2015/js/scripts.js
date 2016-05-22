@@ -9,42 +9,38 @@
     app.el['loader']                   = $('#loader');
     app.el['mask']                     = $('#mask');
 
-	app.fn.screenSize = function() {
-		var size, width = app.el['window'].width();
-		if(width < 320) size = "Not supported";
-		else if(width < 480) size = "Mobile portrait";
-		else if(width < 768) size = "Mobile landscape";
-		else if(width < 960) size = "Tablet";
-		else size = "Desktop";
-		if (width < 768){$('.animated').removeClass('animated').removeClass('hiding');}
-		// $('#screen').html( size + ' - ' + width );
-		// console.log( size, width );
-	};	
-
+    app.fn.screenSize = function() {
+        var size, width = app.el['window'].width();
+        if(width < 320) size = "Not supported";
+        else if(width < 480) size = "Mobile portrait";
+        else if(width < 768) size = "Mobile landscape";
+        else if(width < 960) size = "Tablet";
+        else size = "Desktop";
+        if (width < 768){$('.animated').removeClass('animated').removeClass('hiding');}
+    };	
 	
-	
-	$(function() {	
-    //Preloader
-    app.el['loader'].delay(700).fadeOut();
-    app.el['mask'].delay(1200).fadeOut("slow");
+    $(function() {	
+        //Preloader
+        app.el['loader'].delay(700).fadeOut();
+        app.el['mask'].delay(1200).fadeOut("slow");
 
 	// Resized based on screen size
-	app.el['window'].resize(function() {
-		app.fn.screenSize();
-	});		
+        app.el['window'].resize(function() {
+            app.fn.screenSize();
+        });		
 
-    // fade in .back-to-top
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > 500) {
-        app.el['back-to-top'].fadeIn();
-      } else {
-        app.el['back-to-top'].fadeOut();
-      }
+        // fade in .back-to-top
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 500) {
+                app.el['back-to-top'].fadeIn();
+            } else {
+                app.el['back-to-top'].fadeOut();
+        }
     });
 
     // scroll body to 0px on click
     app.el['back-to-top'].click(function () {
-      app.el['html-body'].animate({
+        app.el['html-body'].animate({
         scrollTop: 0
       }, 1500);
       return false;
