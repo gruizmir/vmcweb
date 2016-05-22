@@ -176,3 +176,7 @@ DEFAULT_FROM_EMAIL = u'Valparaíso Mobile Conf<valpo.mobile.conf@gmail.com>'
 CONTACT_EMAIL = 'valpo.mobile.conf@gmail.com'
 COMMUNICATIONS_EMAIL_SUBJECT_PREFIX = u'[VMC-2016]'
 AWS_CONFIGS = CONFIG.get('aws', {})
+
+MAX_THUMBNAIL_SIZE = 100
+MAX_PHOTO_SIZE = 300
+MAX_ARTICLE_IMAGE_SIZE = 700
