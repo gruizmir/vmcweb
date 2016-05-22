@@ -5,11 +5,12 @@ from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import mail
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic import FormView, View
-from main.forms import ContactForm, HackTeamForm, PitchForm, SponsorForm
+from main.forms import ContactForm, HackTeamForm, PitchForm, \
+                       SpeakerApplicationForm, SponsorForm
 from main.models import Speaker, Sponsor
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -81,7 +82,8 @@ class HomeView(View):
         data['bg'] = random.choice(bgs)
         data['bg_reg'] = random.choice(bgs)
         data['contact_form'] = ContactForm(prefix='contact')
-        data['sponsors'] = Sponsor.objects.filter(version=self.year)
+        data['sponsors'] = Sponsor.objects.filter(version=self.year,
+                                                  accepted=True)
         data['schedule'] = True
         speakers = Speaker.objects.filter(version=self.year)
         speakers_copy = speakers
@@ -195,14 +197,24 @@ class SponsorView(SuccessMessageMixin, FormView):
         data['title'] = u'Auspicio'
         form = SponsorForm(request.POST)
         if form.is_valid():
-            form.save()
-            self.request.session['sponsor_registered'] = True
-            return HttpResponseRedirect(self.get_success_url())
+            sponsor = form.save()
+            if not settings.DEBUG:
+                self.send_email(sponsor)
+            if request.is_ajax():
+                return JsonResponse({'status': 'ok'}, status=200)
+            else:
+                self.request.session['sponsor_registered'] = True
+                return HttpResponseRedirect(self.get_success_url())
         else:
             data['form'] = form
-            return render(request, self.get_template(), data)
+            if request.is_ajax():
+                data = form.errors
+                data['status'] = 'failure'
+                return JsonResponse(data, status=400)
+            else:
+                return render(request, self.get_template(), data)
 
-    def sendEmail(self, sponsor):
+    def send_email(self, sponsor):
         """
         Función encargada de enviar un email de confirmación de recepción de
         email a la empresa interesada y un email a los organizadores.
@@ -211,7 +223,7 @@ class SponsorView(SuccessMessageMixin, FormView):
         msg = u'Estimado %(name)s, hemos recibido su solicitud de auspiciar ' +\
               u'el evento Valparaíso Mobile Conf. En breve, la organización ' +\
               u'del evento le contactará personalmente. \nMuchas gracias ' +\
-              u'por apoyar esta gran inciativa, Valparaíso Mobile Conf.' +\
+              u'por apoyar esta gran iniciativa, Valparaíso Mobile Conf.' +\
               u'\n\n Abdel Rojas Silva\nOrganizador'
         msg = msg % {'name': sponsor.contact_name}
         try:
@@ -314,12 +326,76 @@ class MapView(View):
         return render(request, self.get_template(), data)
 
 
+# TODO: Ocupar Mixin de Javascript, Ajax o lo que haya
+class SpeakerApplicationView(SuccessMessageMixin, FormView):
+    """
+    Vista de registro de auspiciadores para el evento.
+    """
+    form_class = SpeakerApplicationForm
+    year = None
+
+    def get_template(self):
+        return str(self.year) + '/' + self.template_name
+
+    def dispatch(self, request, year=2016):
+        """
+        Primera función llamada cuando se accede normalmente por navegador.
+        """
+        try:
+            self.year = int(year)
+        except:
+            self.year = available_years[-1]
+        return super(SpeakerApplicationView, self).dispatch(request=request)
+
+    def post(self, request):
+        data = {'year': self.year}
+        form = SpeakerApplicationForm(request.POST)
+        if form.is_valid():
+            speaker_application = form.save(commit=False)
+            speaker_application.year = self.year
+            speaker_application.save()
+            if not settings.DEBUG:
+                self.send_email(speaker_application)
+            return JsonResponse({'status': 'ok'}, status=200)
+        else:
+            data = form.errors
+            data['status'] = 'failure'
+            return JsonResponse(data, status=400)
+
+    def send_email(self, speaker):
+        """
+        Función encargada de enviar un email de confirmación de recepción de
+        email a la empresa interesada y un email a los organizadores.
+        """
+        subject = "[Valparaíso Mobile Conf] Postulación de charla"
+        msg = u'Estimado %(name)s, hemos recibido su solicitud de exponer en' +\
+              u'el evento Valparaíso Mobile Conf. En breve, la organización ' +\
+              u'del evento le contactará personalmente. \nMuchas gracias ' +\
+              u'por apoyar esta gran iniciativa, Valparaíso Mobile Conf.' +\
+              u'\n\n Abdel Rojas Silva\nOrganizador'
+        msg = msg % {'name': speaker.name}
+        try:
+            connection = mail.get_connection()
+            connection.open()
+            # TODO: Cambiar emails de organización por CC
+            email = mail.EmailMessage(subject, msg, settings.DEFAULT_FROM_EMAIL,
+                                      [speaker.email,
+                                      'abdel.rojas@alumnos.usm.cl',
+                                      'valpo.mobile.conf@gmail.com'],
+                                      connection=connection)
+            connection.send_messages([email])
+            connection.close()
+        except:
+            print traceback.format_exc()
+
+
 # TODO: Documentar
 def initial_redirect(request):
     td = timezone.now()
     return HttpResponseRedirect(reverse('home', kwargs={'year': td.year}))
 
 become_sponsor = SponsorView.as_view()
+become_speaker = SpeakerApplicationView.as_view()
 register_hack_team = RegisterTeamView.as_view()
 pitch_view = RegisterPitchView.as_view()
 home_view = HomeView.as_view()

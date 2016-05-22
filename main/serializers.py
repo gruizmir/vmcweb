@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from rest_framework import serializers
-from main.models import Speaker, Pitch, HackTeam, Sponsor
+from main.models import Speaker, Pitch, HackTeam, Sponsor, Workshop, Update
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class SpeakerSerializer(serializers.ModelSerializer):
         que debe usar, los campos que envía y los campos de solo lectura.
         """
         model = Speaker
-        exclude = ('phone', 'version', 'created', 'updated')
+        exclude = ('email', 'phone', 'version', 'created', 'updated')
 
 
 class PitchSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class PitchSerializer(serializers.ModelSerializer):
         que debe usar y los campos que envía.
         """
         model = Pitch
-        fields = ('name', 'lastname', 'email', 'app_name')
+        fields = ('id', 'name', 'lastname', 'email', 'app_name')
 
 
 class HackTeamSerializer(serializers.ModelSerializer):
@@ -41,8 +41,8 @@ class HackTeamSerializer(serializers.ModelSerializer):
         que debe usar, los campos que envía y los campos de solo lectura.
         """
         model = HackTeam
-        fields = ('name', 'leader', 'person2', 'person3', 'person4',
-                  'team_picture')
+        fields = ('id', 'name', 'leader', 'person2', 'person3', 'person4',
+                  'team_picture', 'project_description')
 
 
 class SponsorSerializer(serializers.ModelSerializer):
@@ -57,3 +57,31 @@ class SponsorSerializer(serializers.ModelSerializer):
         """
         model = Sponsor
         fields = ('name', 'url', 'logo', 'logo_thumb')
+
+
+class WorkshopSerializer(serializers.ModelSerializer):
+    """
+    Clase que crea el string en formato JSON con los datos de un taller.
+    """
+
+    class Meta:
+        """
+        Configuraciones para la creación del diccionario JSON, como el modelo
+        que debe usar, los campos que envía y los campos de solo lectura.
+        """
+        model = Workshop
+        fields = ('id', 'title', 'teacher', 'day', 'start_time', 'description',
+                  'twitter', 'linkedin', 'profile_picture', 'image')
+
+
+class UpdateSerializer(serializers.ModelSerializer):
+    """
+    Clase que crea el string en formato JSON con los datos de un taller.
+    """
+
+    class Meta:
+        """
+        Configuraciones para la creación del diccionario JSON, como el modelo
+        que debe usar, los campos que envía y los campos de solo lectura.
+        """
+        model = Update

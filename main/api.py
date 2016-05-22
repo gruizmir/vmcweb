@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.http import Http404
 from django.utils import timezone
-from main.models import HackTeam, Pitch, Speaker, Sponsor
+from main.models import HackTeam, Pitch, Speaker, Sponsor, Workshop, Update
 from main.serializers import HackTeamSerializer, PitchSerializer, \
-                             SpeakerSerializer, SponsorSerializer
+    SpeakerSerializer, SponsorSerializer, WorkshopSerializer, UpdateSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -73,6 +73,50 @@ class SponsorList(APIView):
 
     def get(self, request, format=None):
         year = request.GET.get('year', timezone.now().year)
-        sponsors = Sponsor.objects.filter(version=year)
+        sponsors = Sponsor.objects.filter(version=year, accepted=True)
         serializer = SponsorSerializer(sponsors, many=True)
+        return Response(serializer.data)
+
+
+class WorkshopList(APIView):
+    u"""
+    Lista de todos los speakers de la versión actual. Por ahora solo para
+    obtener datos.
+    """
+
+    def get(self, request, format=None):
+        year = request.GET.get('year', timezone.now().year)
+        workshops = Workshop.objects.filter(version=year)
+        serializer = WorkshopSerializer(workshops, many=True)
+        return Response(serializer.data)
+
+
+# TODO: Revisar uso de Mixins
+# http://www.django-rest-framework.org/tutorial/3-class-based-views/
+class UpdateList(APIView):
+    u"""
+    Lista de todos los speakers de la versión actual. Por ahora solo para
+    obtener datos.
+    """
+
+    def get(self, request, format=None):
+        year = request.GET.get('year', timezone.now().year)
+        updates = Update.objects.filter(version=year)
+        serializer = UpdateSerializer(updates, many=True)
+        return Response(serializer.data)
+
+
+class UpdateDetail(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Update.objects.get(pk=pk)
+        except Update.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        update = self.get_object(pk)
+        serializer = UpdateSerializer(update)
         return Response(serializer.data)

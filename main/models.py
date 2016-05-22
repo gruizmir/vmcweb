@@ -9,6 +9,43 @@ from django.dispatch import receiver
 from PIL import Image
 
 
+class SpeakerApplication(models.Model):
+    name = models.CharField(max_length=50, null=True, blank=False,
+                    verbose_name='Nombre')
+    lastname = models.CharField(max_length=50, null=True, blank=False,
+                    verbose_name='Apellido')
+    occupation = models.CharField(max_length=200, null=True, blank=True,
+                    verbose_name='Cargo/Trabajo')
+    email = models.EmailField(max_length=100, null=True, blank=False,
+                    verbose_name='Email')
+    profile_picture = models.ImageField(upload_to="speakers",
+                    verbose_name="Logo", null=True, blank=True)
+    phone = models.CharField(max_length=15, null=True, blank=True,
+                    verbose_name='Fono')
+    twitter = models.CharField(max_length=60, null=True, blank=True,
+                    verbose_name='Twitter')
+    linkedin = models.CharField(max_length=200, null=True, blank=True,
+                    verbose_name='Linkedin')
+    title = models.CharField(max_length=100, null=True, blank=False,
+                    verbose_name='Título de la charla')
+    description = models.TextField(verbose_name='Descripción', null=True,
+                                                               blank=True)
+    version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
+                                                    blank=False, default=2016)
+    accepted = models.BooleanField("Aprobado", default=False)
+    created = models.DateTimeField(auto_now_add=True,
+                                            verbose_name="Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Actualización")
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = u"Postulación de Speaker"
+        verbose_name_plural = u"Postulaciones de Speakers"
+        app_label = 'main'
+
+
 class Speaker(models.Model):
     DAY_OPTIONS = ((1, '1'), (2, '2'))
     name = models.CharField(max_length=50, null=True, blank=False,
@@ -47,6 +84,41 @@ class Speaker(models.Model):
     class Meta:
         verbose_name = "Speaker"
         verbose_name_plural = "Speakers"
+        app_label = 'main'
+
+
+class Workshop(models.Model):
+    DAY_OPTIONS = ((1, '1'), (2, '2'))
+    title = models.CharField(max_length=150, null=True, blank=False,
+                    verbose_name='Título')
+    teacher = models.CharField(max_length=100, null=True, blank=False,
+                    verbose_name='Relator')
+    profile_picture = models.ImageField(upload_to="speakers",
+                    verbose_name="Foto relator", null=True, blank=True)
+    image = models.ImageField(upload_to="workshops",
+                    verbose_name="Imagen referencial", null=True, blank=True)
+    twitter = models.CharField(max_length=60, null=True, blank=True,
+                    verbose_name='Twitter')
+    linkedin = models.CharField(max_length=200, null=True, blank=True,
+                    verbose_name='Linkedin')
+    description = models.TextField(verbose_name='Descripción', null=True,
+                                                               blank=True)
+    day = models.IntegerField(verbose_name="Día", null=True, blank=True,
+                                                choices=DAY_OPTIONS)
+    start_time = models.TimeField(verbose_name='Inicio de charla', null=True,
+                                                                    blank=True)
+    version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
+                                                    blank=False, default=2016)
+    created = models.DateTimeField(auto_now_add=True,
+                                            verbose_name="Creación")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Actualización")
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Taller"
+        verbose_name_plural = "Talleres"
         app_label = 'main'
 
 
@@ -114,6 +186,7 @@ class HackTeam(models.Model):
                                                     blank=False, default=2016)
     team_picture = models.ImageField(upload_to="hackathon",
                             verbose_name="Foto Equipo", null=True, blank=True)
+    project_description = models.TextField(null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
@@ -131,8 +204,8 @@ class Sponsor(models.Model):
                                                                 blank=True)
     url = models.URLField(null=True, blank=True)
     contact_name = models.CharField(max_length=50, verbose_name="Contacto",
-                                                    null=True, blank=True)
-    email = models.EmailField(max_length=40, null=True, blank=True,
+                                                    null=True, blank=False)
+    email = models.EmailField(max_length=40, null=True, blank=False,
                                     verbose_name='Email')
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
@@ -140,6 +213,7 @@ class Sponsor(models.Model):
                     verbose_name="Logo", null=True, blank=True)
     logo_thumb = models.ImageField(upload_to="logos",
                     verbose_name="Thumbnail", null=True, blank=True)
+    accepted = models.BooleanField("Aprobado", default=False)
     version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
                                                     blank=False, default=2016)
     creation_date = models.DateTimeField(auto_now_add=True)
@@ -186,6 +260,30 @@ class Sponsor(models.Model):
                                  content_type='image/%s' % (PIL_TYPE))
         self.logo_thumb.save('%s.%s' % (os.path.splitext(suf.name)[0],
                                  FILE_EXTENSION), suf, save=False)
+
+
+class Update(models.Model):
+    title = models.CharField(max_length=150, verbose_name="Título")
+    description = models.TextField(verbose_name="Descripción", null=True,
+                                                                blank=True)
+    image = models.ImageField(upload_to="updates",
+                    verbose_name="Foto", null=True, blank=True)
+    image_thumb = models.ImageField(upload_to="updates",
+                    verbose_name="Thumbnail", null=True, blank=True)
+    url = models.URLField(null=True, blank=True)
+    active = models.BooleanField(verbose_name="Activo", default=False)
+    version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
+                                                    blank=False, default=2016)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Actualización"
+        verbose_name_plural = "Actualizaciones"
+        app_label = 'main'
+
+    def __unicode__(self):
+        return self.title
 
 
 @receiver(post_delete, sender=Sponsor)

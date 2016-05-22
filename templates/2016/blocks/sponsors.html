@@ -1,0 +1,21 @@
+<!-- SECCION PATROCINADORES -->
+<section>
+    <div class="row partners" id="sponsors">
+        <div class="col-md-12 middle text-center" id="partners_list">
+            <div class="row">
+               <h1 class="double">NOS APOYAN</h1>
+
+               {% for sponsor in sponsors %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="single_partner">
+                      <a href="{{sponsor.url}}">
+                        <img src="{{sponsor.logo.url}}" alt="{{sponsor.name}}">
+                      </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FIN SECCION PATROCINADORES -->
