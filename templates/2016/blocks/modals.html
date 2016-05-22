@@ -1,0 +1,144 @@
+{% load static from staticfiles %}
+{% load i18n %}
+
+<!-- MODAL DE GALERIA -->
+<div id="blueimp-gallery" class="blueimp-gallery" data-use-bootstrap-modal="false">
+  <!-- The container for the modal slides -->
+  <div class="slides"></div>
+  <!-- Controls for the borderless lightbox -->
+  <h3 class="title"></h3>
+  <a class="prev">‹</a>
+  <a class="next">›</a>
+  <a class="close">×</a>
+  <a class="play-pause"></a>
+  <ol class="indicator"></ol>
+  <!-- The modal dialog, which will be used to wrap the lightbox content -->
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body next"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left prev">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Anterior
+          </button>
+          <button type="button" class="btn btn-primary next">
+            Siguiente
+            <i class="glyphicon glyphicon-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN MODAL DE GALERIA -->
+
+
+<!-- SPONSORS MODAL -->
+<div id="sponsorsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Quieres auspiciar o patrocinar a VMC?</h4>
+      </div>
+
+      <div class="modal-body">
+        <p class="simple">Envíanos un mensaje y nos contactaremos contigo.</p>
+        <form id="sponsorForm" class="form form-register" method="post" action="{% url 'become_sponsor' 2016 %}">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre de empresa" value="">
+              <span class="form-error" id="sponsor_name_error"></span>
+            </div>
+          </div>
+
+      <div class="form-group">
+      <div class="col-sm-12">
+        <input type="text" class="form-control required" name="contact_name" id="id_contact_name" placeholder="Nombre de contacto" value="">
+        <span class="form-error" id="sponsor_contact_name_error"></span>
+      </div>
+      </div>
+
+      <div class="form-group">
+      <div class="col-sm-12">
+        <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
+        <span class="form-error" id="sponsor_email_error"></span>
+      </div>
+      </div>
+
+      <div class="form-group">
+      <div class="col-sm-12">
+        <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
+        <span class="form-error" id="sponsor_phone_error"></span>
+      </div>
+      </div>
+      <div class="form-group form-buttons">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+  </div>
+</div>
+<!-- END SPONSORS MODAL -->
+
+
+<!-- SPEAKERS MODAL -->
+<div id="speakersModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">¿Quieres dar una charla en VMC?</h4>
+    </div>
+    <div class="modal-body">
+    <p class="simple">Envíanos un mensaje y nos contactaremos contigo.</p>
+    <form id="speakerForm" class="form form-register" method="post" action="{% url 'become_speaker' 2016 %}">
+      {% csrf_token %}
+
+      <div class="form-group">
+      <div class="col-sm-12">
+        <input type="text" class="form-control required" name="name" id="id_name" placeholder="Nombre completo" value="">
+        <span class="form-error" id="speaker_name_error"></span>
+      </div>
+      </div>
+
+      <div class="form-group">
+      <div class="col-sm-12">
+        <input type="email" class="form-control required email" name="email" id="id_email" placeholder="Email" value="">
+        <span class="form-error" id="speaker_email_error"></span>
+      </div>
+      </div>
+
+      <div class="form-group">
+      <div class="col-sm-12">
+        <input type="text" class="form-control required" name="phone" id="id_phone" placeholder="Teléfono" value="">
+        <span class="form-error" id="speaker_phone_error"></span>
+      </div>
+      </div>
+      <div class="form-buttons">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+     </form>
+    </div>
+
+  </div>
+
+  </div>
+</div>
+<!-- END SPEAKERS MODAL -->
+

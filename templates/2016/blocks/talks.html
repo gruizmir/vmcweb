@@ -1,0 +1,67 @@
+{% load static from staticfiles %}
+{% load i18n %}
+
+<section>
+    <div class="row" id="conference">
+        <div class="col-md-7 middle no-padding cont_rl text-center">
+            <img src="{% static '2016/img/speaker.jpg' %}" class="img100" alt="img">
+        </div>
+        <div class="col-md-5 no-padding">
+            <div class="registration text-center">
+                <h2 class="double">VMC 2016</h2>
+                <h6 class="simple">4-5 de Noviembre | UTFSM Valparaíso</h6>
+                {% comment %}
+                <a href="#pricing_table" class="btn-reg' %}" >Regístrate ahora!</a>
+                {% endcomment %}
+            </div>
+            <div class="sidebar_content">
+                <h1 class="double">Las charlas</h1>
+                <p class="simple">La versión 2015 tuvo a 11 expositores que
+                compartieron su conocimiento y experiencia alrededor de las
+                tecnologías móviles en 11 charlas, 2 talleres y una espectacular
+                hackathon.
+                Este año, repetiremos eso y más: no solo smartphones y smartwatches:
+                habrá distintos vestibles, Raspberry Pi, y muchas más sorpresas!
+                </p>
+                <hr class="divder">
+            </div>
+            <div class="sidebar_content text-center">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="fa fa-comments"></i>
+                        <p class="simple">GRANDES EXPOSITORES</p>
+                        <hr class="divder-sm">
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-clock-o"></i>
+                        <p class="simple">20 HORAS DE PROGRAMACIÓN</p>
+                        <hr class="divder-sm">
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-map-marker"></i>
+                        <p class="simple">2+ TALLERES</p>
+                        <hr class="divder-sm">
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-gift"></i>
+                        <p class="simple">MÁS SORPRESAS!</p>
+                        <hr class="divder-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% comment %}
+<section>
+    <div id="newsleter" class="row newsleter parallax text-center">
+        <div class="overlay">
+            <div class="col-md-12">
+                <h3 class="double">¿Interesado en asistir?</h3>
+                <a href="#location" class="btn-sq btn-loc" >Revisa la ubicación del evento</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endcomment %}
