@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from main.models import Sponsor, HackTeam, Pitch, Speaker, SpeakerApplication,\
-                        Workshop
+                        Workshop, Update
 
 
 @admin.register(Sponsor)
@@ -36,4 +36,10 @@ class HackTeamAdmin(admin.ModelAdmin):
 @admin.register(Workshop)
 class WorkshopAdmin(admin.ModelAdmin):
     list_display = ('title', 'teacher', 'day', 'version')
+    list_filters = ('version', )
+
+
+@admin.register(Update)
+class UpdateAdmin(admin.ModelAdmin):
+    list_display = ('title', 'active', 'version', 'creation_date')
     list_filters = ('version', )
