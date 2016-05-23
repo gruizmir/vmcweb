@@ -7,6 +7,7 @@ class SpeakerSerializer(serializers.ModelSerializer):
     """
     Clase que crea el string en formato JSON con los datos de un speaker
     """
+    start_time = serializers.SerializerMethodField()
     class Meta:
         """
         Configuraciones para la creación del diccionario JSON, como el modelo
@@ -15,6 +16,8 @@ class SpeakerSerializer(serializers.ModelSerializer):
         model = Speaker
         exclude = ('email', 'phone', 'version', 'created', 'updated')
 
+    def get_start_time(self, obj):
+        return obj.start_time.strftime("%H:%M")
 
 class PitchSerializer(serializers.ModelSerializer):
     """
@@ -63,6 +66,7 @@ class WorkshopSerializer(serializers.ModelSerializer):
     """
     Clase que crea el string en formato JSON con los datos de un taller.
     """
+    start_time = serializers.SerializerMethodField()
 
     class Meta:
         """
@@ -74,6 +78,8 @@ class WorkshopSerializer(serializers.ModelSerializer):
                   'twitter', 'linkedin', 'profile_picture', 'profile_thumn',
                   'image')
 
+    def get_start_time(self, obj):
+        return obj.start_time.strftime("%H:%M")                  
 
 class UpdateSerializer(serializers.ModelSerializer):
     """
