@@ -51,7 +51,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'debug_toolbar',
-    'corsheaders'
+    'corsheaders',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -147,7 +148,7 @@ else:
     AWS_S3_MEDIA_DOMAIN = '%s.s3.amazonaws.com' % AWS_MEDIA_BUCKET_NAME
     MEDIA_URL = "https://%s/" % (AWS_S3_MEDIA_DOMAIN)
     MEDIA_ROOT = MEDIA_URL
-    DEFAULT_FILE_STORAGE = 'destacame.custom_storages.MediaStorage'
+    DEFAULT_FILE_STORAGE = 'main.custom_storages.MediaStorage'
 
 
 TEMPLATE_DIRS = (
