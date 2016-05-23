@@ -71,7 +71,8 @@ class WorkshopSerializer(serializers.ModelSerializer):
         """
         model = Workshop
         fields = ('id', 'title', 'teacher', 'day', 'start_time', 'description',
-                  'twitter', 'linkedin', 'profile_picture', 'image')
+                  'twitter', 'linkedin', 'profile_picture', 'profile_thumn',
+                  'image')
 
 
 class UpdateSerializer(serializers.ModelSerializer):

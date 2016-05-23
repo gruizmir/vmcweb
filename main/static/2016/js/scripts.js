@@ -4,19 +4,19 @@ var fullAddress = "Avenida España 1680, Valparaíso, Valparaíso, Chile"
 var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green.png';
 
 function initialize() {
-var mapOptions = {
-  zoom: 10,
-  center: new google.maps.LatLng(-33.0360358,-71.5985076),
-  mapTypeControl: false,
-  panControl: false,
-  zoomControl: false,
-  streetViewControl: false,
-  draggable: false,
-};
-geocoder = new google.maps.Geocoder();
-map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-setMapByAddress(fullAddress);
-  }
+    var mapOptions = {
+      zoom: 10,
+      center: new google.maps.LatLng(-33.0360358,-71.5985076),
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: false,
+      streetViewControl: false,
+      draggable: false,
+    };
+    geocoder = new google.maps.Geocoder();
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    setMapByAddress(fullAddress);
+      }
 
   function setMapByAddress(mAddress) {
 geocoder.geocode({ 'address': mAddress}, function(results, status) {

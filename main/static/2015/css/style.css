@@ -1,43 +1,19 @@
-/*
-*
-*    Ventcamp v1.0 custom styles
-*
-*   http://themeforest.net/user/Vivaco
-*
-*
-*    Orange - #fe4918
-*    Blue - #2da9ff
-*    Green - #57c2be
-*    Pink - #fe4918
-*    Berry - #ff8208
-*
-*/
-label
-/* FIX FONTS */
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,300italic,300,100italic&subset=latin,cyrillic-ext);
-
-/* END */
-
 body,
 li.featured a {
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-style: normal;
-
 }
-
 .btn, .hero-txt, .navigation, .nav-tabs li a {
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
     font-style: normal;
 }
-
 strong {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-style: normal;
 }
-
 .hero-big {
     font-family: 'Ubuntu', sans-serif;
 }
@@ -128,7 +104,6 @@ a:hover, a:active, a:focus {
 textarea {
     height:150px !important;
 }
-
 hr {
     width: 20px;
     border-top:1px solid #fe4918;

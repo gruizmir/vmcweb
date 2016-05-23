@@ -18,7 +18,7 @@ class SpeakerApplication(models.Model):
                     verbose_name='Cargo/Trabajo')
     email = models.EmailField(max_length=100, null=True, blank=False,
                     verbose_name='Email')
-    profile_picture = models.ImageField(upload_to="speakers",
+    profile_picture = models.ImageField(upload_to="speakers/applications",
                     verbose_name="Logo", null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
@@ -58,6 +58,8 @@ class Speaker(models.Model):
                     verbose_name='Email')
     profile_picture = models.ImageField(upload_to="speakers",
                     verbose_name="Logo", null=True, blank=True)
+    profile_thumbnail = models.ImageField(upload_to="speakers/thumbs",
+                                verbose_name="Logo", null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
     twitter = models.CharField(max_length=60, null=True, blank=True,
@@ -77,14 +79,125 @@ class Speaker(models.Model):
     created = models.DateTimeField(auto_now_add=True,
                                             verbose_name="Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Actualización")
-
-    def __unicode__(self):
-        return self.name + " " + self.lastname
+    __original_photo = None
 
     class Meta:
         verbose_name = "Speaker"
         verbose_name_plural = "Speakers"
         app_label = 'main'
+
+    def __unicode__(self):
+        return self.name + " " + self.lastname
+
+    def __init__(self, *args, **kwargs):
+        u"""
+        :Authors:
+            Gabriel Ruiz
+        """
+        super(Speaker, self).__init__(*args, **kwargs)
+        self.__original_photo = self.profile_picture
+
+    def create_thumbnail(self):
+        u"""Crear un thumbnail de la foto de perfil del usuario.
+
+        Crea un thumbnail del avatar del usuario, con el menor tamaño (entre
+        ancho y alto), definido por MAX_THUMBNAIL_SIZE en settings. Luego,
+        guarda este thumbnail en el objeto Profile, campo profile_thumbnail.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if not self.profile_picture:
+            return
+        img = Image.open(StringIO(self.profile_picture.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE == 'jpeg':
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+        else:
+            return
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the thumbnail
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.profile_picture.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        self.profile_thumbnail.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+
+    def resize_photo(self):
+        u"""Escalado de la imagen de perfil del usuario.
+
+        Encoge la imagen subida por el usuario a un tamaño mínimo definido por
+        por MAX_PHOTO_SIZE en settings. Luego, guarda esta imagen en
+        profile_picture, y elimina la imagen anterior.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if not self.profile_picture:
+            return
+        img = Image.open(StringIO(self.profile_picture.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE in ['jpeg', 'mpo']:
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+        else:
+            return
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_PHOTO_SIZE
+            thumbHeight = settings.MAX_PHOTO_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_PHOTO_SIZE
+            thumbWidth = settings.MAX_PHOTO_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the resized image
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.profile_picture.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        storage, path = self.profile_picture.storage, \
+                        self.profile_picture.path
+        self.profile_picture.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+        storage.delete(path)
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        u"""Verifica cambios en las fotos antes de guardar.
+
+        Este método save() verifica si la foto de perfil ha cambiado antes de
+        hacer el almacenamiento o actualización de la instancia. Si han habido
+        cambios, entonces cambia el tamaño de la foto y crea el thumbnail de la
+        imagen.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if self.profile_picture != self.__original_photo:
+            self.resize_photo()
+            self.create_thumbnail()
+        super(Speaker, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_photo = self.profile_picture
 
 
 class Workshop(models.Model):
@@ -93,8 +206,10 @@ class Workshop(models.Model):
                     verbose_name='Título')
     teacher = models.CharField(max_length=100, null=True, blank=False,
                     verbose_name='Relator')
-    profile_picture = models.ImageField(upload_to="speakers",
+    profile_picture = models.ImageField(upload_to="workshops/teachers",
                     verbose_name="Foto relator", null=True, blank=True)
+    profile_thumbnail = models.ImageField(upload_to="workshops/thumbs",
+                        verbose_name="Thumbnail relator", null=True, blank=True)
     image = models.ImageField(upload_to="workshops",
                     verbose_name="Imagen referencial", null=True, blank=True)
     twitter = models.CharField(max_length=60, null=True, blank=True,
@@ -112,14 +227,125 @@ class Workshop(models.Model):
     created = models.DateTimeField(auto_now_add=True,
                                             verbose_name="Creación")
     updated = models.DateTimeField(auto_now=True, verbose_name="Actualización")
-
-    def __unicode__(self):
-        return self.title
+    __original_photo = None
 
     class Meta:
         verbose_name = "Taller"
         verbose_name_plural = "Talleres"
         app_label = 'main'
+
+    def __unicode__(self):
+        return self.title
+
+    def __init__(self, *args, **kwargs):
+        u"""
+        :Authors:
+            Gabriel Ruiz
+        """
+        super(Workshop, self).__init__(*args, **kwargs)
+        self.__original_photo = self.profile_picture
+
+    def create_thumbnail(self):
+        u"""Crear un thumbnail de la foto de perfil del usuario.
+
+        Crea un thumbnail del avatar del usuario, con el menor tamaño (entre
+        ancho y alto), definido por MAX_THUMBNAIL_SIZE en settings. Luego,
+        guarda este thumbnail en el objeto Profile, campo profile_thumbnail.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if not self.profile_picture:
+            return
+        img = Image.open(StringIO(self.profile_picture.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE == 'jpeg':
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+        else:
+            return
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the thumbnail
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.profile_picture.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        self.profile_thumbnail.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+
+    def resize_photo(self):
+        u"""Escalado de la imagen de perfil del usuario.
+
+        Encoge la imagen subida por el usuario a un tamaño mínimo definido por
+        por MAX_PHOTO_SIZE en settings. Luego, guarda esta imagen en
+        profile_picture, y elimina la imagen anterior.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if not self.profile_picture:
+            return
+        img = Image.open(StringIO(self.profile_picture.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE in ['jpeg', 'mpo']:
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+        else:
+            return
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_PHOTO_SIZE
+            thumbHeight = settings.MAX_PHOTO_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_PHOTO_SIZE
+            thumbWidth = settings.MAX_PHOTO_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the resized image
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.profile_picture.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        storage, path = self.profile_picture.storage, \
+                        self.profile_picture.path
+        self.profile_picture.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+        storage.delete(path)
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        u"""Verifica cambios en las fotos antes de guardar.
+
+        Este método save() verifica si la foto de perfil ha cambiado antes de
+        hacer el almacenamiento o actualización de la instancia. Si han habido
+        cambios, entonces cambia el tamaño de la foto y crea el thumbnail de la
+        imagen.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if self.profile_picture != self.__original_photo:
+            self.resize_photo()
+            self.create_thumbnail()
+        super(Workshop, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_photo = self.profile_picture
 
 
 class Pitch(models.Model):
@@ -211,12 +437,13 @@ class Sponsor(models.Model):
                     verbose_name='Fono')
     logo = models.ImageField(upload_to="logos",
                     verbose_name="Logo", null=True, blank=True)
-    logo_thumb = models.ImageField(upload_to="logos",
+    logo_thumb = models.ImageField(upload_to="logos/thumbs",
                     verbose_name="Thumbnail", null=True, blank=True)
     accepted = models.BooleanField("Aprobado", default=False)
     version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
                                                     blank=False, default=2016)
     creation_date = models.DateTimeField(auto_now_add=True)
+    __original_photo = None
 
     class Meta:
         verbose_name = "Auspiciador"
@@ -226,11 +453,23 @@ class Sponsor(models.Model):
     def __unicode__(self):
         return self.name
 
-    def createThumbnails(self):
+    def __init__(self, *args, **kwargs):
+        u"""
+        :Authors:
+            Gabriel Ruiz
         """
+        super(Sponsor, self).__init__(*args, **kwargs)
+        self.__original_photo = self.logo
+
+    def create_thumbnail(self):
+        u"""Crear un thumbnail de la foto de perfil del usuario.
+
         Crea un thumbnail del avatar del usuario, con el menor tamaño (entre
         ancho y alto), definido por MAX_THUMBNAIL_SIZE en settings. Luego,
         guarda este thumbnail en el objeto Profile, campo profile_thumbnail.
+
+        :Authors:
+            Gabriel Ruiz
         """
         if not self.logo:
             return
@@ -241,7 +480,8 @@ class Sponsor(models.Model):
             FILE_EXTENSION = 'jpg'
         elif PIL_TYPE == 'png':
             FILE_EXTENSION = 'png'
-
+        else:
+            return
         width, height = img.size
         if width >= height:
             thumbWidth = settings.MAX_THUMBNAIL_SIZE
@@ -255,11 +495,73 @@ class Sponsor(models.Model):
         temp_handle = StringIO()
         img.save(temp_handle, PIL_TYPE)
         temp_handle.seek(0)
+
         suf = SimpleUploadedFile(os.path.split(self.logo.name)[-1],
                                  temp_handle.read(),
                                  content_type='image/%s' % (PIL_TYPE))
         self.logo_thumb.save('%s.%s' % (os.path.splitext(suf.name)[0],
                                  FILE_EXTENSION), suf, save=False)
+
+    def resize_photo(self):
+        u"""Escalado de la imagen de perfil del usuario.
+
+        Encoge la imagen subida por el usuario a un tamaño mínimo definido por
+        por MAX_PHOTO_SIZE en settings. Luego, guarda esta imagen en
+        profile_picture, y elimina la imagen anterior.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if not self.logo:
+            return
+        img = Image.open(StringIO(self.logo.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE in ['jpeg', 'mpo']:
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+        else:
+            return
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_PHOTO_SIZE
+            thumbHeight = settings.MAX_PHOTO_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_PHOTO_SIZE
+            thumbWidth = settings.MAX_PHOTO_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the resized image
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.logo.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        storage, path = self.logo.storage, \
+                        self.logo.path
+        self.logo.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+        storage.delete(path)
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        u"""Verifica cambios en las fotos antes de guardar.
+
+        Este método save() verifica si la foto de perfil ha cambiado antes de
+        hacer el almacenamiento o actualización de la instancia. Si han habido
+        cambios, entonces cambia el tamaño de la foto y crea el thumbnail de la
+        imagen.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if self.logo != self.__original_photo:
+            self.resize_photo()
+            self.create_thumbnail()
+        super(Sponsor, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_photo = self.logo
 
 
 class Update(models.Model):
@@ -268,7 +570,7 @@ class Update(models.Model):
                                                                 blank=True)
     image = models.ImageField(upload_to="updates",
                     verbose_name="Foto", null=True, blank=True)
-    image_thumb = models.ImageField(upload_to="updates",
+    image_thumb = models.ImageField(upload_to="updates/thumbs",
                     verbose_name="Thumbnail", null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     active = models.BooleanField(verbose_name="Activo", default=False)
@@ -284,6 +586,116 @@ class Update(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def __init__(self, *args, **kwargs):
+        u"""
+        :Authors:
+            Gabriel Ruiz
+        """
+        super(Update, self).__init__(*args, **kwargs)
+        self.__original_photo = self.image
+
+    def create_thumbnail(self):
+        u"""Crear un thumbnail de la foto de perfil del usuario.
+
+        Crea un thumbnail del avatar del usuario, con el menor tamaño (entre
+        ancho y alto), definido por MAX_THUMBNAIL_SIZE en settings. Luego,
+        guarda este thumbnail en el objeto Profile, campo profile_thumbnail.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if not self.image:
+            return
+        img = Image.open(StringIO(self.image.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE == 'jpeg':
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+        else:
+            return
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_THUMBNAIL_SIZE
+            thumbWidth = settings.MAX_THUMBNAIL_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the thumbnail
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.image.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        self.image_thumb.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+
+    def resize_photo(self):
+        u"""Escalado de la imagen de perfil del usuario.
+
+        Encoge la imagen subida por el usuario a un tamaño mínimo definido por
+        por MAX_PHOTO_SIZE en settings. Luego, guarda esta imagen en
+        profile_picture, y elimina la imagen anterior.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if not self.image:
+            return
+        img = Image.open(StringIO(self.image.read()))
+
+        PIL_TYPE = img.format.lower()
+        if PIL_TYPE in ['jpeg', 'mpo']:
+            FILE_EXTENSION = 'jpg'
+        elif PIL_TYPE == 'png':
+            FILE_EXTENSION = 'png'
+        else:
+            return
+        width, height = img.size
+        if width >= height:
+            thumbWidth = settings.MAX_ARTICLE_IMAGE_SIZE
+            thumbHeight = settings.MAX_ARTICLE_IMAGE_SIZE * height / width
+        else:
+            thumbHeight = settings.MAX_ARTICLE_IMAGE_SIZE
+            thumbWidth = settings.MAX_ARTICLE_IMAGE_SIZE * width / height
+        img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
+
+        # Save the resized image
+        temp_handle = StringIO()
+        img.save(temp_handle, PIL_TYPE)
+        temp_handle.seek(0)
+
+        suf = SimpleUploadedFile(os.path.split(self.image.name)[-1],
+                                 temp_handle.read(),
+                                 content_type='image/%s' % (PIL_TYPE))
+        storage, path = self.image.storage, \
+                        self.image.path
+        self.image.save('%s.%s' % (os.path.splitext(suf.name)[0],
+                                 FILE_EXTENSION), suf, save=False)
+        storage.delete(path)
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        u"""Verifica cambios en las fotos antes de guardar.
+
+        Este método save() verifica si la foto de perfil ha cambiado antes de
+        hacer el almacenamiento o actualización de la instancia. Si han habido
+        cambios, entonces cambia el tamaño de la foto y crea el thumbnail de la
+        imagen.
+
+        :Authors:
+            Gabriel Ruiz
+        """
+        if self.image != self.__original_photo:
+            self.resize_photo()
+            self.create_thumbnail()
+        super(Update, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_photo = self.image
 
 
 @receiver(post_delete, sender=Sponsor)
