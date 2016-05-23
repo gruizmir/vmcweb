@@ -18,7 +18,7 @@ class SpeakerApplication(models.Model):
                     verbose_name='Cargo/Trabajo')
     email = models.EmailField(max_length=100, null=True, blank=False,
                     verbose_name='Email')
-    profile_picture = models.ImageField(upload_to="speakers",
+    profile_picture = models.ImageField(upload_to="speakers/applications",
                     verbose_name="Logo", null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
@@ -58,7 +58,7 @@ class Speaker(models.Model):
                     verbose_name='Email')
     profile_picture = models.ImageField(upload_to="speakers",
                     verbose_name="Logo", null=True, blank=True)
-    profile_thumbnail = models.ImageField(upload_to="speakers",
+    profile_thumbnail = models.ImageField(upload_to="speakers/thumbs",
                                 verbose_name="Logo", null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True,
                     verbose_name='Fono')
@@ -206,9 +206,9 @@ class Workshop(models.Model):
                     verbose_name='Título')
     teacher = models.CharField(max_length=100, null=True, blank=False,
                     verbose_name='Relator')
-    profile_picture = models.ImageField(upload_to="workshops",
+    profile_picture = models.ImageField(upload_to="workshops/teachers",
                     verbose_name="Foto relator", null=True, blank=True)
-    profile_thumbnail = models.ImageField(upload_to="workshops",
+    profile_thumbnail = models.ImageField(upload_to="workshops/thumbs",
                         verbose_name="Thumbnail relator", null=True, blank=True)
     image = models.ImageField(upload_to="workshops",
                     verbose_name="Imagen referencial", null=True, blank=True)
@@ -437,7 +437,7 @@ class Sponsor(models.Model):
                     verbose_name='Fono')
     logo = models.ImageField(upload_to="logos",
                     verbose_name="Logo", null=True, blank=True)
-    logo_thumb = models.ImageField(upload_to="logos",
+    logo_thumb = models.ImageField(upload_to="logos/thumbs",
                     verbose_name="Thumbnail", null=True, blank=True)
     accepted = models.BooleanField("Aprobado", default=False)
     version = models.IntegerField(verbose_name=u"Versión (Año)", null=False,
@@ -570,7 +570,7 @@ class Update(models.Model):
                                                                 blank=True)
     image = models.ImageField(upload_to="updates",
                     verbose_name="Foto", null=True, blank=True)
-    image_thumb = models.ImageField(upload_to="updates",
+    image_thumb = models.ImageField(upload_to="updates/thumbs",
                     verbose_name="Thumbnail", null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     active = models.BooleanField(verbose_name="Activo", default=False)
