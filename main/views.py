@@ -35,14 +35,20 @@ bgs = [
 
 available_years = [2015, 2016]
 
+# TODO: enviar mensaje cuando falla usado mensajes de django
 
-class HomeView(View):
+class YearBasedView(View):
     """
     Recibe el formulario de registro de un equipo para la hackathon.
     """
     success_url = '/'
-    template_name = 'index.html'
     year = None
+
+    def get_success_url(self):
+        if self.year is None:
+            return self.success_url
+        else:
+            return '/' + str(self.year) + self.success_url
 
     def get_template(self):
         return str(self.year) + '/' + self.template_name
@@ -55,8 +61,16 @@ class HomeView(View):
             self.year = int(year)
         except:
             self.year = available_years[-1]
+        return super(YearBasedView, self).dispatch(request=request)
 
-        return super(HomeView, self).dispatch(request=request)
+class HomeView(YearBasedView):
+    """
+    Recibe el formulario de registro de un equipo para la hackathon.
+    """
+    template_name = 'index.html'
+
+    def dispatch(self, request, year=2016):
+        return super(HomeView, self).dispatch(request=request, year=year)
 
     def get(self, request):
         # TODO: Documentar. Enviar a dispatch
@@ -91,7 +105,11 @@ class HomeView(View):
                                         for i in range(0, speakers.count(), 4)]
         data['speakers_day_1'] = speakers_copy.filter(day=1)
         data['speakers_day_2'] = speakers_copy.filter(day=2)
-        return render(request, self.get_template(), data)
+        try:
+            return render(request, self.get_template(), data)
+        except:
+            print traceback.format_exc()
+            return HttpResponseRedirect(self.get_success_url())
 
 
 @api_view(["POST"])
@@ -104,27 +122,16 @@ def contact(request):
         return Response(status=status.HTTP_403_FORBIDDEN)
 
 
-class RegisterTeamView(FormView):
+class RegisterTeamView(YearBasedView):
     """
     Recibe el formulario de registro de un equipo para la hackathon.
     """
-    success_url = '/'
     template_name = 'register_team.html'
     form_class = HackTeamForm
-    year = None
-
-    def get_template(self):
-        return str(self.year) + '/' + self.template_name
 
     def dispatch(self, request, year=2016):
-        """
-        Primera función llamada cuando se accede normalmente por navegador.
-        """
-        try:
-            self.year = int(year)
-        except:
-            self.year = available_years[-1]
-        return super(RegisterTeamView, self).dispatch(request=request)
+        return super(RegisterTeamView, self).dispatch(request=request,
+                                                      year=year)
 
     def get(self, request):
         data = {'year': self.year}
@@ -160,30 +167,22 @@ class RegisterTeamView(FormView):
             data['bg'] = random.choice(bgs)
             data['form'] = form
             data['title'] = u'Registro de equipos'
-            return render(request, self.get_template(), data)
+            try:
+                return render(request, self.get_template(), data)
+            except:
+                print traceback.format_exc()
+                return HttpResponseRedirect(self.get_success_url())
 
 
-class SponsorView(SuccessMessageMixin, FormView):
+class SponsorView(SuccessMessageMixin, YearBasedView):
     """
     Vista de registro de auspiciadores para el evento.
     """
-    success_url = '/'
     template_name = 'new_sponsor.html'
     form_class = SponsorForm
-    year = None
-
-    def get_template(self):
-        return str(self.year) + '/' + self.template_name
 
     def dispatch(self, request, year=2016):
-        """
-        Primera función llamada cuando se accede normalmente por navegador.
-        """
-        try:
-            self.year = int(year)
-        except:
-            self.year = available_years[-1]
-        return super(SponsorView, self).dispatch(request=request)
+        return super(SponsorView, self).dispatch(request=request, year=year)
 
     def get(self, request):
         data = {'year': self.year}
@@ -204,7 +203,7 @@ class SponsorView(SuccessMessageMixin, FormView):
                 return JsonResponse({'status': 'ok'}, status=200)
             else:
                 self.request.session['sponsor_registered'] = True
-                return HttpResponseRedirect(self.get_success_url())
+                return HttpResponseRedirect(self.get_success_url() + self.year)
         else:
             data['form'] = form
             if request.is_ajax():
@@ -212,7 +211,11 @@ class SponsorView(SuccessMessageMixin, FormView):
                 data['status'] = 'failure'
                 return JsonResponse(data, status=400)
             else:
-                return render(request, self.get_template(), data)
+                try:
+                    return render(request, self.get_template(), data)
+                except:
+                    print traceback.format_exc()
+                    return HttpResponseRedirect(self.get_success_url())
 
     def send_email(self, sponsor):
         """
@@ -241,25 +244,14 @@ class SponsorView(SuccessMessageMixin, FormView):
             print traceback.format_exc()
 
 
-class RegisterPitchView(FormView):
+class RegisterPitchView(YearBasedView):
     u"""Recibe el formulario de registro de un equipo para la hackathon."""
-    success_url = '/'
     template_name = 'register_pitch.html'
     form_class = PitchForm
-    year = None
-
-    def get_template(self):
-        return str(self.year) + '/' + self.template_name
 
     def dispatch(self, request, year=2016):
-        """
-        Primera función llamada cuando se accede normalmente por navegador.
-        """
-        try:
-            self.year = int(year)
-        except:
-            self.year = available_years[-1]
-        return super(RegisterPitchView, self).dispatch(request=request)
+        return super(RegisterPitchView, self).dispatch(request=request,
+                                                       year=year)
 
     def get(self, request):
         data = {'year': self.year}
@@ -296,56 +288,41 @@ class RegisterPitchView(FormView):
             data['bg'] = random.choice(bgs)
             data['form'] = form
             data['title'] = u'Registro de pitch'
-            return render(request, self.get_template(), data)
+            try:
+                return render(request, self.get_template(), data)
+            except:
+                print traceback.format_exc()
+                return HttpResponseRedirect(self.get_success_url())
 
 
-class MapView(View):
+class MapView(YearBasedView):
     """
     Recibe el formulario de registro de un equipo para la hackathon.
     """
-    success_url = '/'
     template_name = 'map.html'
-    year = None
-
-    def get_template(self):
-        return str(self.year) + '/' + self.template_name
 
     def dispatch(self, request, year=2016):
-        """
-        Primera función llamada cuando se accede normalmente por navegador.
-        """
-        try:
-            self.year = int(year)
-        except:
-            self.year = available_years[-1]
-        return super(MapView, self).dispatch(request=request)
+        return super(MapView, self).dispatch(request=request, year=year)
 
     def get(self, request):
-        # TODO: Documentar. Enviar a dispatch
         data = {'year': self.year}
-        return render(request, self.get_template(), data)
+        try:
+            return render(request, self.get_template(), data)
+        except:
+            print traceback.format_exc()
+            return HttpResponseRedirect(self.get_success_url())
 
 
 # TODO: Ocupar Mixin de Javascript, Ajax o lo que haya
-class SpeakerApplicationView(SuccessMessageMixin, FormView):
+class SpeakerApplicationView(SuccessMessageMixin, YearBasedView):
     """
     Vista de registro de auspiciadores para el evento.
     """
     form_class = SpeakerApplicationForm
-    year = None
-
-    def get_template(self):
-        return str(self.year) + '/' + self.template_name
 
     def dispatch(self, request, year=2016):
-        """
-        Primera función llamada cuando se accede normalmente por navegador.
-        """
-        try:
-            self.year = int(year)
-        except:
-            self.year = available_years[-1]
-        return super(SpeakerApplicationView, self).dispatch(request=request)
+        return super(SpeakerApplicationView, self).dispatch(request=request,
+                                                            year=year)
 
     def post(self, request):
         data = {'year': self.year}

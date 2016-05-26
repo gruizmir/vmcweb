@@ -69,9 +69,9 @@ gulp.task('concatCSS', function() {
 // Concatena y minifica los archivos JS para el landing.
 gulp.task('concatJS', function() {
   return gulp.src(['main/static/2016/js/jquery-1.11.1.min.js',
+                   'main/static/2016/js/scripts.js',
                    'main/static/2016/js/bootstrap.min.js',
                    'main/static/2016/js/bootstrap-image-gallery.min.js',
-                   'main/static/2016/js/scripts.js',
                  ])
     .pipe(buffer())
     .pipe(concat('concat.min.js'))

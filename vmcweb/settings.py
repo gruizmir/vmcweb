@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
+u"""
 Django settings for vmcweb project.
 
 For more information on this file, see
@@ -155,15 +155,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
-DEFAULT_FROM_EMAIL = 'valpo.mobile.conf@gmail.com'
-
 MAX_THUMBNAIL_SIZE = 150
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'valpomobileconf'
-EMAIL_HOST_PASSWORD = 'kenolamasca2veces'
-EMAIL_PORT = 587
 
 # Communication systems
 EMAIL_CONFIGS = CONFIG.get('email', {}).get('smtp', {})
@@ -172,9 +164,8 @@ EMAIL_HOST = EMAIL_CONFIGS.get('host', '')
 EMAIL_HOST_USER = EMAIL_CONFIGS.get('user', '')
 EMAIL_HOST_PASSWORD = EMAIL_CONFIGS.get('password', '')
 EMAIL_PORT = EMAIL_CONFIGS.get('port', 587)
-
-DEFAULT_FROM_EMAIL = u'Valparaíso Mobile Conf<valpo.mobile.conf@gmail.com>'
-CONTACT_EMAIL = 'valpo.mobile.conf@gmail.com'
+DEFAULT_FROM_EMAIL = CONFIG.get('email', {}).get('default_from', '')
+CONTACT_EMAIL = DEFAULT_FROM_EMAIL
 COMMUNICATIONS_EMAIL_SUBJECT_PREFIX = u'[VMC-2016]'
 AWS_CONFIGS = CONFIG.get('aws', {})
 
