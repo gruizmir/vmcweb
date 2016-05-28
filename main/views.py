@@ -18,7 +18,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
-
 bgs = [
     '2015/bg/bg01.jpg',
     '2015/bg/bg02.jpg',
@@ -110,7 +109,7 @@ class HomeView(YearBasedView):
         data['speakers_day_1'] = speakers_copy.filter(day=1)
         data['speakers_day_2'] = speakers_copy.filter(day=2)
 
-        data['has_updates'] = Update.objects.exists()
+        data['has_updates'] = Update.objects.filter(active=True).exists()
         try:
             return render(request, self.get_template(), data)
         except:
@@ -330,7 +329,7 @@ class UpdatesView(YearBasedView):
 
     def get(self, request):
         data = {'year': self.year}
-        updates = Update.objects.all()
+        updates = Update.objects.filter(active=True)
         if updates.exists:
             data['has_updates'] = True
         paginator = Paginator(updates, 10)
