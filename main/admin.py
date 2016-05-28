@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from ckeditor.widgets import CKEditorWidget
+from django import forms
 from django.contrib import admin
 from main.models import Sponsor, HackTeam, Pitch, Speaker, SpeakerApplication,\
                         Workshop, Update
@@ -45,8 +47,13 @@ class WorkshopAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
+class UpdateAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget())
+
+
 @admin.register(Update)
 class UpdateAdmin(admin.ModelAdmin):
+    form = UpdateAdminForm
     list_display = ('title', 'active', 'version', 'creation_date')
     list_filters = ('version', )
     save_on_top = True

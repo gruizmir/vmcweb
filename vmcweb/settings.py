@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django_gulp',
     'django.contrib.staticfiles',
+    'ckeditor',
     'main',
     'rest_framework',
     'rest_framework.authtoken',
@@ -169,6 +170,6 @@ CONTACT_EMAIL = DEFAULT_FROM_EMAIL
 COMMUNICATIONS_EMAIL_SUBJECT_PREFIX = u'[VMC-2016]'
 AWS_CONFIGS = CONFIG.get('aws', {})
 
-MAX_THUMBNAIL_SIZE = 100
+MAX_THUMBNAIL_SIZE = 250
 MAX_PHOTO_SIZE = 300
 MAX_ARTICLE_IMAGE_SIZE = 700

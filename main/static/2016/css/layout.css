@@ -1,3 +1,10 @@
+.update-img {
+    width:100%;
+}
+.update-img image {
+    width:100%;
+    max-heigth:200px;
+}
 #main_logo {
     max-height: 350px;
 }

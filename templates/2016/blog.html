@@ -1,0 +1,72 @@
+{% extends '2016/base.html'%}
+
+{% load static from staticfiles %}
+{% load i18n %}
+
+{% block modals %}
+{% include '2016/blocks/gallery_modal.html' %}
+{% endblock %}
+
+{% block right_content %}
+<div class="container-fluid no-padding">
+  <section>
+    <div class="row blog" id="blog">
+      <div class="col-md-12 no-padding">
+        <div class="sidebar_content">
+          <h2 class="double">ÚLTIMAS ACTUALIZACIONES</h2>
+          {% for update in updates %}
+          <div class="row">
+            <div class="col-sm-12">
+              <h3 class="double">{{update.title}}</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+
+            {% if update.image %}
+              <a class="update-img" href="{{update.image.url}}" title="{{update.title}}" data-gallery>
+                {% if update.image_thumb %}
+                  <img class="update-img" src="{{update.image_thumb.url}}"/>
+                {% else %}
+                  <img class="update-img" src="{{update.image_thumb.url}}"/>
+                {% endif %}
+              </a>
+            {% endif %}
+            </div>
+            <div class="{% if update.image %}col-sm-9{% else %}col-sm-12{% endif %}">
+              <p>
+               {% autoescape off %}
+               {{update.description}}
+               {% endautoescape %}
+             </p>
+             <p class="small fr"><b>{{update.creation_date|date:"d/m/Y"}}</b></p>
+            </div>
+          </div>
+          <hr class="divder-sm">
+          {% endfor %}
+
+        </div> <!-- END .sidebar_content -->
+      </div>
+    </div> <!-- END .row .blog -->
+
+    {% if updates.has_previous or updates.has_next %}
+    <div class="row pagination">
+      <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+        {% if contacts.has_previous %}
+          <a href="?page={{ updates.previous_page_number }}">Anterior</a>
+      {% endif %}
+      <span class="current">
+        {{ updates.number }} de {{ updates.paginator.num_pages }}.
+      </span>
+
+      {% if updates.has_next %}
+        <a href="?page={{ contacts.next_page_number }}">Siguiente</a>
+      {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+  </section>
+
+</div>
+{% endblock %}
