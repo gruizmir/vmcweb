@@ -4,17 +4,19 @@ import traceback
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core import mail
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
-from django.views.generic import FormView, View
+from django.views.generic import View
 from main.forms import ContactForm, HackTeamForm, PitchForm, \
                        SpeakerApplicationForm, SponsorForm
-from main.models import Speaker, Sponsor
+from main.models import Speaker, Sponsor, Update
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 
 
 bgs = [
@@ -36,6 +38,7 @@ bgs = [
 available_years = [2015, 2016]
 
 # TODO: enviar mensaje cuando falla usado mensajes de django
+
 
 class YearBasedView(View):
     """
@@ -62,6 +65,7 @@ class YearBasedView(View):
         except:
             self.year = available_years[-1]
         return super(YearBasedView, self).dispatch(request=request)
+
 
 class HomeView(YearBasedView):
     """
@@ -105,6 +109,8 @@ class HomeView(YearBasedView):
                                         for i in range(0, speakers.count(), 4)]
         data['speakers_day_1'] = speakers_copy.filter(day=1)
         data['speakers_day_2'] = speakers_copy.filter(day=2)
+
+        data['has_updates'] = Update.objects.exists()
         try:
             return render(request, self.get_template(), data)
         except:
@@ -313,6 +319,40 @@ class MapView(YearBasedView):
             return HttpResponseRedirect(self.get_success_url())
 
 
+class UpdatesView(YearBasedView):
+    """
+    Recibe el formulario de registro de un equipo para la hackathon.
+    """
+    template_name = 'blog.html'
+
+    def dispatch(self, request, year=2016):
+        return super(UpdatesView, self).dispatch(request=request, year=year)
+
+    def get(self, request):
+        data = {'year': self.year}
+        updates = Update.objects.all()
+        if updates.exists:
+            data['has_updates'] = True
+        paginator = Paginator(updates, 10)
+        page = request.GET.get('page')
+        try:
+            updates = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            updates = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            updates = paginator.page(paginator.num_pages)
+
+        data['updates'] = updates
+
+        try:
+            return render(request, self.get_template(), data)
+        except:
+            print traceback.format_exc()
+            return HttpResponseRedirect(self.get_success_url())
+
+
 # TODO: Ocupar Mixin de Javascript, Ajax o lo que haya
 class SpeakerApplicationView(SuccessMessageMixin, YearBasedView):
     """
@@ -377,3 +417,4 @@ register_hack_team = RegisterTeamView.as_view()
 pitch_view = RegisterPitchView.as_view()
 home_view = HomeView.as_view()
 map_view = MapView.as_view()
+updates = UpdatesView.as_view()

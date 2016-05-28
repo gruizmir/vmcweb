@@ -10,4 +10,5 @@ urlpatterns = patterns('main.views',
     url(r'^speaker/new/', 'become_speaker', name='become_speaker'),
     url(r'^pitches/add/', 'pitch_view', name='new_pitch'),
     url(r'^alojamiento/', 'map_view', name='lodging'),
+    url(r'^noticias/', 'updates', name='updates'),
 )
