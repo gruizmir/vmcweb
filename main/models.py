@@ -309,11 +309,11 @@ class Workshop(models.Model):
             return
         width, height = img.size
         if width >= height:
-            thumbWidth = settings.MAX_PHOTO_SIZE
-            thumbHeight = settings.MAX_PHOTO_SIZE * height / width
+            thumbWidth = settings.MAX_ARTICLE_IMAGE_SIZE
+            thumbHeight = settings.MAX_ARTICLE_IMAGE_SIZE * height / width
         else:
-            thumbHeight = settings.MAX_PHOTO_SIZE
-            thumbWidth = settings.MAX_PHOTO_SIZE * width / height
+            thumbHeight = settings.MAX_ARTICLE_IMAGE_SIZE
+            thumbWidth = settings.MAX_ARTICLE_IMAGE_SIZE * width / height
         img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
 
         # Save the resized image
@@ -525,11 +525,11 @@ class Sponsor(models.Model):
             return
         width, height = img.size
         if width >= height:
-            thumbWidth = settings.MAX_PHOTO_SIZE
-            thumbHeight = settings.MAX_PHOTO_SIZE * height / width
+            thumbWidth = settings.MAX_LOGO_SIZE
+            thumbHeight = settings.MAX_LOGO_SIZE * height / width
         else:
-            thumbHeight = settings.MAX_PHOTO_SIZE
-            thumbWidth = settings.MAX_PHOTO_SIZE * width / height
+            thumbHeight = settings.MAX_LOGO_SIZE
+            thumbWidth = settings.MAX_LOGO_SIZE * width / height
         img.thumbnail((thumbWidth, thumbHeight), Image.ANTIALIAS)
 
         # Save the resized image
