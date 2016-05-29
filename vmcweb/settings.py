@@ -156,8 +156,6 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
-MAX_THUMBNAIL_SIZE = 150
-
 # Communication systems
 EMAIL_CONFIGS = CONFIG.get('email', {}).get('smtp', {})
 EMAIL_USE_TLS = EMAIL_CONFIGS.get('use_tls', True)
@@ -171,5 +169,6 @@ COMMUNICATIONS_EMAIL_SUBJECT_PREFIX = u'[VMC-2016]'
 AWS_CONFIGS = CONFIG.get('aws', {})
 
 MAX_THUMBNAIL_SIZE = 250
-MAX_PHOTO_SIZE = 300
+MAX_PHOTO_SIZE = 500
+MAX_LOGO_SIZE = 500
 MAX_ARTICLE_IMAGE_SIZE = 700
