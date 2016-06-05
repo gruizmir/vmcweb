@@ -412,6 +412,8 @@ class HackTeam(models.Model):
                                                     blank=False, default=2016)
     team_picture = models.ImageField(upload_to="hackathon",
                             verbose_name="Foto Equipo", null=True, blank=True)
+    # TODO: Miniatura de la foto
+    # TODO: Crear función para ajustar tamaño de la imagen
     project_description = models.TextField(null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
