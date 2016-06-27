@@ -6,45 +6,53 @@ from main.models import Sponsor, HackTeam, Pitch, Speaker, SpeakerApplication,\
                         Workshop, Update
 
 
-@admin.register(Sponsor)
-class SponsorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'contact_name', 'email', 'accepted', 'version')
-    list_filters = ('version', 'day')
+class VMCAdmin(admin.ModelAdmin):
+    actions = ('duplicate', )
     save_on_top = True
+
+    def duplicate(self, request, queryset):
+        for item in queryset:
+            item_copy = item
+            item_copy.id = None
+            item_copy.save()
+
+    duplicate.short_description = u'Duplicar selección'
+
+
+@admin.register(Sponsor)
+class SponsorAdmin(VMCAdmin):
+    list_display = ('name', 'contact_name', 'email', 'accepted', 'version')
+    list_filter = ('version', )
 
 
 @admin.register(Pitch)
-class PitchAdmin(admin.ModelAdmin):
+class PitchAdmin(VMCAdmin):
     list_display = ('name', 'lastname', 'email', 'version')
-    list_filters = ('version', )
-    save_on_top = True
+    list_filter = ('version', )
 
 
 @admin.register(Speaker)
-class SpeakerAdmin(admin.ModelAdmin):
+class SpeakerAdmin(VMCAdmin):
     list_display = ('name', 'lastname', 'email', 'version')
-    list_filters = ('version', )
-    save_on_top = True
+    list_filter = ('version', 'day')
 
 
 @admin.register(SpeakerApplication)
-class SpeakerApplicationAdmin(admin.ModelAdmin):
+class SpeakerApplicationAdmin(VMCAdmin):
+    actions = ('duplicate', )
     list_display = ('name', 'email', 'accepted')
-    save_on_top = True
 
 
 @admin.register(HackTeam)
-class HackTeamAdmin(admin.ModelAdmin):
+class HackTeamAdmin(VMCAdmin):
     list_display = ('leader', 'name', 'email', 'version')
-    list_filters = ('version', )
-    save_on_top = True
+    list_filter = ('version', )
 
 
 @admin.register(Workshop)
-class WorkshopAdmin(admin.ModelAdmin):
+class WorkshopAdmin(VMCAdmin):
     list_display = ('title', 'teacher', 'day', 'version')
-    list_filters = ('version', )
-    save_on_top = True
+    list_filter = ('version', 'day')
 
 
 class UpdateAdminForm(forms.ModelForm):
@@ -52,8 +60,7 @@ class UpdateAdminForm(forms.ModelForm):
 
 
 @admin.register(Update)
-class UpdateAdmin(admin.ModelAdmin):
+class UpdateAdmin(VMCAdmin):
     form = UpdateAdminForm
     list_display = ('title', 'active', 'version', 'creation_date')
-    list_filters = ('version', )
-    save_on_top = True
+    list_filter = ('version', )
