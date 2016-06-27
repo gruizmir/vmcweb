@@ -75,11 +75,12 @@ class WorkshopSerializer(serializers.ModelSerializer):
         """
         model = Workshop
         fields = ('id', 'title', 'teacher', 'day', 'start_time', 'description',
-                  'twitter', 'linkedin', 'profile_picture', 'profile_thumn',
+                  'twitter', 'linkedin', 'profile_picture', 'profile_thumbnail',
                   'image')
 
     def get_start_time(self, obj):
-        return obj.start_time.strftime("%H:%M")                  
+        return obj.start_time.strftime("%H:%M")
+
 
 class UpdateSerializer(serializers.ModelSerializer):
     """
