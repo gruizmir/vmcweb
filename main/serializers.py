@@ -8,16 +8,18 @@ class SpeakerSerializer(serializers.ModelSerializer):
     Clase que crea el string en formato JSON con los datos de un speaker
     """
     start_time = serializers.SerializerMethodField()
+
     class Meta:
         """
         Configuraciones para la creación del diccionario JSON, como el modelo
         que debe usar, los campos que envía y los campos de solo lectura.
         """
         model = Speaker
-        exclude = ('email', 'phone', 'version', 'created', 'updated')
+        exclude = ('email', 'phone', 'version', 'created')
 
     def get_start_time(self, obj):
         return obj.start_time.strftime("%H:%M")
+
 
 class PitchSerializer(serializers.ModelSerializer):
     """
@@ -30,7 +32,7 @@ class PitchSerializer(serializers.ModelSerializer):
         que debe usar y los campos que envía.
         """
         model = Pitch
-        fields = ('id', 'name', 'lastname', 'email', 'app_name')
+        fields = ('id', 'name', 'lastname', 'email', 'app_name', 'updated')
 
 
 class HackTeamSerializer(serializers.ModelSerializer):
@@ -45,7 +47,7 @@ class HackTeamSerializer(serializers.ModelSerializer):
         """
         model = HackTeam
         fields = ('id', 'name', 'leader', 'person2', 'person3', 'person4',
-                  'team_picture', 'project_description')
+                  'team_picture', 'project_description', 'updated')
 
 
 class SponsorSerializer(serializers.ModelSerializer):
@@ -59,7 +61,7 @@ class SponsorSerializer(serializers.ModelSerializer):
         que debe usar, los campos que envía y los campos de solo lectura.
         """
         model = Sponsor
-        fields = ('name', 'url', 'logo', 'logo_thumb')
+        fields = ('name', 'url', 'logo', 'logo_thumb', 'updated')
 
 
 class WorkshopSerializer(serializers.ModelSerializer):
@@ -76,7 +78,7 @@ class WorkshopSerializer(serializers.ModelSerializer):
         model = Workshop
         fields = ('id', 'title', 'teacher', 'day', 'start_time', 'description',
                   'twitter', 'linkedin', 'profile_picture', 'profile_thumbnail',
-                  'image')
+                  'image', 'updated')
 
     def get_start_time(self, obj):
         return obj.start_time.strftime("%H:%M")
