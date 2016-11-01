@@ -50,7 +50,8 @@ marker.setMap(null);
 google.maps.event.addDomListener(window, 'load', initialize);
 
 $(document).ready(function(){
-
+    $("#cancellationModal").modal("show");
+    
     $(function() {
       $('a[href*="#"]:not([href="#"])').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
